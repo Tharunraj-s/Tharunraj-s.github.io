@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Tharunraj | Portfolio</title>
+
+  <!-- 🔹 Favicon -->
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon" />
+
+  <!-- 🔹 Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <!-- 🔹 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+
+  <!-- 🔹 Ionicons (v7) -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+
+  <!-- 🌗 Theme Toggle (persists via localStorage) -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+    <ion-icon name="moon-outline"></ion-icon>
+  </button>
+
+  <main>
+
+    <!-- 🧊 SIDEBAR -->
+    <aside class="sidebar glass-effect" data-sidebar>
+
+      <!-- 📇 Profile block -->
+      <div class="sidebar-info glass-layer">
+
+        <figure class="avatar-box">
+          <img src="./assets/imgs/my-avatar.png" alt="Tharunraj" width="80" />
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Tharunraj">Tharunraj</h1>
+          <p class="title"><span class="role-tag">Machine Learning Engineer</span></p>
+        </div>
+
+        <!-- Toggle contacts visibility (mobile) -->
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <!-- 📬 Contacts -->
+      <div class="sidebar-info_more glass-layer">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <!-- ✉️ Email -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/gmail.svg" alt="Email" width="30" />
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:tharunraj.singaravelu@gmail.com" class="contact-link">
+                tharunraj.singaravelu@gmail.com
+              </a>
+            </div>
+          </li>
+
+          <!-- 📞 Phone -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/call.svg" alt="Phone" width="30" />
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Phone/WhatsApp</p>
+              <a href="tel:+353892032647" class="contact-link">+353 892032647</a>
+            </div>
+          </li>
+
+          <!-- 🎂 Birthday -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/calendar.svg" alt="Birthday" width="30" />
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Birthday</p>
+              <time datetime="2002-03-15">March 15, 2002</time>
+            </div>
+          </li>
+
+          <!-- 📍 Location -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/location.svg" alt="Location" width="30" />
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Limerick, Ireland</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <!-- 🌐 Social Links -->
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/tharunraj-s/" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/Tharunraj-s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://instagram.com/tharunraj._.s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.credly.com/users/tharunraj-s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <img src="./assets/imgs/credly.png" alt="Credly" width="23" />
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </aside>
+
+    <!-- 🌐 MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- 🧭 NAVBAR (SPA section switcher) -->
+      <nav class="navbar glass-effect neon-border" aria-label="Primary">
+        <ul class="navbar-list">
+          <li class="navbar-item"><button class="navbar-link active" data-nav-link>About</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Projects</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Certificates</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Publications</button></li>
+        </ul>
+      </nav>
+
+      <!-- =====================
+           🧑‍💻 ABOUT
+           ===================== -->
+      <article class="about active glass-layer" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title neon-text">About Me</h2>
+        </header>
+
+        <section class="about-text">
+          <p>
+            Hi, I'm <strong>Tharunraj</strong>, a Master's graduate in <strong>Data Science</strong> from the
+            <strong>University of Limerick, Ireland</strong>, with a background in
+            <strong>Computer Science and Engineering</strong>.
+          </p>
+
+          <p>
+            I specialize in building <strong>Machine Learning systems</strong> with strong foundations in
+            <strong>statistical modeling, model validation, and scalable data processing</strong>.
+            My work focuses on healthcare prediction, computer vision, and large-scale analytics.
+          </p>
+
+          <p>
+            I work primarily with <strong>Python (Scikit-learn, PyTorch)</strong>, <strong>SQL</strong>, and
+            <strong>Apache Spark</strong>, and I aim to develop models that are reliable, interpretable,
+            and ready for real-world deployment.
+          </p>
+
+          <p>
+            Currently seeking opportunities in <strong>Machine Learning Engineering and AI-focused roles in Ireland</strong>.
+          </p>
+
+            </section>
+
+        <!-- 💼 Services -->
+        <section class="service glass-layer">
+          <h3 class="h3 service-title neon-text"><span class="glow-line"></span>What I'm Doing</h3>
+
+          <ul class="service-list">
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/python.svg" alt="Python" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Python Programming</h4>
+                <p class="service-item-text">Advanced in problem-solving and automation using Python</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/R.png" alt="R" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">R Programming</h4>
+                <p class="service-item-text">Experienced in statistical analysis and data visualization with R</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/ds2.png" alt="Data Science" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Data Science & Analytics</h4>
+                <p class="service-item-text">Skilled in uncovering insights from data through analytics and visualization</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/ai-brain-management.svg" alt="AI" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Artificial Intelligence</h4>
+                <p class="service-item-text">Developing intelligent systems, chatbots, and virtual assistants</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/ML.svg" alt="Machine Learning" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Machine Learning</h4>
+                <p class="service-item-text">Building predictive models and data-driven decision systems</p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box neon-glow"><img src="./assets/imgs/web-design.svg" alt="Web" width="50" /></div>
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Web Design & Development</h4>
+                <p class="service-item-text">Creating modern, responsive websites using HTML, CSS, and JavaScript</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+      </article>
+
+      <!-- =====================
+           🧱 PROJECTS
+           ===================== -->
+      <article class="portfolio glass-layer" data-page="projects">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Projects</h2>
+        </header>
+
+        <section class="projects">
+
+          <!-- 🧭 Filter bar -->
+          <ul class="filter-list" aria-label="Project filters">
+            <li class="filter-item"><button class="active neon-btn" data-filter-btn>All</button></li>
+            <li class="filter-item"><button class="neon-btn" data-filter-btn>AI/ML</button></li>
+            <li class="filter-item"><button class="neon-btn" data-filter-btn>Data Analytics</button></li>
+            <li class="filter-item"><button class="neon-btn" data-filter-btn>Web Design</button></li>
+          </ul>
+
+          <!-- 🔽 Mobile dropdown -->
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>Select category</div>
+              <div class="select-icon"><ion-icon name="chevron-down"></ion-icon></div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item"><button data-select-item>All</button></li>
+              <li class="select-item"><button data-select-item>AI/ML</button></li>
+              <li class="select-item"><button data-select-item>Data Analytics</button></li>
+              <li class="select-item"><button data-select-item>Web Design</button></li>
+            </ul>
+          </div>
+
+          <!-- 🎨 Project grid -->
+          <ul class="project-list" aria-label="Project list">
+
+            <!-- 🤖 AI/ML -->
+            <li class="project-item active" data-filter-item data-category="ai/ml">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/ProjectDayGallery-APS" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/VisionBasedAPS.jpg" alt="Vision Based APS" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Vision Based Active Protection System</h3>
+                  <p class="project-category">AI/ML</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai/ml">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/Haarcascade-face-eye-detection" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/AI-1.png" alt="Haarcascade Face/Eye Detection" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Haarcascade Face Eye Detection</h3>
+                  <p class="project-category">AI/ML</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai/ml">
+              <div class="project-card" role="presentation">
+                <a href="#" class="project-link">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/RFD.png" alt="Renal Failure Prediction" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Renal Failure Prediction</h3>
+                  <p class="project-category">AI/ML</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="ai/ml">
+              <div class="project-card" role="presentation">
+                <a href="#" class="project-link">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/HSER.png" alt="HSER using ResNet18 + LSTM" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">HSER using Resnet18-LSTM</h3>
+                  <p class="project-category">AI/ML</p>
+                </a>
+              </div>
+            </li>
+
+            <!-- 📊 Data Analytics -->
+            <li class="project-item active" data-filter-item data-category="data analytics">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/payment-date-predictor" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/analytics-1.png" alt="Payment Date Prediction" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Illustration of Payment Date Prediction</h3>
+                  <p class="project-category">Data Analytics</p>
+                </a>
+              </div>
+            </li>
+
+            <!-- 🌐 Web -->
+            <li class="project-item active" data-filter-item data-category="web design">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/website-chatbot" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/web-4.png" alt="Website Chatbot" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Web Chatbot using HTML, JS, and Python</h3>
+                  <p class="project-category">Web Design • AI/ML</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/sign_in-sign_in-fom" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/web-1.png" alt="Responsive Webpage" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Responsive Webpage</h3>
+                  <p class="project-category">Web Design</p>
+                </a>
+              </div>
+            </li>
+
+            <li class="project-item active" data-filter-item data-category="web design">
+              <div class="project-card" role="presentation">
+                <a href="https://github.com/Tharunraj-s/signin-signup-forgotpswrd-page" target="_blank" class="project-link" rel="noopener">
+                  <figure class="project-img">
+                    <div class="project-item-icon-box neon-glow"><ion-icon name="eye-outline"></ion-icon></div>
+                    <img src="./assets/imgs/web-2.png" alt="Login Page" loading="lazy" />
+                  </figure>
+                  <h3 class="project-title">Login Page</h3>
+                  <p class="project-category">Web Design</p>
+                </a>
+              </div>
+            </li>
+
+          </ul>
+        </section>
+      </article>
+
+      <!-- =====================
+           🏅 CERTIFICATES
+           Includes: Credly badges
+           ===================== -->
+      <article class="certificates glass-layer" data-page="certificates">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Certificates</h2>
+        </header>
+
+        <!-- 🏅 Credly Badges (click to open modal) -->
+        <section class="badges glass-layer">
+          <h3 class="h3 badges-title neon-text"><span class="glow-line"></span>Credly Badges</h3>
+
+          <ul class="badge-list has-scrollbar" aria-label="Credly badges">
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/microsoft-certified-azure-ai-fundamentals.png" alt="Azure AI Fundamentals" width="64" data-modal-avatar />
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Microsoft Certified Azure AI Fundamentals</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/aws-cloud-quest-cloud-practitioner (1).png" alt="AWS Cloud Quest" width="64" data-modal-avatar />
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>AWS Cloud Quest Practitioner</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/python-project-for-ai-and-application-development.png" alt="IBM Python Project" width="64" data-modal-avatar />
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Python Project for AI & Application Development</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/python-for-data-science-and-ai.png" alt="Python for Data Science and AI" width="64" data-modal-avatar />
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Python for Data Science and AI</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/chatbot-building-essentials.png" alt="Chatbot Building Essentials" width="64" data-modal-avatar />
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Chatbot Building Essentials</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- 🎓 Certificates list -->
+        <section class="certificates-posts">
+          <ul class="certificates-posts-list" aria-label="Certificates list">
+
+            <li class="certificates-post-item">
+              <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/CCCBE6TTVYGC" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/IBMAAI.png" alt="IBM Applied AI" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Coursera</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-06">Jun 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">IBM Applied AI Specialization</h3>
+                  <p class="certificates-text">Learned and built AI-powered applications using Python, IBM Watson APIs and OpenCV.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/ICBSII.pdf" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/apsconf.png" alt="ICBSII Best Paper Award" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">ICBSII</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-03">Mar 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Best Paper Award – ICBSII 2023</h3>
+                  <p class="certificates-text">Presented “Vision-Based Realtime Active Protection System Using Deep CNN” and won Best Paper Award.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://www.coursera.org/account/accomplishments/certificate/C3RPCAPY8P2W" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/coursera1.jpg" alt="Supervised Machine Learning" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">AI</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-02">Feb 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Supervised Machine Learning</h3>
+                  <p class="certificates-text">Built and trained ML models using NumPy and Scikit-learn for regression and classification tasks.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://learn.microsoft.com/en-us/users/tharunrajs-2195/transcript/dzq5bk8woy1pg9d" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/ai900.png" alt="Azure AI Fundamentals" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Microsoft Certified</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-10">Oct 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Azure AI Fundamentals (AI-900)</h3>
+                  <p class="certificates-text">Earned Microsoft AI-900 certification (76.3%), demonstrating AI service knowledge on Azure.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/coin-2.png" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/coin-2.png" alt="AI with Python" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">AI</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-12">Dec 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">AI with Python</h3>
+                  <p class="certificates-text">Built a CNN model using the Fashion MNIST dataset for image classification.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://www.guvi.in/verify-certificate?id=5GkS7244L1E87q6W6A&course=pygame_english" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/Guvi-1.png" alt="Pygame" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Python Programming</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-11">Nov 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Pygame Development</h3>
+                  <p class="certificates-text">Created beginner games using Python and Pygame framework.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://www.udemy.com/certificate/UC-902e4b06-ed73-4cd3-8984-f4b68eeea8be/" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/Udemy.png" alt="Udemy Python" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Udemy</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-01">Jan 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Core Python for Everyone</h3>
+                  <p class="certificates-text">Completed Udemy course covering Python fundamentals and OOP.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://www.guvi.in/verify-certificate?id=3vUz9812N26319134Z" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/Guvi-3.png" alt="AI for India" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">AI/ML</p>
+                    <span class="dot"></span>
+                    <time datetime="2021-04">Apr 2021</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">AI for India</h3>
+                  <p class="certificates-text">Participated in national AI initiative and built a face recognition model.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/AWS.jpg" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/AWS.jpg" alt="AWS ML Essentials" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Amazon Skill Builder</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-02">Feb 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">ML Essentials for Business and Technical Leaders</h3>
+                  <p class="certificates-text">Completed AWS Machine Learning Essentials training for technical decision-makers.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/js-1.png" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/js-1.png" alt="JavaScript" loading="lazy" />
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">JavaScript</p>
+                    <span class="dot"></span>
+                    <time datetime="2021-04">Apr 2021</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">JavaScript Course</h3>
+                  <p class="certificates-text">Completed JavaScript course conducted by SRM Axis Intellects.</p>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </section>
+      </article>
+
+      <!-- =====================
+           📚 PUBLICATIONS
+           ===================== -->
+      <article class="publications glass-layer" data-page="publications">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Publications</h2>
+        </header>
+
+        <section class="publications-list-wrap">
+          <ul class="publication-list" aria-label="Publications list">
+
+            <li class="publication-item">
+              <button class="publication-card" type="button" data-modal-item>
+                <figure class="publication-logo neon-glow">
+                  <img src="./assets/imgs/RVAPS.jpg" alt="Vision Based APS" width="88" height="88" data-modal-avatar />
+                </figure>
+
+                <div class="publication-content">
+                  <h4 class="h4 publication-title" data-modal-title>
+                    2023 ICBSII – IEEE Xplore
+                  </h4>
+
+                  <!-- ✅ Visible small summary box -->
+                  <div class="publication-preview">
+                    <p>  </p>
+                  </div>
+
+                  <!-- ✅ Hidden: used ONLY for modal content -->
+                  <div class="publication-desc" data-modal-text>
+                    <p style="text-align:justify;">
+                      <strong>Vision-Based Realtime Active Protection System Using Deep CNN</strong><br />
+                      Published March 2023 in ICBSII.<br />
+                      <a href="https://ieeexplore.ieee.org/document/10181062"
+                         target="_blank" class="neon-link" rel="noopener">View Publication</a>
+                    </p>
+                  </div>
+                </div>
+              </button>
+            </li>
+
+          </ul>
+        </section>
+      </article>
+
+      <!-- 🔍 Shared Modal (Badges + Publications) -->
+      <div class="modal-container" data-modal-container>
+        <div class="overlay" data-overlay></div>
+
+        <section class="projects-modal glass-layer" role="dialog" aria-modal="true" aria-label="Details modal">
+          <button class="modal-close-btn" data-modal-close-btn aria-label="Close">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="modal-img-wrapper">
+            <figure class="modal-avatar-box">
+              <img src="" alt="" width="84" height="84" data-modal-img />
+            </figure>
+          </div>
+
+          <div class="modal-content">
+            <h4 class="h3 modal-title" data-modal-title></h4>
+            <div data-modal-text></div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ⚙️ Custom JavaScript -->
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
