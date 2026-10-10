@@ -33,6 +33,15 @@
 .project-card {height:100%}
 .publication-preview p {line-height:1.7}
 @media(max-width:480px){.navbar-list{gap:12px}.navbar-link{font-size:12px}}
+.contact-intro{color:var(--muted);line-height:1.8;margin-bottom:24px;max-width:650px}
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.contact-page-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:28px;border:1px solid var(--glass-border);border-radius:22px;color:var(--text);transition:transform .2s}
+.contact-page-card:hover{transform:translateY(-3px)}
+.contact-page-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.contact-page-card>ion-icon{font-size:30px;color:var(--accent)}
+.contact-page-card h3{font-size:18px}.contact-page-card p{color:var(--muted);overflow-wrap:anywhere;font-size:14px}.contact-page-card .card-read{margin-top:auto}
+.contact-location{display:flex;gap:8px;align-items:center;color:var(--muted);margin-top:24px;font-size:14px}
+@media(max-width:580px){.contact-grid{grid-template-columns:1fr}.navbar-list{gap:6px;flex-wrap:wrap}.navbar-link{padding:10px 8px;font-size:11px}}
 </style>
 </head>
 
@@ -141,6 +150,7 @@
           <li class="navbar-item"><button class="navbar-link" data-nav-link>Projects</button></li>
           <li class="navbar-item"><button class="navbar-link" data-nav-link>Certificates</button></li>
           <li class="navbar-item"><button class="navbar-link" data-nav-link>Publications</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link>Contact</button></li>
         </ul>
       </nav>
 
@@ -509,6 +519,16 @@
 
           </ul>
         </section>
+      </article>
+
+      <article class="contact glass-layer" data-page="contact">
+        <header><h2 class="h2 article-title neon-text"><span class="glow-line"></span>Contact</h2></header>
+        <p class="contact-intro">Let’s connect about graduate and junior opportunities in machine learning, computer vision and data science.</p>
+        <section class="contact-grid" aria-label="Contact options">
+          <a class="contact-page-card glass-layer" href="mailto:stharunraj2002@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon><h3>Email</h3><p>stharunraj2002@gmail.com</p><span class="card-read">Send an email ↗</span></a>
+          <a class="contact-page-card glass-layer" href="https://www.linkedin.com/in/tharunraj-s/" target="_blank" rel="noopener"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon><h3>LinkedIn</h3><p>Tharunraj Singaravelu</p><span class="card-read">Connect on LinkedIn ↗</span></a>
+        </section>
+        <p class="contact-location"><ion-icon name="location-outline" aria-hidden="true"></ion-icon> Based in Ireland</p>
       </article>
 
       <!-- 🔍 Shared Modal (Badges + Publications) -->
