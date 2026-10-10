@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="./assets/imgs/my-avatar.svg" type="image/x-icon" />
 
   <!-- 🔹 Custom CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20261010-cards" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261010-themes" />
 
   <!-- 🔹 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -39,9 +39,8 @@
 <body>
 
   <!-- 🌗 Theme Toggle (persists via localStorage) -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-    <ion-icon name="moon-outline"></ion-icon>
-  </button>
+  <button id="theme-toggle" class="theme-toggle theme-picker-toggle" aria-label="Choose a theme" aria-expanded="false" aria-controls="theme-picker"><ion-icon name="color-palette-outline"></ion-icon><span>Themes</span></button>
+<section id="theme-picker" class="theme-picker glass-layer" aria-label="Theme picker" hidden><div class="theme-picker-header"><div><p class="theme-eyebrow">MAKE IT YOURS</p><h2>Choose your atmosphere</h2></div><button id="theme-picker-close" aria-label="Close theme picker">×</button></div><div class="theme-options"><button class="theme-option" type="button" data-theme-choice="arctic" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#edf5fa;--swatch-accent:#229fba"><i></i><i></i><i></i></span><span><strong>Arctic Glass</strong><small>Frosted blue · airy</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="aurora" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#07181d;--swatch-accent:#63d4b5"><i></i><i></i><i></i></span><span><strong>Aurora Glass</strong><small>Midnight · teal glow</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="obsidian" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#10100f;--swatch-accent:#cfaf6b"><i></i><i></i><i></i></span><span><strong>Obsidian Gold</strong><small>Ink black · brushed gold</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="champagne" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#f5f0e7;--swatch-accent:#9b793f"><i></i><i></i><i></i></span><span><strong>Champagne Glass</strong><small>Warm ivory · soft gold</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="amethyst" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#161023;--swatch-accent:#be9ae6"><i></i><i></i><i></i></span><span><strong>Amethyst Glass</strong><small>Deep plum · lilac light</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="cobalt" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#0a1429;--swatch-accent:#86aafa"><i></i><i></i><i></i></span><span><strong>Cobalt Studio</strong><small>Navy glass · electric blue</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="graphite" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#181b1e;--swatch-accent:#bacbd5"><i></i><i></i><i></i></span><span><strong>Graphite Glass</strong><small>Smoked charcoal · silver</small></span><span class="theme-check" aria-hidden="true">✓</span></button></div><p class="theme-picker-note">Preview instantly. Your choice stays saved on this device.</p></section>
 
   <main>
 
@@ -538,7 +537,7 @@
   </main>
 
   <!-- ⚙️ Custom JavaScript -->
-  <script src="./assets/js/script.js?v=20261010-cards"></script>
+  <script src="./assets/js/script.js?v=20261010-themes"></script>
 </body>
 
 </html>

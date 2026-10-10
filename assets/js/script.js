@@ -131,52 +131,29 @@ if (filterBtns.length && filterItems.length) {
   });
 }
 
-/* =====================
-   Theme Toggle (persisted + system aware)
-   ===================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-  const themeToggle = document.getElementById("theme-toggle");
-  if (!themeToggle) return;
-
-  const STORAGE_KEY = "theme";
-  const prefersDark =
-    window.matchMedia &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const applyTheme = (mode) => {
-    const isDark = mode === "dark";
-    document.body.classList.toggle("dark-mode", isDark);
-
-    // Dark -> show SUN (switch to light). Light -> show MOON (switch to dark).
-    themeToggle.innerHTML = isDark
-      ? '<ion-icon name="sunny-outline"></ion-icon>'
-      : '<ion-icon name="moon-outline"></ion-icon>';
-
-    themeToggle.setAttribute(
-      "aria-label",
-      isDark ? "Switch to light mode" : "Switch to dark mode"
-    );
-
-    // Small pulse glow on toggle
-    themeToggle.classList.add("pulse");
-    themeToggle.style.setProperty(
-      "--pulse-color",
-      isDark ? "rgba(0,224,255,0.6)" : "rgba(0,255,136,0.6)"
-    );
-    setTimeout(() => themeToggle.classList.remove("pulse"), 600);
-  };
-
-  const saved = localStorage.getItem(STORAGE_KEY);
-  const initial = saved ? saved : prefersDark ? "dark" : "light";
-  applyTheme(initial);
-
-  themeToggle.addEventListener("click", () => {
-    const nowDark = document.body.classList.contains("dark-mode");
-    const next = nowDark ? "light" : "dark";
-    localStorage.setItem(STORAGE_KEY, next);
-    applyTheme(next);
-  });
+const themeToggle = document.getElementById("theme-toggle");
+const themePicker = document.getElementById("theme-picker");
+const themeClose = document.getElementById("theme-picker-close");
+const themeChoices = [...document.querySelectorAll("[data-theme-choice]")];
+const darkThemes = new Set(["aurora","obsidian","amethyst","cobalt","graphite"]);
+const applyTheme = (id, persist = true) => {
+  if (!themeChoices.some(button => button.dataset.themeChoice === id)) id = "arctic";
+  document.body.dataset.theme = id;
+  document.body.classList.toggle("dark-mode", darkThemes.has(id));
+  themeChoices.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === id)));
+  if (persist) { try { localStorage.setItem("portfolio-theme", id); } catch {} }
+};
+const closeThemePicker = () => {themePicker.hidden = true;themeToggle.setAttribute("aria-expanded","false");};
+themeToggle.addEventListener("click", () => {
+  themePicker.hidden = !themePicker.hidden;
+  themeToggle.setAttribute("aria-expanded", String(!themePicker.hidden));
+  if (!themePicker.hidden) themeChoices.find(b=>b.getAttribute("aria-pressed")==="true")?.focus();
 });
-
-console.log("%cPortfolio Loaded Successfully 🚀", "color:#00ff88; font-weight:bold;");
+themeClose.addEventListener("click", () => {closeThemePicker();themeToggle.focus();});
+themeChoices.forEach(button=>button.addEventListener("click",()=>applyTheme(button.dataset.themeChoice)));
+document.addEventListener("click", event=>{if (!themePicker.contains(event.target) && !themeToggle.contains(event.target)) closeThemePicker();});
+document.addEventListener("keydown", event=>{if(event.key==="Escape" && !themePicker.hidden){closeThemePicker();themeToggle.focus();}});
+let savedTheme;
+try { savedTheme = localStorage.getItem("portfolio-theme"); if(!savedTheme && localStorage.getItem("theme")==="dark")savedTheme="aurora"; } catch {}
+applyTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "aurora" : "arctic"), false);
