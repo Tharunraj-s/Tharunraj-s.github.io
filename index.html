@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="./assets/imgs/my-avatar.svg" type="image/x-icon" />
 
   <!-- 🔹 Custom CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20261010-profile" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261010-cards" />
 
   <!-- 🔹 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -193,38 +193,14 @@
 
           <!-- 🎨 Project grid -->
           <ul class="project-list" aria-label="Project list">
-<li class="project-item active" data-filter-item data-category="ai/ml"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/VisionBasedAPS.jpg" alt="Real-Time Edge AI Active Protection System" loading="lazy"></figure>
-<h3 class="project-title">Real-Time Edge AI Active Protection System</h3><p class="project-category">YOLOv5, OpenCV, Raspberry Pi, Arduino</p>
-<p class="project-description">Led computer-vision development in a five-member team, from annotation and model experimentation to servo-controlled target alignment. IEEE publication and ICBSII 2023 Best Paper Award.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/edge-ai-threat-detection" target="_blank" rel="noopener">View project ↗</a></div></li>
-<li class="project-item active" data-filter-item data-category="ai/ml"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/RFD.png" alt="Renal Failure Prediction System" loading="lazy"></figure>
-<h3 class="project-title">Renal Failure Prediction System</h3><p class="project-category">Random Forest, YOLOv8, Flask</p>
-<p class="project-description">Combined 24 biomarkers across approximately 400 records with CT-image analysis. Random Forest achieved approximately 96% accuracy; YOLOv8 achieved approximately 0.94–0.96 mAP@50 on the project evaluation.</p></div></li>
-<li class="project-item active" data-filter-item data-category="ai/ml"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/HSER.png" alt="Speech Emotion Recognition" loading="lazy"></figure>
-<h3 class="project-title">Speech Emotion Recognition</h3><p class="project-category">CNN-LSTM, MFCC, DWT</p>
-<p class="project-description">Explored TESS, CREMA-D, SAVEE and RAVDESS. The best TESS experiment achieved 99.64% accuracy using MFCC-40 and first-level DWT; this result is specific to that dataset and experiment.</p></div></li>
-<li class="project-item active" data-filter-item data-category="data analytics"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/analytics-1.png" alt="Large-Scale Chicago Crime Analytics" loading="lazy"></figure>
-<h3 class="project-title">Large-Scale Chicago Crime Analytics</h3><p class="project-category">PySpark, Spark MLlib, Databricks</p>
-<p class="project-description">Processed 7M+ records with distributed preprocessing and feature engineering. Improved Random Forest accuracy from approximately 87% to 89% through feature selection, cross-validation and tuning.</p></div></li>
-<li class="project-item active" data-filter-item data-category="data analytics"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/DS.png" alt="Customer Segmentation &amp; Analytics" loading="lazy"></figure>
-<h3 class="project-title">Customer Segmentation &amp; Analytics</h3><p class="project-category">R, R Shiny, K-Means, PAM, Hierarchical Clustering</p>
-<p class="project-description">Compared clustering methods, analysed customer lifetime value and experimental outcomes, and presented results through an interactive R Shiny application.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/customer-segmentation-dashboard" target="_blank" rel="noopener">View project ↗</a></div></li>
-<li class="project-item active" data-filter-item data-category="data analytics"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/DS.png" alt="Mathematical Modelling of Glass Etching" loading="lazy"></figure>
-<h3 class="project-title">Mathematical Modelling of Glass Etching</h3><p class="project-category">Python, MATLAB, Numerical Modelling</p>
-<p class="project-description">MSc thesis exploring multi-species glass etching through MATLAB differential-equation models and an exploratory Python lattice simulation. The public release includes run instructions and model limitations.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/glass-etching-simulation" target="_blank" rel="noopener">View project ↗</a></div></li>
-<li class="project-item active" data-filter-item data-category="data analytics"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/analytics-1.png" alt="US Road Network Analysis" loading="lazy"></figure>
-<h3 class="project-title">US Road Network Analysis</h3><p class="project-category">Network Analysis, Graph Analytics</p>
-<p class="project-description">Explored US road-network connectivity using degree distributions, complementary cumulative distributions, local clustering coefficients and six-hop neighbourhood visualisations in R.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/us-road-network-analysis" target="_blank" rel="noopener">View project ↗</a></div></li>
-<li class="project-item active" data-filter-item data-category="ai/ml"><div class="project-card">
-<figure class="project-img"><img src="./assets/imgs/DS.png" alt="Heart Disease Analysis &amp; Prediction" loading="lazy"></figure>
-<h3 class="project-title">Heart Disease Analysis &amp; Prediction</h3><p class="project-category">R, caret, XGBoost, Random Forest</p>
-<p class="project-description">Compared XGBoost and Random Forest using stratified train/test splitting, cross-validation, ROC-AUC and feature importance. The curated release documents evaluation conventions and requires the original input dataset.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/heart-disease-classification" target="_blank" rel="noopener">View project ↗</a></div></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Real-Time Edge AI Active Protection System"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/VisionBasedAPS.jpg" alt="Real-Time Edge AI Active Protection System" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Real-Time Edge AI Active Protection System</h3><p class="project-category">YOLOv5, OpenCV, Raspberry Pi, Arduino</p><p class="project-description">Real-time detection with hardware integration…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Led computer-vision development in a five-member team, from annotation and model experimentation to servo-controlled target alignment. IEEE publication and ICBSII 2023 Best Paper Award.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/edge-ai-threat-detection" target="_blank" rel="noopener">View project ↗</a></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Renal Failure Prediction System"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/RFD.png" alt="Renal Failure Prediction System" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Renal Failure Prediction System</h3><p class="project-category">Random Forest, YOLOv8, Flask</p><p class="project-description">Biomarker prediction and renal CT-image analysis…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Combined 24 biomarkers across approximately 400 records with CT-image analysis. Random Forest achieved approximately 96% accuracy; YOLOv8 achieved approximately 0.94–0.96 mAP@50 on the project evaluation.</p></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Speech Emotion Recognition"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/HSER.png" alt="Speech Emotion Recognition" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Speech Emotion Recognition</h3><p class="project-category">CNN-LSTM, MFCC, DWT</p><p class="project-description">Speech-emotion modelling across four datasets…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Explored TESS, CREMA-D, SAVEE and RAVDESS. The best TESS experiment achieved 99.64% accuracy using MFCC-40 and first-level DWT; this result is specific to that dataset and experiment.</p></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Large-Scale Chicago Crime Analytics"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/analytics-1.png" alt="Large-Scale Chicago Crime Analytics" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Large-Scale Chicago Crime Analytics</h3><p class="project-category">PySpark, Spark MLlib, Databricks</p><p class="project-description">Distributed analytics across 7 million crime records…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Processed 7M+ records with distributed preprocessing and feature engineering. Improved Random Forest accuracy from approximately 87% to 89% through feature selection, cross-validation and tuning.</p></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Customer Segmentation & Analytics"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/DS.png" alt="Customer Segmentation &amp; Analytics" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Customer Segmentation &amp; Analytics</h3><p class="project-category">R, R Shiny, K-Means, PAM, Hierarchical Clustering</p><p class="project-description">Customer segments and interactive business insights…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Compared clustering methods, analysed customer lifetime value and experimental outcomes, and presented results through an interactive R Shiny application.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/customer-segmentation-dashboard" target="_blank" rel="noopener">View project ↗</a></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Mathematical Modelling of Glass Etching"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/DS.png" alt="Mathematical Modelling of Glass Etching" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Mathematical Modelling of Glass Etching</h3><p class="project-category">Python, MATLAB, Numerical Modelling</p><p class="project-description">Multi-species glass etching through numerical models…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>MSc thesis exploring multi-species glass etching through MATLAB differential-equation models and an exploratory Python lattice simulation. The public release includes run instructions and model limitations.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/glass-etching-simulation" target="_blank" rel="noopener">View project ↗</a></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about US Road Network Analysis"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/analytics-1.png" alt="US Road Network Analysis" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>US Road Network Analysis</h3><p class="project-category">Network Analysis, Graph Analytics</p><p class="project-description">Road-network topology and local connectivity…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Explored US road-network connectivity using degree distributions, complementary cumulative distributions, local clustering coefficients and six-hop neighbourhood visualisations in R.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/us-road-network-analysis" target="_blank" rel="noopener">View project ↗</a></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Heart Disease Analysis & Prediction"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/DS.png" alt="Heart Disease Analysis &amp; Prediction" loading="lazy"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Heart Disease Analysis &amp; Prediction</h3><p class="project-category">R, caret, XGBoost, Random Forest</p><p class="project-description">Comparing classifiers on heart-disease survey data…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Compared XGBoost and Random Forest using stratified train/test splitting, cross-validation, ROC-AUC and feature importance. The curated release documents evaluation conventions and requires the original input dataset.</p><a class="project-detail-link" href="https://github.com/Tharunraj-s/heart-disease-classification" target="_blank" rel="noopener">View project ↗</a></div></button></li>
 </ul>
         </section>
       </article>
@@ -502,7 +478,7 @@
 <figure class="publication-logo neon-glow"><img src="./assets/imgs/RFD.png" alt="Renal CT imaging research" width="88" height="88" data-modal-avatar></figure>
 <div class="publication-content">
 <h4 class="h4 publication-title" data-modal-title>Enhanced Deep Learning Models for Early Detection of Renal Failure from CT Imaging</h4>
-<div class="publication-preview"><p>FMDB Transactions on Sustainable Health Science Letters · September 2024<br>Vol. 2, No. 3, pp. 152–163 · YOLOv8 detection and segmentation</p></div>
+<div class="publication-preview"><p>FMDB Transactions on Sustainable Health Science Letters · 2024</p><span class="card-read">Read paper details ↗</span></div>
 <div class="publication-desc" data-modal-text>
 <p><strong>Enhanced Deep Learning Models for Early Detection of Renal Failure from CT Imaging</strong></p>
 <p>S. Rubin Bose, J. Angelin Jeba, R. Regin, S. Tarunraj, Edwin Shalom Soji and S. Suman Rajest.</p>
@@ -524,19 +500,10 @@
                   </h4>
 
                   <!-- ✅ Visible small summary box -->
-                  <div class="publication-preview">
-                    <p>ICBSII 2023 · IEEE Xplore · Best Paper Award<br>Deep-learning-based real-time detection with hardware integration.</p>
-                  </div>
+                  <div class="publication-preview"><p>ICBSII · IEEE Xplore · 2023</p><span class="card-read">Read paper details ↗</span></div>
 
                   <!-- ✅ Hidden: used ONLY for modal content -->
-                  <div class="publication-desc" data-modal-text>
-                    <p style="text-align:justify;">
-                      <strong>Vision-Based Realtime Active Protection System Using Deep CNN</strong><br />
-                      Published March 2023 in ICBSII.<br />
-                      <a href="https://ieeexplore.ieee.org/document/10181062"
-                         target="_blank" class="neon-link" rel="noopener">View Publication</a>
-                    </p>
-                  </div>
+                  <div class="publication-desc" data-modal-text><p><strong>Vision-Based Realtime Active Protection System Using Deep CNN</strong></p><p>Published in the 2023 International Conference on Biosignals, Images and Instrumentation (ICBSII), IEEE Xplore.</p><p>Research on deep-learning-based real-time visual detection with hardware integration. The project combined YOLOv5 and OpenCV with Raspberry Pi and Arduino for detection and servo-controlled target alignment.</p><p>Recognised with the ICBSII 2023 Best Paper Award.</p><p><a href="https://ieeexplore.ieee.org/document/10181062" target="_blank" class="neon-link" rel="noopener">Read IEEE publication ↗</a></p></div>
                 </div>
               </button>
             </li>
@@ -571,7 +538,7 @@
   </main>
 
   <!-- ⚙️ Custom JavaScript -->
-  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/script.js?v=20261010-cards"></script>
 </body>
 
 </html>

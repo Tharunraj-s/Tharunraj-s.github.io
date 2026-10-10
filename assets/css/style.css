@@ -1007,3 +1007,25 @@ body.dark-mode .publication-card {
 .avatar-box img{object-position:50% 38%}
 @media(max-width:1100px){.profile-grid{grid-template-columns:1fr}}
 @media(max-width:520px){.profile-card{padding:16px}.profile-card .service-list{grid-template-columns:1fr}.intro-summary p{font-size:.93rem}.avatar-box{width:128px;height:148px}}
+
+/* Consistent project and publication cards */
+.project-list{grid-template-columns:repeat(2,minmax(0,1fr));padding-right:0;align-items:stretch}
+.project-modal-card{display:flex;flex-direction:column;width:100%;text-align:left;height:100%}
+.project-modal-card .project-img{margin:0;width:100%}
+.project-modal-card .project-img img{height:190px}
+.project-content{padding:18px;display:flex;flex-direction:column;flex:1;width:100%;min-width:0}
+.project-modal-card .project-title{margin:0 0 8px;text-align:left;font-size:1rem;min-height:3em;line-height:1.5}
+.project-modal-card .project-category{margin:0 0 12px;text-align:left;font-size:.8rem;line-height:1.6;min-height:2.6em}
+.project-modal-card .project-description{margin:0 0 16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.85rem}
+.card-read{display:block;margin-top:auto;font-size:.8rem;font-weight:600;color:var(--text);text-decoration:underline;text-underline-offset:4px}
+.project-full-description{display:none}
+.publication-list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.publication-card{height:100%;grid-template-columns:1fr;gap:18px;text-align:left;padding:22px}
+.publication-logo{margin:0;width:80px;height:80px}
+.publication-title{font-size:1rem;line-height:1.6;margin:0 0 14px;min-height:6.4em}
+.publication-content{padding:0;display:flex;flex-direction:column}
+.publication-preview{flex:1;display:flex;flex-direction:column}
+.publication-preview p{font-size:.85rem;color:var(--muted);min-height:4.8em;margin:0 0 16px}
+.projects-modal{max-height:85vh;overflow-y:auto}
+.project-modal-card:focus-visible,.publication-card:focus-visible{outline:2px solid var(--accent-blue);outline-offset:4px}
+@media(max-width:600px){.project-list,.publication-list{grid-template-columns:1fr}.publication-title,.publication-preview p{min-height:0}}
