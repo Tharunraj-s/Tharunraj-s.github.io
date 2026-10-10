@@ -18,13 +18,21 @@ const sidebarBtn = document.querySelector("[data-sidebar-btn]");
 
 if (sidebar && sidebarBtn) {
   sidebarBtn.addEventListener("click", () => {
-    if (window.innerWidth <= 992) sidebar.classList.toggle("active");
+    if (window.innerWidth <= 992) {
+      const expanded = sidebar.classList.toggle("active");
+      sidebarBtn.setAttribute("aria-expanded", String(expanded));
+      sidebarBtn.querySelector("span").textContent = expanded ? "Hide Contacts" : "Show Contacts";
+    }
   });
 }
 
 window.addEventListener("resize", () => {
   if (!sidebar) return;
-  if (window.innerWidth > 992) sidebar.classList.remove("active");
+  if (window.innerWidth > 992) {
+    sidebar.classList.remove("active");
+    sidebarBtn?.setAttribute("aria-expanded", "false");
+    if(sidebarBtn) sidebarBtn.querySelector("span").textContent = "Show Contacts";
+  }
 });
 
 /* =====================
@@ -46,7 +54,11 @@ navLinks.forEach((link) => {
     link.classList.add("active");
 
     // Close sidebar on nav (mobile)
-    if (sidebar && window.innerWidth <= 992) sidebar.classList.remove("active");
+    if (sidebar && window.innerWidth <= 992) {
+      sidebar.classList.remove("active");
+      sidebarBtn?.setAttribute("aria-expanded", "false");
+      if(sidebarBtn) sidebarBtn.querySelector("span").textContent = "Show Contacts";
+    }
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   });

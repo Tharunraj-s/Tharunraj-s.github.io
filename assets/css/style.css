@@ -1061,3 +1061,26 @@ body[data-theme] .badge-card,body[data-theme] .publication-card,body[data-theme]
 .theme-check{margin-left:auto;opacity:0;color:var(--accent-blue)}.theme-option[aria-pressed="true"] .theme-check{opacity:1}
 .theme-picker-note{font-size:.67rem;line-height:1.6;color:var(--muted);margin:14px 0 0}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Mobile profile expansion and contained project cards */
+.project-item,.project-modal-card,.project-img{min-width:0;max-width:100%}
+.project-modal-card{box-sizing:border-box;overflow:hidden}
+.project-modal-card .project-img{flex-shrink:0;align-self:stretch}
+.project-modal-card .project-img img{display:block;max-width:100%;width:100%;object-fit:cover}
+.project-content{box-sizing:border-box;max-width:100%;overflow:hidden}
+.project-modal-card .project-title,.project-modal-card .project-category{white-space:normal;overflow-wrap:anywhere;min-width:0}
+.social-link img[alt="Credly"]{width:23px;height:23px;object-fit:contain;filter:brightness(0)}
+body.dark-mode .social-link img[alt="Credly"]{filter:brightness(0) invert(1)}
+@media(max-width:992px){
+  .sidebar:not(.active) .sidebar-info_more{display:none!important;padding:0;margin:0;border:0}
+  .sidebar .avatar-box{width:168px;height:194px;transition:width .25s ease,height .25s ease,margin .25s ease}
+  .sidebar.active .avatar-box{width:124px;height:144px;margin-bottom:10px}
+  .sidebar .sidebar-info{padding:22px;transition:padding .25s ease}
+  .sidebar.active .sidebar-info{padding:16px}
+  .sidebar .info_more-btn{padding:14px 18px;min-height:48px}
+  .sidebar.active .info_more-btn{padding:11px 18px}
+  .sidebar.active .info_more-btn ion-icon{transform:rotate(180deg)}
+  .sidebar.active .sidebar-info_more{animation:contacts-reveal .25s ease both}
+}
+@keyframes contacts-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.sidebar .avatar-box,.sidebar .sidebar-info{transition:none}.sidebar.active .sidebar-info_more{animation:none}}
