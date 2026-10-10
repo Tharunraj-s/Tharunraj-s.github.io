@@ -986,3 +986,24 @@ body.dark-mode .publication-card {
 
 
 
+
+.intro-summary p{font-size:1rem;line-height:1.8;margin-bottom:0;color:var(--text)}
+.profile-card{margin-top:20px;padding:22px}
+.profile-card .service-title{margin:0;font-size:1.15rem}
+.profile-card .service-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.profile-card .service-item{padding:16px}
+.service-content-box{min-width:0}
+.service-icon-box{flex:0 0 48px;width:48px;height:48px}
+.service-icon-box img{width:36px;height:36px;object-fit:contain}
+.profile-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px}
+.profile-card p,.skill-group dd{color:var(--muted);font-size:.88rem;line-height:1.7}
+.entry-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.entry-top h4,.education-entry h4{font-size:.98rem;margin:18px 0 6px}
+.entry-meta{margin:0 0 12px}.entry-date{font-size:.78rem;color:var(--muted)}
+.education-entry + .education-entry{margin-top:22px;padding-top:8px;border-top:1px solid var(--border-glass)}
+.education-entry p{margin:4px 0}.skills-grid{margin:18px 0 0;display:grid;gap:16px}
+.skill-group dt{font-size:.84rem;font-weight:600}.skill-group dd{margin:5px 0 0}
+.avatar-box{width:152px;height:176px;border-radius:20px;margin-bottom:16px}
+.avatar-box img{object-position:50% 38%}
+@media(max-width:1100px){.profile-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.profile-card{padding:16px}.profile-card .service-list{grid-template-columns:1fr}.intro-summary p{font-size:.93rem}.avatar-box{width:128px;height:148px}}
