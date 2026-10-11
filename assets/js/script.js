@@ -42,27 +42,40 @@ window.addEventListener("resize", () => {
 const navLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    const target = link.dataset.navTarget;
 
-    pages.forEach((page) => {
-      page.classList.toggle("active", page.dataset.page === target);
-    });
-
-    navLinks.forEach((l) => l.classList.remove("active"));
-    link.classList.add("active");
-
-    // Close sidebar on nav (mobile)
-    if (sidebar && window.innerWidth <= 992) {
-      sidebar.classList.remove("active");
-      sidebarBtn?.setAttribute("aria-expanded", "false");
-      if(sidebarBtn) sidebarBtn.querySelector("span").textContent = contactToggleText(false);
-    }
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
+const navigationBar=document.querySelector(".navbar");
+const reduceMotion=()=>window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function highlightSection(target){
+  navLinks.forEach(link=>{
+    const active=link.dataset.navTarget===target;
+    link.classList.toggle("active",active);
+    if(active)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");
   });
-});
+}
+navLinks.forEach(link=>link.addEventListener("click",()=>{
+  const target=document.querySelector('[data-page="'+link.dataset.navTarget+'"]');
+  if(!target)return;
+  if(sidebar && window.innerWidth<=992){
+    sidebar.classList.remove("active");
+    sidebarBtn?.setAttribute("aria-expanded","false");
+    if(sidebarBtn)sidebarBtn.querySelector("span").textContent=contactToggleText(false);
+  }
+  const offset=navigationBar.getBoundingClientRect().height+26;
+  window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset,behavior:reduceMotion()?"instant":"smooth"});
+  highlightSection(link.dataset.navTarget);
+}));
+let scrollFrame=0;
+function updateCurrentSection(){
+  scrollFrame=0;
+  const threshold=navigationBar.getBoundingClientRect().height+40;
+  let current=pages[0];
+  pages.forEach(page=>{if(page.getBoundingClientRect().top<=threshold)current=page;});
+  if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-8)current=pages[pages.length-1];
+  highlightSection(current.dataset.page);
+}
+window.addEventListener("scroll",()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updateCurrentSection)},{passive:true});
+window.addEventListener("resize",updateCurrentSection);
+updateCurrentSection();
 
 /* =====================
    Shared Modal (badges + publications)
@@ -153,6 +166,7 @@ const applyTheme = (id, persist = true) => {
   if (!themeChoices.some(button => button.dataset.themeChoice === id)) id = "arctic";
   document.body.dataset.theme = id;
   document.body.classList.toggle("dark-mode", darkThemes.has(id));
+  document.documentElement.style.setProperty("--scroll-accent",getComputedStyle(document.body).getPropertyValue("--accent-blue").trim());
   themeChoices.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === id)));
   if (persist) { try { localStorage.setItem("portfolio-theme", id); } catch {} }
 };
@@ -182,7 +196,7 @@ const translatedNodes = [];
 const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
 let translationNode;
 while ((translationNode = walker.nextNode())) {
-  if (translationNode.parentElement.closest("script,style,#language-toggle,.intro-summary,.projects-modal")) continue;
+  if (translationNode.parentElement.closest("script,style,#language-toggle,.intro-summary,.projects-modal,[data-keep-english]")) continue;
   const original = translationNode.nodeValue;
   const key = original.trim();
   if (tamilText.has(key)) translatedNodes.push({node:translationNode,original,tamil:original.replace(key,tamilText.get(key))});
@@ -209,6 +223,7 @@ function setSiteLanguage(language, persist=true) {
   languageButton.setAttribute("aria-pressed",String(siteLanguage==="ta"));
   languageButton.setAttribute("aria-label",siteLanguage==="ta"?"Switch to English":"Switch to Tamil");
   closeModal();
+  updateCurrentSection();
   if(persist){try{localStorage.setItem("portfolio-language",siteLanguage)}catch{}}
 }
 let languageBusy=false;
@@ -244,3 +259,11 @@ languageButton.addEventListener("click",async()=>{
 let savedLanguage;
 try{savedLanguage=localStorage.getItem("portfolio-language")}catch{}
 setSiteLanguage(savedLanguage||"en",false);
+
+const languageToolbar=document.querySelector(".language-toolbar");
+function placeLanguageControl(){
+  if(window.innerWidth<=992){document.body.appendChild(languageToolbar);}
+  else if(languageToolbar.parentElement!==navigationBar){navigationBar.insertBefore(languageToolbar,navigationBar.firstChild);}
+}
+window.addEventListener("resize",placeLanguageControl);
+placeLanguageControl();
