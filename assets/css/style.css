@@ -1084,3 +1084,20 @@ body.dark-mode .social-link img[alt="Credly"]{filter:brightness(0) invert(1)}
 }
 @keyframes contacts-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.sidebar .avatar-box,.sidebar .sidebar-info{transition:none}.sidebar.active .sidebar-info_more{animation:none}}
+
+/* English / Tamil switch and theme-coloured radial cover */
+.navbar{position:relative}
+.language-toolbar{display:flex;justify-content:flex-end;padding:0 4px 8px}
+#language-toggle{display:inline-flex;align-items:center;gap:5px;padding:8px 13px;border:1px solid var(--border-glass);border-radius:999px;background:var(--bg-glass);color:var(--text);font:inherit;font-size:12px;cursor:pointer}
+#language-toggle span[lang=ta]{font-family:"Noto Sans Tamil",sans-serif}
+#language-toggle:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+html[lang=ta] body{font-family:"Noto Sans Tamil",sans-serif;line-height:1.75}
+html[lang=ta] button,html[lang=ta] input,html[lang=ta] textarea{font-family:inherit}
+html[lang=ta] .navbar-list{flex-wrap:wrap}
+html[lang=ta] .navbar-link{font-size:.8rem}
+html[lang=ta] .project-title,html[lang=ta] .service-item-title{line-height:1.7}
+html[lang=ta] .intro-summary p{line-height:2}
+#language-wave{position:fixed;inset:0;z-index:2147483647;background:var(--accent-blue);pointer-events:all}
+#language-wave[hidden]{display:none}
+body.language-covered main,body.language-covered #theme-toggle,body.language-covered #theme-picker{visibility:hidden}
+@media(max-width:600px){.language-toolbar{padding-bottom:10px}html[lang=ta] .navbar-link{font-size:11px}html[lang=ta] .navbar-list{gap:5px}}
