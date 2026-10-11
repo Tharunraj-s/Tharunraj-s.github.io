@@ -1101,3 +1101,20 @@ html[lang=ta] .intro-summary p{line-height:2}
 #language-wave[hidden]{display:none}
 body.language-covered main,body.language-covered #theme-toggle,body.language-covered #theme-picker{visibility:hidden}
 @media(max-width:600px){.language-toolbar{padding-bottom:10px}html[lang=ta] .navbar-link{font-size:11px}html[lang=ta] .navbar-list{gap:5px}}
+
+/* Compact desktop navigation and overflow-safe profile stacking */
+.sidebar-info,.sidebar-info_more{flex-shrink:0;min-width:0}
+@media(min-width:993px){
+  .sidebar{justify-content:safe center}
+  .navbar{display:flex;align-items:center;gap:10px}
+  .navbar .navbar-list{order:1;flex:1;min-width:0;flex-wrap:nowrap;gap:5px}
+  .language-toolbar{order:2;flex:0 0 auto;padding:0}
+  .navbar-link{padding:10px 9px;white-space:nowrap}
+  html[lang=ta] .navbar .navbar-list{flex-wrap:nowrap;gap:4px}
+  html[lang=ta] .navbar-link{font-size:clamp(10px,.9vw,13px);padding:10px 7px}
+  html[lang=ta] .sidebar .name{font-size:1.4rem;line-height:1.5}
+  html[lang=ta] .sidebar .role-tag{font-size:.8rem;line-height:1.6;max-width:100%;overflow-wrap:anywhere;padding:7px 10px}
+  html[lang=ta] .sidebar-info{padding:14px}
+  html[lang=ta] .sidebar-info_more{padding:14px}
+  html[lang=ta] .contacts-list{gap:14px}
+}
