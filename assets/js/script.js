@@ -82,7 +82,7 @@ function scrollToSection(top){
     if(began===undefined)began=now;
     const progress=Math.min(1,(now-began)/duration);
     const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
-    window.scrollTo(0,start+distance*eased);
+    window.scrollTo({top:start+distance*eased,left:0,behavior:"instant"});
     if(progress<1)navigationAnimation=requestAnimationFrame(frame);else navigationAnimation=0;
   }
   navigationAnimation=requestAnimationFrame(frame);
@@ -276,28 +276,28 @@ const tamilFontReady=document.fonts ? document.fonts.load('400 16px "Noto Sans T
 languageButton.addEventListener("click",async()=>{
   if(languageBusy)return;
   languageBusy=true;
+  languageButton.disabled=true;
   const next=siteLanguage==="en"?"ta":"en";
-  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if(reduced){setSiteLanguage(next);languageBusy=false;return;}
-  const rect=languageButton.getBoundingClientRect();
-  const x=rect.left+rect.width/2,y=rect.top+rect.height/2;
-  const radius=Math.hypot(Math.max(x,window.innerWidth-x),Math.max(y,window.innerHeight-y));
-  const origin=x+"px "+y+"px";
-  languageWave.style.clipPath="circle(0px at "+origin+")";
-  languageWave.style.opacity="1";
-  languageWave.hidden=false;
+  const main=document.querySelector("main");
+  let fade;
   try {
-    await languageWave.animate([{clipPath:"circle(0px at "+origin+")"},{clipPath:"circle("+radius+"px at "+origin+")"}],{duration:260,easing:"cubic-bezier(.2,.7,.3,1)",fill:"forwards"}).finished;
-    document.body.classList.add("language-covered");
+    if(next==="ta")await tamilFontReady;
+    cancelNavigationScroll();
+    const threshold=navigationBar.getBoundingClientRect().bottom+20;
+    const anchor=[...pages].reverse().find(page=>page.getBoundingClientRect().top<=threshold)||pages[0];
+    const anchorTop=anchor.getBoundingClientRect().top;
+    const animate=!reduceMotion()&&typeof main.animate==="function";
+    if(animate){fade=main.animate([{opacity:1},{opacity:0}],{duration:130,easing:"ease-out",fill:"forwards"});await fade.finished;}
     setSiteLanguage(next);
-    await Promise.race([tamilFontReady,new Promise(resolve=>setTimeout(resolve,60))]);
-    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-    document.body.classList.remove("language-covered");
-    await languageWave.animate([{opacity:1},{opacity:0}],{duration:180,easing:"ease-out",fill:"forwards"}).finished;
+    await new Promise(resolve=>requestAnimationFrame(resolve));
+    window.scrollTo({top:window.scrollY+anchor.getBoundingClientRect().top-anchorTop,behavior:"instant"});
+    positionNavPill();
+    fade?.cancel();
+    if(animate){fade=main.animate([{opacity:0},{opacity:1}],{duration:220,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"});await fade.finished;}
   } finally {
-    document.body.classList.remove("language-covered");
+    fade?.cancel();
     languageWave.hidden=true;
-    languageWave.getAnimations().forEach(animation=>animation.cancel());
+    languageButton.disabled=false;
     languageBusy=false;
   }
 });
@@ -382,7 +382,7 @@ let runnerState="ready",runnerY=0,runnerVelocity=0,runnerDistance=0,runnerObstac
 try{runnerBest=Math.max(0,Number(localStorage.getItem("portfolio-runner-best"))||0)}catch{}
 function runnerLabels(){
  const ta=document.documentElement.lang==="ta",score=Math.floor(runnerDistance/10);
- document.getElementById("runner-score").textContent=(ta?"புள்ளிகள் ":"Score ")+score;document.getElementById("runner-best").textContent=(ta?"சிறந்தது ":"Best ")+runnerBest;
+ setGameText("runner-score",(ta?"புள்ளிகள் ":"Score ")+score);setGameText("runner-best",(ta?"சிறந்தது ":"Best ")+runnerBest);
  const status=runnerState==="ready"?(ta?"தடையைத் தாண்டுங்கள். மேலே வரும் தடைக்குக் குனியுங்கள்.":"Jump ground obstacles. Duck under overhead ones."):runnerState==="over"?(ta?"மோதிவிட்டது. மீண்டும் முயலலாம்.":"Radar saw it. The rover didn’t quite dodge it."):runnerState==="paused"?(ta?"இடைநிறுத்தப்பட்டது.":"Paused. Catch your breath."):(ta?"தாவு அல்லது குனி.":"Scan. Jump. Duck. Keep moving.");
  const statusNode=document.getElementById("runner-status");if(statusNode.textContent!==status)statusNode.textContent=status;
  runnerAction.textContent=runnerState==="running"?(ta?"தாவு ↑":"Jump ↑"):runnerState==="paused"?(ta?"தொடர்க":"Resume"):(ta?runnerState==="over"?"மீண்டும் ஓடு":"ஓடத் தொடங்கு":runnerState==="over"?"Run again":"Start running");
@@ -391,8 +391,12 @@ function runnerLabels(){
  document.querySelector(".runner-top h3").textContent=ta?"ரோவர் ஓட்டம்":"ROVER RUN";
  document.getElementById("runner-help").textContent=ta?"Space / ↑: தாவு. ↓: குனி. கைப்பேசியில் பொத்தான்களைப் பயன்படுத்துங்கள்.":"Space / ↑: jump. ↓: duck. Mobile: tap Jump, tap or hold Duck.";
 }
+let gamePalette;
+function refreshGamePalette(){const style=getComputedStyle(document.body);gamePalette={accent:style.getPropertyValue("--accent-blue").trim(),text:style.getPropertyValue("--text").trim()};}
+refreshGamePalette();
+function setGameText(id,text){const node=document.getElementById(id);if(node.textContent!==text)node.textContent=text;}
 function drawRunner(){
- const ctx=runnerCtx,s=getComputedStyle(document.body),a=s.getPropertyValue("--accent-blue").trim(),t=s.getPropertyValue("--text").trim();
+ const ctx=runnerCtx,a=gamePalette.accent,t=gamePalette.text;
  ctx.clearRect(0,0,720,260);ctx.strokeStyle=a;ctx.globalAlpha=.12;
  for(let r=50;r<330;r+=55){ctx.beginPath();ctx.arc(120,220,r,Math.PI,0);ctx.stroke();}
  const angle=-Math.PI+(runnerDistance*.003%Math.PI);ctx.globalAlpha=.22;ctx.beginPath();ctx.moveTo(120,220);ctx.lineTo(120+Math.cos(angle)*310,220+Math.sin(angle)*310);ctx.stroke();
@@ -437,14 +441,14 @@ const shootCanvas=document.getElementById("shooter-canvas"),shootCtx=shootCanvas
 let shootState="ready",shootScore=0,shootBest=0,shootMisses=0,shootTargets=[],shootSpawn=0,shootLast=0,shootFrame=0,shootAim={x:360,y:150},shootFlash=0;
 try{shootBest=Number(localStorage.getItem("portfolio-shooter-best"))||0}catch{}
 function shootLabels(){
- document.getElementById("shooter-score").textContent="Score "+shootScore+" · Misses "+shootMisses+"/3";
- document.getElementById("shooter-best").textContent="Best "+shootBest;
+ setGameText("shooter-score","Score "+shootScore+" · Misses "+shootMisses+"/3");
+ setGameText("shooter-best","Best "+shootBest);
  shootStart.textContent=shootState==="paused"?"Resume":shootState==="over"?"Play again":"Start game";shootStart.disabled=shootState==="running";shootFire.disabled=shootPause.disabled=shootState!=="running";
  const text=shootState==="over"?"Three slipped through. One more round?":shootState==="paused"?"Paused. Take your time.":shootState==="running"?"Track. Aim. Fire. Keep the radar clear.":"Tap jets and trucks to fire. Three escapes end the round.";
  const node=document.getElementById("shooter-status");if(node.textContent!==text)node.textContent=text;
 }
 function drawShooter(){
- const ctx=shootCtx,style=getComputedStyle(document.body),a=style.getPropertyValue("--accent-blue").trim(),t=style.getPropertyValue("--text").trim();
+ const ctx=shootCtx,a=gamePalette.accent,t=gamePalette.text;
  ctx.clearRect(0,0,720,320);ctx.strokeStyle=a;ctx.globalAlpha=.12;
  for(let r=70;r<400;r+=60){ctx.beginPath();ctx.arc(360,300,r,Math.PI,0);ctx.stroke();}
  ctx.globalAlpha=.35;ctx.beginPath();ctx.moveTo(0,285);ctx.lineTo(720,285);ctx.stroke();ctx.globalAlpha=1;
@@ -481,6 +485,26 @@ function selectGame(game){
 }
 for(const game of ["xo","runner","shooter"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
 document.addEventListener("portfolio-language-change",()=>{renderXo();runnerLabels();drawRunner();});
-themeChoices.forEach(button=>button.addEventListener("click",()=>{drawRunner();drawShooter();}));
+themeChoices.forEach(button=>button.addEventListener("click",()=>{refreshGamePalette();drawRunner();drawShooter();}));
 renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();selectGame("xo");
 
+
+function gameResetLabels(){
+ const ta=document.documentElement.lang==="ta";
+ document.getElementById("games-reset").textContent=ta?"விளையாட்டுகளை மீட்டமை ↻":"Reset games ↻";
+ document.getElementById("games-reset-note").textContent=ta?"இந்தச் சாதனத்தில் சேமித்த புள்ளிகள், சாதனைகள் மற்றும் பெயரை அழிக்கும்.":"Clears saved scores, best runs and your name on this device.";
+ document.getElementById("games-reset-status").textContent="";
+}
+function resetGames(){
+ clearTimeout(xoTimer);cancelAnimationFrame(runnerFrame);cancelAnimationFrame(shootFrame);
+ cancelNavigationScroll();
+ for(const key of ["portfolio-xo-score","portfolio-xo-name","portfolio-runner-best","portfolio-shooter-best"]){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
+ xoBoard=Array(9).fill("");xoThinking=false;xoOutcome=null;xoPlayer="";xoScores={me:0,you:0};document.getElementById("xo-player-name").value="";
+ runnerState="ready";runnerBest=0;runnerY=0;runnerVelocity=0;runnerDistance=0;runnerObstacles=[];runnerDucking=false;runnerDuckUntil=0;runnerSpawn=1.2;runnerLast=0;runnerFrame=0;
+ shootState="ready";shootScore=0;shootBest=0;shootMisses=0;shootTargets=[];shootSpawn=0;shootLast=0;shootFrame=0;shootAim={x:360,y:150};shootFlash=0;
+ renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();
+ document.getElementById("games-reset-status").textContent=document.documentElement.lang==="ta"?"விளையாட்டுத் தரவு அழிக்கப்பட்டது. புதிதாகத் தொடங்கலாம் ✓":"Game data cleared. Fresh start ✓";
+}
+ document.getElementById("games-reset").addEventListener("click",resetGames);
+ document.addEventListener("portfolio-language-change",gameResetLabels);
+ gameResetLabels();
