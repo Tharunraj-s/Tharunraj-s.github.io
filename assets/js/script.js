@@ -343,7 +343,7 @@ copyEmailButton?.addEventListener("click",async()=>{
 function fitDesktopSidebar(){
   if(!sidebar)return;
   if(window.innerWidth<=992){sidebar.style.removeProperty("top");return;}
-  sidebar.style.top=Math.min(20,window.innerHeight-sidebar.offsetHeight-20)+"px";
+  sidebar.style.top="16px";
 }
 if("ResizeObserver" in window)new ResizeObserver(fitDesktopSidebar).observe(sidebar);
 window.addEventListener("resize",fitDesktopSidebar);
@@ -401,7 +401,7 @@ function drawRunner(){
  const y=220-runnerY;ctx.globalAlpha=1;ctx.fillStyle=a;ctx.fillRect(72,y-23,48,14);ctx.fillRect(83,y-31,26,8);
  if(!runnerDucking){ctx.fillRect(97,y-47,4,16);ctx.fillRect(89,y-55,20,12);ctx.fillStyle=t;ctx.fillRect(104,y-52,4,5);}
  ctx.fillStyle=t;for(const x of [82,109]){ctx.beginPath();ctx.arc(x,y-8,7,0,Math.PI*2);ctx.fill();ctx.fillStyle=a;ctx.beginPath();ctx.arc(x,y-8,3,0,Math.PI*2);ctx.fill();ctx.fillStyle=t;}
- for(const ob of runnerObstacles){ctx.fillStyle=a;ctx.globalAlpha=.75;ctx.fillRect(ob.x,ob.y,ob.w,ob.h);ctx.globalAlpha=1;ctx.fillStyle=t;ctx.fillRect(ob.x+4,ob.y+5,ob.w-8,2);if(ob.x<400){ctx.strokeStyle=a;ctx.globalAlpha=.3;ctx.strokeRect(ob.x-5,ob.y-5,ob.w+10,ob.h+10);ctx.globalAlpha=1;}}
+ for(const ob of runnerObstacles){drawArcadeVehicle(ctx,ob,a,t);if(ob.x<400){ctx.strokeStyle=a;ctx.globalAlpha=.3;ctx.strokeRect(ob.x-5,ob.y-5,ob.w+10,ob.h+10);ctx.globalAlpha=1;}}
  if(runnerState!=="running"){ctx.globalAlpha=.6;ctx.font="14px Poppins, sans-serif";ctx.textAlign="center";ctx.fillStyle=t;ctx.fillText(runnerState==="ready"?"ROVER READY":runnerState==="paused"?"PAUSED":"TRY ANOTHER RUN",455,105);ctx.globalAlpha=1;}
 }
 function runnerCollides(ob,duck,y){const top=220-y-(duck?31:55),bottom=220-y-3;return 116>ob.x+3&&76<ob.x+ob.w-3&&bottom>ob.y+3&&top<ob.y+ob.h-3;}
@@ -409,7 +409,7 @@ function runnerTick(now){
  if(runnerState!=="running")return;const dt=Math.min((now-(runnerLast||now))/1000,.035);runnerLast=now;
  if(now>runnerDuckUntil)runnerDucking=false;
  const speed=Math.min(520,255+runnerDistance*.05);runnerDistance+=speed*dt;runnerVelocity-=1600*dt;runnerY=Math.max(0,runnerY+runnerVelocity*dt);if(!runnerY)runnerVelocity=0;
- runnerSpawn-=dt;if(runnerSpawn<=0){const air=runnerDistance>500&&Math.random()<.42;const h=air?20:30+Math.random()*17;runnerObstacles.push({x:740,w:air?50:24+Math.random()*12,h,y:air?170:220-h});runnerSpawn=(420+Math.random()*150)/speed;}
+ runnerSpawn-=dt;if(runnerSpawn<=0){const air=runnerDistance>500&&Math.random()<.42;const h=air?20:34;runnerObstacles.push({kind:air?"jet":"truck",x:740,w:air?62:48,h,y:air?170:220-h});runnerSpawn=(420+Math.random()*150)/speed;}
  runnerObstacles.forEach(ob=>ob.x-=speed*dt);runnerObstacles=runnerObstacles.filter(ob=>ob.x+ob.w>0);
  if(runnerObstacles.some(ob=>runnerCollides(ob,runnerDucking,runnerY))){runnerState="over";runnerBest=Math.max(runnerBest,Math.floor(runnerDistance/10));try{localStorage.setItem("portfolio-runner-best",runnerBest)}catch{}}
  runnerLabels();drawRunner();if(runnerState==="running")runnerFrame=requestAnimationFrame(runnerTick);
@@ -426,7 +426,60 @@ document.querySelector(".runner-game").addEventListener("keydown",event=>{if(eve
 document.querySelector(".runner-game").addEventListener("keyup",event=>{if(event.code==="ArrowDown"){runnerDuckUntil=performance.now()+100;}});
 document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseRunner();});
 new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseRunner();},{threshold:.05}).observe(runnerCanvas);
-function selectGame(game){const rover=game==="runner";document.getElementById("xo-panel").hidden=rover;document.getElementById("runner-panel").hidden=!rover;document.getElementById("choose-xo").setAttribute("aria-pressed",String(!rover));document.getElementById("choose-runner").setAttribute("aria-pressed",String(rover));if(!rover)pauseRunner();else drawRunner();}
-document.getElementById("choose-xo").addEventListener("click",()=>selectGame("xo"));document.getElementById("choose-runner").addEventListener("click",()=>selectGame("runner"));
-document.addEventListener("portfolio-language-change",()=>{renderXo();runnerLabels();drawRunner();});themeChoices.forEach(button=>button.addEventListener("click",drawRunner));
-renderXo();runnerLabels();drawRunner();selectGame("xo");
+
+function drawArcadeVehicle(ctx,ob,a,t){
+ ctx.save();ctx.translate(ob.x,ob.y);ctx.fillStyle=a;
+ if(ob.kind==="jet"){ctx.beginPath();ctx.moveTo(0,10);ctx.lineTo(20,6);ctx.lineTo(32,0);ctx.lineTo(39,0);ctx.lineTo(35,7);ctx.lineTo(ob.w-10,7);ctx.lineTo(ob.w-3,2);ctx.lineTo(ob.w,2);ctx.lineTo(ob.w-3,14);ctx.lineTo(34,14);ctx.lineTo(40,ob.h);ctx.lineTo(30,ob.h);ctx.lineTo(20,14);ctx.closePath();ctx.fill();ctx.fillStyle=t;ctx.fillRect(10,8,8,3);}
+ else{ctx.fillRect(16,0,ob.w-16,ob.h-9);ctx.fillRect(2,8,17,ob.h-17);ctx.fillStyle=t;ctx.fillRect(4,10,10,7);for(const x of [10,ob.w-10]){ctx.beginPath();ctx.arc(x,ob.h-6,6,0,Math.PI*2);ctx.fill();}}
+ ctx.restore();
+}
+const shootCanvas=document.getElementById("shooter-canvas"),shootCtx=shootCanvas.getContext("2d"),shootStart=document.getElementById("shooter-start"),shootFire=document.getElementById("shooter-fire"),shootPause=document.getElementById("shooter-pause");
+let shootState="ready",shootScore=0,shootBest=0,shootMisses=0,shootTargets=[],shootSpawn=0,shootLast=0,shootFrame=0,shootAim={x:360,y:150},shootFlash=0;
+try{shootBest=Number(localStorage.getItem("portfolio-shooter-best"))||0}catch{}
+function shootLabels(){
+ document.getElementById("shooter-score").textContent="Score "+shootScore+" · Misses "+shootMisses+"/3";
+ document.getElementById("shooter-best").textContent="Best "+shootBest;
+ shootStart.textContent=shootState==="paused"?"Resume":shootState==="over"?"Play again":"Start game";shootStart.disabled=shootState==="running";shootFire.disabled=shootPause.disabled=shootState!=="running";
+ const text=shootState==="over"?"Three slipped through. One more round?":shootState==="paused"?"Paused. Take your time.":shootState==="running"?"Track. Aim. Fire. Keep the radar clear.":"Tap jets and trucks to fire. Three escapes end the round.";
+ const node=document.getElementById("shooter-status");if(node.textContent!==text)node.textContent=text;
+}
+function drawShooter(){
+ const ctx=shootCtx,style=getComputedStyle(document.body),a=style.getPropertyValue("--accent-blue").trim(),t=style.getPropertyValue("--text").trim();
+ ctx.clearRect(0,0,720,320);ctx.strokeStyle=a;ctx.globalAlpha=.12;
+ for(let r=70;r<400;r+=60){ctx.beginPath();ctx.arc(360,300,r,Math.PI,0);ctx.stroke();}
+ ctx.globalAlpha=.35;ctx.beginPath();ctx.moveTo(0,285);ctx.lineTo(720,285);ctx.stroke();ctx.globalAlpha=1;
+ for(const ob of shootTargets)drawArcadeVehicle(ctx,ob,a,t);
+ ctx.strokeStyle=a;ctx.beginPath();ctx.arc(shootAim.x,shootAim.y,13,0,Math.PI*2);ctx.moveTo(shootAim.x-20,shootAim.y);ctx.lineTo(shootAim.x+20,shootAim.y);ctx.moveTo(shootAim.x,shootAim.y-20);ctx.lineTo(shootAim.x,shootAim.y+20);ctx.stroke();
+ ctx.fillStyle=a;ctx.fillRect(345,300,30,12);
+ if(performance.now()<shootFlash){ctx.globalAlpha=.7;ctx.beginPath();ctx.moveTo(360,300);ctx.lineTo(shootAim.x,shootAim.y);ctx.stroke();ctx.globalAlpha=1;}
+ if(shootState!=="running"){ctx.font="14px Poppins";ctx.fillStyle=t;ctx.textAlign="center";ctx.fillText(shootState==="over"?"ROUND OVER":shootState==="paused"?"PAUSED":"RADAR READY",360,150);}
+}
+function fireShot(){
+ if(shootState!=="running")return;
+ shootFlash=performance.now()+100;
+ const i=shootTargets.findIndex(ob=>shootAim.x>=ob.x-8&&shootAim.x<=ob.x+ob.w+8&&shootAim.y>=ob.y-8&&shootAim.y<=ob.y+ob.h+8);
+ if(i>=0){shootScore+=shootTargets[i].kind==="jet"?20:10;shootTargets.splice(i,1);}shootLabels();drawShooter();
+}
+function shootTick(now){
+ if(shootState!=="running")return;
+ const dt=Math.min((now-(shootLast||now))/1000,.04);shootLast=now;shootSpawn-=dt;
+ if(shootSpawn<=0){const jet=Math.random()<.65;shootTargets.push({kind:jet?"jet":"truck",x:740,y:jet?45+Math.random()*150:251,w:jet?62:48,h:jet?20:34,speed:100+Math.min(180,shootScore*.35)+Math.random()*40});shootSpawn=Math.max(.6,1.5-shootScore*.002);}
+ shootTargets.forEach(ob=>ob.x-=ob.speed*dt);shootTargets=shootTargets.filter(ob=>{if(ob.x+ob.w<0){shootMisses++;return false;}return true;});
+ if(shootMisses>=3){shootMisses=3;shootState="over";shootBest=Math.max(shootBest,shootScore);try{localStorage.setItem("portfolio-shooter-best",shootBest)}catch{}}
+ shootLabels();drawShooter();if(shootState==="running")shootFrame=requestAnimationFrame(shootTick);
+}
+function pauseShooter(){if(shootState==="running"){shootState="paused";cancelAnimationFrame(shootFrame);shootLabels();drawShooter();}}
+shootStart.addEventListener("click",()=>{if(shootState!=="paused"){shootScore=0;shootMisses=0;shootTargets=[];shootSpawn=.4;}cancelAnimationFrame(shootFrame);shootState="running";shootLast=0;shootLabels();shootFrame=requestAnimationFrame(shootTick);});
+shootPause.addEventListener("click",pauseShooter);shootFire.addEventListener("click",fireShot);
+shootCanvas.addEventListener("pointerdown",event=>{event.preventDefault();const r=shootCanvas.getBoundingClientRect();shootAim={x:(event.clientX-r.left)*720/r.width,y:(event.clientY-r.top)*320/r.height};fireShot();drawShooter();});
+shootCanvas.addEventListener("keydown",event=>{const d={ArrowLeft:[-18,0],ArrowRight:[18,0],ArrowUp:[0,-18],ArrowDown:[0,18]}[event.code];if(d){event.preventDefault();shootAim.x=Math.max(0,Math.min(720,shootAim.x+d[0]));shootAim.y=Math.max(0,Math.min(285,shootAim.y+d[1]));drawShooter();}if(event.code==="Space"){event.preventDefault();if(!event.repeat)fireShot();}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseShooter();});
+new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseShooter();},{threshold:.05}).observe(shootCanvas);
+function selectGame(game){
+ for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
+ if(game!=="runner")pauseRunner();else drawRunner();if(game!=="shooter")pauseShooter();else drawShooter();
+}
+for(const game of ["xo","runner","shooter"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
+document.addEventListener("portfolio-language-change",()=>{renderXo();runnerLabels();drawRunner();});
+themeChoices.forEach(button=>button.addEventListener("click",()=>{drawRunner();drawShooter();}));
+renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();selectGame("xo");
