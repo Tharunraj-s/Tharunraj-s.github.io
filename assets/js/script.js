@@ -342,8 +342,8 @@ copyEmailButton?.addEventListener("click",async()=>{
 
 function fitDesktopSidebar(){
   if(!sidebar)return;
-  if(window.innerWidth<=992){sidebar.style.removeProperty("top");return;}
-  sidebar.style.top="16px";
+  if(window.innerWidth<=992){sidebar.style.removeProperty("top");sidebar.style.removeProperty("--sidebar-offset");return;}
+  sidebar.style.setProperty("--sidebar-offset",Math.max(16,(window.innerHeight-sidebar.offsetHeight)/2)+"px");
 }
 if("ResizeObserver" in window)new ResizeObserver(fitDesktopSidebar).observe(sidebar);
 window.addEventListener("resize",fitDesktopSidebar);
