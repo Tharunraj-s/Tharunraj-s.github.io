@@ -1184,3 +1184,22 @@ body[data-theme="obsidian"],body[data-theme="amethyst"],body[data-theme="emerald
 body[data-theme="amethyst"] .neon-text,body[data-theme="emerald"] .neon-text{text-shadow:none}
 body[data-theme="obsidian"] .neon-glow,body[data-theme="amethyst"] .neon-glow,body[data-theme="emerald"] .neon-glow{box-shadow:0 4px 14px rgba(0,0,0,.15)}
 body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-layer,body[data-theme="emerald"] .glass-layer{box-shadow:0 14px 40px rgba(0,0,0,.24),inset 0 1px 0 rgba(var(--theme-rgb),.07)}
+
+.play-intro{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:20px}
+.xo-game{max-width:480px;margin:0 auto;padding:24px;border:1px solid var(--border-glass);border-radius:24px}
+.xo-game-top{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.xo-eyebrow{font-size:.65rem;letter-spacing:.12em;color:var(--muted)}
+.xo-game h3{font-size:1.35rem;margin:7px 0;color:var(--text)}
+.xo-symbols{font-size:2rem;font-weight:600;color:var(--accent-blue)}.xo-symbols span{color:var(--muted)}
+.xo-status{font-size:.84rem;line-height:1.6;min-height:3em;color:var(--muted);margin:14px 0 8px}
+.xo-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.xo-cell{aspect-ratio:1;width:100%;padding:0;display:grid;place-items:center;border-radius:16px;border:1px solid var(--border-glass);background:rgba(var(--theme-rgb),.055);color:var(--text);font-family:"Poppins",sans-serif!important;font-size:clamp(2rem,5vw,3rem);font-weight:500;cursor:pointer;transition:background-color 180ms ease,transform 180ms ease,border-color 180ms ease}
+.xo-cell:enabled:hover{background:rgba(var(--theme-rgb),.14);transform:translateY(-2px)}
+.xo-cell:enabled:active{transform:scale(.97)}.xo-cell:disabled{cursor:default;opacity:1}
+.xo-cell[data-mark=X]{color:var(--accent-blue)}.xo-cell[data-mark=O]{color:var(--text)}
+.xo-cell.xo-win{background:rgba(var(--theme-rgb),.2);border-color:var(--accent-blue)}
+.xo-cell:focus-visible,.xo-restart:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+.xo-game-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;flex-wrap:wrap}
+#xo-hint{font-size:.7rem;color:var(--muted);line-height:1.7;max-width:180px}
+.xo-restart{font:inherit;font-size:.78rem;color:var(--text);background:var(--bg-glass);border:1px solid var(--border-glass);padding:10px 14px;border-radius:999px;cursor:pointer}
+@media(max-width:520px){.xo-game{padding:18px}.xo-board{gap:8px}.xo-cell{border-radius:12px}}
