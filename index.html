@@ -13,7 +13,7 @@
   <link rel="shortcut icon" href="./assets/imgs/my-avatar.svg" type="image/x-icon" />
 
   <!-- 🔹 Custom CSS -->
-  <link rel="stylesheet" href="./assets/css/style.css?v=20261012-xo" />
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261012-runner" />
 
   <!-- 🔹 Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -160,7 +160,7 @@
           <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="projects">Projects</button></li>
           <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="certificates">Certificates</button></li>
           <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="publications">Publications</button></li>
-          <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="play">Play</button></li>
+          
           <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="contact">Contact</button></li>
         </ul>
       </nav>
@@ -487,15 +487,7 @@
         </section>
       </article>
 
-      <article class="play glass-layer" data-page="play">
-<header><h2 class="h2 article-title">Feeling bored? Let’s play.</h2></header>
-<p class="play-intro">A quick round of XO. You’re X. The computer is O.</p>
-<section class="xo-game glass-layer" aria-label="Tic-tac-toe game" data-keep-english>
-<div class="xo-game-top"><div><span class="xo-eyebrow">TAKE A SMALL BREAK</span><h3>YOUR MOVE.</h3></div><span class="xo-symbols" aria-hidden="true">X <span>O</span></span></div>
-<p id="xo-status" class="xo-status" role="status" aria-live="polite">Pick a square. You go first.</p>
-<div class="xo-board" role="group" aria-label="Tic-tac-toe board"><button class="xo-cell" type="button" data-xo-cell="0" aria-label="Row 1, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="1" aria-label="Row 1, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="2" aria-label="Row 1, column 3: empty"></button><button class="xo-cell" type="button" data-xo-cell="3" aria-label="Row 2, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="4" aria-label="Row 2, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="5" aria-label="Row 2, column 3: empty"></button><button class="xo-cell" type="button" data-xo-cell="6" aria-label="Row 3, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="7" aria-label="Row 3, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="8" aria-label="Row 3, column 3: empty"></button></div>
-<div class="xo-game-bottom"><p id="xo-hint">Three in a row. No pressure. Allegedly.</p><button id="xo-restart" class="xo-restart" type="button">Restart round ↻</button></div>
-</section></article>
+      <article class="play glass-layer" data-page="play"><header><h2 class="h2 article-title">Feeling bored? Let’s play a game.</h2></header><p class="play-intro">A little robot. A few obstacles. How far can you go?</p><section class="runner-game glass-layer" data-keep-english aria-label="Robot runner game"><div class="runner-top"><h3>ROBOT RUN</h3><div class="runner-scores"><span id="runner-score">Score 0</span><span id="runner-best">Best 0</span></div></div><canvas id="runner-canvas" width="720" height="260" tabindex="0" aria-label="Robot runner: press Space or tap Jump to avoid obstacles"></canvas><p id="runner-status" role="status" aria-live="polite"></p><div class="runner-controls"><button id="runner-action" type="button">Start running</button><button id="runner-pause" type="button" disabled>Pause</button><p id="runner-help">Space / ↑ or tap to jump. Best score stays on this device.</p></div></section></article>
 
       <article class="contact glass-layer" data-page="contact">
         <header><h2 class="h2 article-title neon-text"><span class="glow-line"></span>Contact</h2></header>
@@ -536,7 +528,7 @@
   </main>
 
   <!-- ⚙️ Custom JavaScript -->
-  <script src="./assets/js/script.js?v=20261012-xo"></script>
+  <script src="./assets/js/script.js?v=20261012-runner"></script>
 </body>
 
 </html>

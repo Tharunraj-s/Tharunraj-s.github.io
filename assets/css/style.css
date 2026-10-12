@@ -1203,3 +1203,14 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 #xo-hint{font-size:.7rem;color:var(--muted);line-height:1.7;max-width:180px}
 .xo-restart{font:inherit;font-size:.78rem;color:var(--text);background:var(--bg-glass);border:1px solid var(--border-glass);padding:10px 14px;border-radius:999px;cursor:pointer}
 @media(max-width:520px){.xo-game{padding:18px}.xo-board{gap:8px}.xo-cell{border-radius:12px}}
+
+.runner-game{padding:24px;border:1px solid var(--border-glass);border-radius:24px}
+.runner-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.runner-top h3{font-size:1rem;letter-spacing:.08em}
+.runner-scores{display:flex;gap:16px;font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+#runner-canvas{display:block;width:100%;height:auto;border-radius:16px;background:rgba(var(--theme-rgb),.035);margin-top:18px;touch-action:manipulation;border:1px solid var(--border-glass)}
+#runner-status{font-size:.85rem;min-height:1.7em;color:var(--muted);margin:14px 0}
+.runner-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.runner-controls button{font:inherit;font-size:.8rem;border:1px solid var(--border-glass);border-radius:999px;padding:11px 18px;background:var(--bg-glass);color:var(--text);cursor:pointer;touch-action:manipulation}
+.runner-controls button:disabled{opacity:.45;cursor:default}.runner-controls button:focus-visible,#runner-canvas:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+#runner-help{font-size:.72rem;color:var(--muted);line-height:1.6;flex:1 1 200px}
+@media(max-width:520px){.runner-game{padding:16px}.runner-scores{gap:10px}#runner-canvas{min-height:155px;object-fit:contain}}
