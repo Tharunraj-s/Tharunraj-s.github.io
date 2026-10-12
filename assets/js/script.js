@@ -65,6 +65,28 @@ function highlightSection(target){
   });
   positionNavPill();
 }
+let navigationAnimation=0;
+function cancelNavigationScroll(){if(navigationAnimation)cancelAnimationFrame(navigationAnimation);navigationAnimation=0;}
+window.addEventListener("wheel",cancelNavigationScroll,{passive:true});
+window.addEventListener("touchstart",cancelNavigationScroll,{passive:true});
+window.addEventListener("keydown",event=>{if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].includes(event.key))cancelNavigationScroll();});
+function scrollToSection(top){
+  cancelNavigationScroll();
+  const start=window.scrollY;
+  const end=Math.max(0,Math.min(top,document.documentElement.scrollHeight-window.innerHeight));
+  const distance=end-start;
+  if(reduceMotion()||Math.abs(distance)<2){window.scrollTo(0,end);return;}
+  const duration=Math.min(700,Math.max(320,Math.abs(distance)*.13));
+  let began;
+  function frame(now){
+    if(began===undefined)began=now;
+    const progress=Math.min(1,(now-began)/duration);
+    const eased=progress<.5?4*progress*progress*progress:1-Math.pow(-2*progress+2,3)/2;
+    window.scrollTo(0,start+distance*eased);
+    if(progress<1)navigationAnimation=requestAnimationFrame(frame);else navigationAnimation=0;
+  }
+  navigationAnimation=requestAnimationFrame(frame);
+}
 navLinks.forEach(link=>link.addEventListener("click",()=>{
   const target=document.querySelector('[data-page="'+link.dataset.navTarget+'"]');
   if(!target)return;
@@ -74,8 +96,7 @@ navLinks.forEach(link=>link.addEventListener("click",()=>{
     if(sidebarBtn)sidebarBtn.querySelector("span").textContent=contactToggleText(false);
   }
   const offset=navigationBar.getBoundingClientRect().height+26;
-  window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-offset,behavior:reduceMotion()?"instant":"smooth"});
-  highlightSection(link.dataset.navTarget);
+  scrollToSection(target.getBoundingClientRect().top+window.scrollY-offset);
 }));
 let scrollFrame=0;
 function updateCurrentSection(){
@@ -123,7 +144,6 @@ let modalCloseTimer;
 const closeModal = () => {
   if(!modalContainer?.classList.contains("active"))return;
   clearTimeout(modalCloseTimer);
-  modalContainer.querySelectorAll("video").forEach(video=>video.pause());
   if(reduceMotion()){modalContainer.classList.remove("active");return;}
   modalContainer.classList.add("is-closing");
   modalCloseTimer=setTimeout(()=>{modalContainer.classList.remove("active","is-closing");},150);

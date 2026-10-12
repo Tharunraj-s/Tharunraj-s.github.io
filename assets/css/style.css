@@ -1172,3 +1172,9 @@ body,article,.glass-layer,.glass-effect,.project-card,.publication-card,.navbar,
 .copy-contact-btn:hover{border-color:var(--accent-blue)}
 #contact-feedback{min-height:1.6em;color:var(--muted);font-size:.8rem;margin:8px 0 0}
 @media(prefers-reduced-motion:reduce){.reveal-card{opacity:1;translate:none}.nav-motion-pill,.project-img img,.contact-page-card>ion-icon{transition:none!important}.modal-container.active .projects-modal,.modal-container.active .overlay{animation:none!important}}
+
+/* Softer scroll-following navigation and shorter card travel */
+.nav-motion-pill{transition:transform 260ms cubic-bezier(.22,1,.36,1),width 260ms cubic-bezier(.22,1,.36,1),height 260ms ease}
+.reveal-card{translate:0 8px;transition:opacity 340ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms),translate 340ms cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms)}
+.reveal-card.is-revealed{translate:0 0}
+@media(prefers-reduced-motion:reduce){.nav-motion-pill{transition:none!important}.reveal-card{transition:none!important;translate:none}}
