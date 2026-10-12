@@ -1214,3 +1214,14 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 .runner-controls button:disabled{opacity:.45;cursor:default}.runner-controls button:focus-visible,#runner-canvas:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
 #runner-help{font-size:.72rem;color:var(--muted);line-height:1.6;flex:1 1 200px}
 @media(max-width:520px){.runner-game{padding:16px}.runner-scores{gap:10px}#runner-canvas{min-height:155px;object-fit:contain}}
+
+.game-choices{display:flex;gap:8px;justify-content:center;margin:0 0 22px}
+.game-choices button{font:inherit;font-size:.8rem;padding:10px 18px;background:var(--bg-glass);color:var(--muted);border:1px solid var(--border-glass);border-radius:999px;cursor:pointer}
+.game-choices button[aria-pressed=true]{color:var(--text);background:rgba(var(--theme-rgb),.16);border-color:var(--accent-blue)}
+#runner-panel[hidden],#xo-panel[hidden],#xo-name-form[hidden]{display:none!important}
+.xo-score-strip{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--border-glass);border-bottom:1px solid var(--border-glass);padding:12px 0;margin-top:14px;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+#xo-name-form{margin-top:18px;font-size:.8rem;color:var(--muted)}#xo-name-form>div{display:flex;gap:8px;margin-top:9px;flex-wrap:wrap}
+#xo-name-form input{min-width:0;flex:1 1 150px;padding:10px 12px;border-radius:12px;background:var(--bg-glass);border:1px solid var(--border-glass);color:var(--text);font:inherit}
+#xo-name-form button{padding:10px;border-radius:12px;background:rgba(var(--theme-rgb),.12);color:var(--text);border:1px solid var(--border-glass);font:inherit;cursor:pointer}
+#runner-duck{user-select:none;-webkit-user-select:none;touch-action:none}
+.game-choices button:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
