@@ -1306,3 +1306,20 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 .arcade-fullscreen-button:focus-visible,.arcade-enter:focus-visible,.arcade-exit:focus-visible,#oma-canvas:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
 @media(max-width:520px){.oma-controls{gap:8px}.oma-controls button{padding:10px 12px}.arcade-screen-top span{font-size:9px}.arcade-screen .runner-scores{font-size:11px}.arcade-screen .runner-controls{gap:6px}.arcade-screen .runner-controls button{padding:8px 11px}.arcade-screen .radar-aim-controls{gap:4px}}
 @media(prefers-reduced-motion:reduce){.arcade-tilt{animation:none;transform:rotate(90deg)}}
+
+.runner-game{position:relative}
+.runner-guide{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:16px;border-radius:inherit;background:rgba(var(--theme-rgb),.12);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.runner-guide[hidden]{display:none!important}
+.runner-guide-card{width:min(460px,100%);padding:24px;text-align:center;border:1px solid var(--border-glass);border-radius:22px;background:var(--bg);color:var(--text);box-shadow:0 16px 60px rgba(0,0,0,.25)}
+.runner-guide-eyebrow{color:var(--accent-blue);font-size:11px;letter-spacing:.14em}
+.runner-guide-card h3{font-size:19px;margin:8px 0 16px}
+.runner-guide-sides{display:grid;grid-template-columns:1fr 1fr;gap:12px}.runner-guide-sides p{padding:14px 8px;background:var(--bg-glass);border-radius:14px}.runner-guide-sides strong{display:block;color:var(--accent-blue);font-size:14px}.runner-guide-sides span{display:block;font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+.runner-guide-keyboard{font-size:12px;color:var(--muted);margin:16px 0}
+.runner-guide-card button{padding:11px 16px;margin:4px;border:1px solid var(--accent-blue);border-radius:999px;background:var(--bg-glass);color:var(--text);font:inherit;font-size:12px}
+.arcade-screen .runner-guide-card{padding:18px}.arcade-screen .runner-guide-full{display:none}
+@media(max-height:430px) and (orientation:landscape){.runner-guide-card{padding:12px}.runner-guide-card h3{font-size:16px;margin:6px}.runner-guide-sides p{padding:8px}.runner-guide-keyboard{margin:8px}}
+#runner-panel #runner-duck{order:1;margin-right:auto}
+#runner-panel #runner-pause{order:2}
+#runner-panel #runner-action{order:3;margin-left:auto}
+#runner-panel .arcade-help-button{order:4}
+#runner-panel .arcade-fullscreen-button,#runner-panel #runner-help{order:5}

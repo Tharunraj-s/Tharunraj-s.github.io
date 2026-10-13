@@ -105,7 +105,7 @@ function updateCurrentSection(){
   let current=pages[0];
   pages.forEach(page=>{if(page.getBoundingClientRect().top<=threshold)current=page;});
   if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-8)current=pages[pages.length-1];
-  highlightSection(current.dataset.page==="play"?"publications":current.dataset.page);
+  highlightSection(current.dataset.page);
 }
 window.addEventListener("scroll",()=>{if(!scrollFrame)scrollFrame=requestAnimationFrame(updateCurrentSection)},{passive:true});
 window.addEventListener("resize",updateCurrentSection);
@@ -385,11 +385,11 @@ function runnerLabels(){
  setGameText("runner-score",(ta?"புள்ளிகள் ":"Score ")+score);setGameText("runner-best",(ta?"சிறந்தது ":"Best ")+runnerBest);
  const status=runnerState==="ready"?(ta?"தடையைத் தாண்டுங்கள். மேலே வரும் தடைக்குக் குனியுங்கள்.":"Jump ground obstacles. Duck under overhead ones."):runnerState==="over"?(ta?"மோதிவிட்டது. மீண்டும் முயலலாம்.":"Radar saw it. The rover didn’t quite dodge it."):runnerState==="paused"?(ta?"இடைநிறுத்தப்பட்டது.":"Paused. Catch your breath."):(ta?"தாவு அல்லது குனி.":"Scan. Jump. Duck. Keep moving.");
  const statusNode=document.getElementById("runner-status");if(statusNode.textContent!==status)statusNode.textContent=status;
- runnerAction.textContent=runnerState==="running"?(ta?"தாவு ↑":"Jump ↑"):runnerState==="paused"?(ta?"தொடர்க":"Resume"):(ta?runnerState==="over"?"மீண்டும் ஓடு":"ஓடத் தொடங்கு":runnerState==="over"?"Run again":"Start running");
+ runnerAction.textContent=runnerState==="running"?(ta?"வலது: தாவு ▶":"Jump ▶"):runnerState==="paused"?(ta?"தொடர்க":"Resume"):(ta?runnerState==="over"?"மீண்டும் ஓடு":"ஓடத் தொடங்கு":runnerState==="over"?"Run again":"Start running");
  runnerPause.textContent=ta?"நிறுத்து":"Pause";runnerPause.disabled=runnerState!=="running";
- runnerDuck.textContent=ta?"குனி ↓":"Duck ↓";runnerDuck.disabled=runnerState!=="running";
+ runnerDuck.textContent=ta?"◀ இடது: குனி":"◀ Duck";runnerDuck.disabled=runnerState!=="running";
  document.querySelector(".runner-top h3").textContent=ta?"ரோவர் ஓட்டம்":"ROVER RUN";
- document.getElementById("runner-help").textContent=ta?"Space / ↑: தாவு. ↓: குனி. கைப்பேசியில் பொத்தான்களைப் பயன்படுத்துங்கள்.":"Space / ↑: jump. ↓: duck. Mobile: tap Jump, tap or hold Duck.";
+ document.getElementById("runner-help").textContent=ta?"இடது: குனி. வலது / Space: தாவு. கைப்பேசியின் இடப்பகுதி: குனி; வலப்பகுதி: தாவு.":"Left: duck. Right / Space: jump. Touch: left half ducks, right half jumps.";
 }
 let gamePalette;
 function refreshGamePalette(){const style=getComputedStyle(document.body);gamePalette={accent:style.getPropertyValue("--accent-blue").trim(),text:style.getPropertyValue("--text").trim()};}
@@ -422,29 +422,40 @@ function runnerStart(){cancelAnimationFrame(runnerFrame);runnerState="running";r
 function runnerInput(){if(runnerState==="ready"||runnerState==="over"){runnerStart();return;}if(runnerState==="paused"){runnerState="running";runnerLast=0;runnerLabels();runnerFrame=requestAnimationFrame(runnerTick);return;}if(!runnerY){runnerDucking=false;runnerDuckUntil=0;runnerVelocity=620;}}
 function duckRunner(){if(runnerState!=="running"||runnerY>0)return;runnerDucking=true;runnerDuckUntil=performance.now()+650;}
 function pauseRunner(){if(runnerState!=="running")return;runnerState="paused";cancelAnimationFrame(runnerFrame);runnerLabels();drawRunner();}
-runnerAction.addEventListener("click",runnerInput);runnerCanvas.addEventListener("click",runnerInput);runnerPause.addEventListener("click",pauseRunner);
+runnerAction.addEventListener("click",runnerInput);runnerPause.addEventListener("click",pauseRunner);
+runnerCanvas.addEventListener("pointerdown",event=>{event.preventDefault();const rect=runnerCanvas.getBoundingClientRect();if(event.clientX-rect.left<rect.width/2){duckRunner();if(runnerDucking){runnerCanvas.setPointerCapture(event.pointerId);runnerDuckUntil=Infinity;}}else runnerInput();});
+["pointerup","pointercancel","lostpointercapture"].forEach(type=>runnerCanvas.addEventListener(type,()=>{if(runnerDucking)runnerDuckUntil=performance.now()+100;}));
 runnerDuck.addEventListener("pointerdown",event=>{event.preventDefault();runnerDuck.setPointerCapture(event.pointerId);duckRunner();if(runnerDucking)runnerDuckUntil=Infinity;});
 ["pointerup","pointercancel","lostpointercapture"].forEach(type=>runnerDuck.addEventListener(type,()=>{if(runnerDucking)runnerDuckUntil=performance.now()+500;}));
 runnerDuck.addEventListener("click",duckRunner);
-document.querySelector(".runner-game").addEventListener("keydown",event=>{if(event.code==="ArrowDown"){event.preventDefault();duckRunner();if(runnerDucking)runnerDuckUntil=Infinity;}else if((event.code==="Space"||event.code==="ArrowUp")&&event.target!==runnerPause&&event.target!==runnerDuck){event.preventDefault();if(!event.repeat)runnerInput();}});
-document.querySelector(".runner-game").addEventListener("keyup",event=>{if(event.code==="ArrowDown"){runnerDuckUntil=performance.now()+100;}});
+document.querySelector(".runner-game").addEventListener("keydown",event=>{if(event.target.tagName==="BUTTON"&&event.code==="Space")return;if(["ArrowDown","ArrowLeft"].includes(event.code)){event.preventDefault();duckRunner();if(runnerDucking)runnerDuckUntil=Infinity;}else if((event.code==="Space"||event.code==="ArrowUp"||event.code==="ArrowRight")&&event.target!==runnerPause&&event.target!==runnerDuck){event.preventDefault();if(!event.repeat)runnerInput();}});
+document.querySelector(".runner-game").addEventListener("keyup",event=>{if(["ArrowDown","ArrowLeft"].includes(event.code)){runnerDuckUntil=performance.now()+100;}});
 document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseRunner();});
 new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseRunner();},{threshold:.05}).observe(runnerCanvas);
 
+function makeRadarTarget(sequence,score){
+ const types=[{kind:"jet",w:62,h:20},{kind:"truck",w:48,h:34},{kind:"drone",w:44,h:22},{kind:"car",w:42,h:23},{kind:"helicopter",w:60,h:30},{kind:"rocket",w:46,h:15}];
+ const type=types[sequence%types.length],direction=Math.floor(sequence/types.length)%2===0?(sequence%2===0?1:-1):(sequence%2===0?-1:1);
+ return {...type,direction,x:direction>0?-type.w-20:740,y:["truck","car"].includes(type.kind)?285-type.h:42+Math.random()*(195-type.h),speed:100+Math.min(180,score*.35)+Math.random()*40};
+}
 function drawArcadeVehicle(ctx,ob,a,t){
- ctx.save();ctx.translate(ob.x,ob.y);ctx.fillStyle=a;
+ ctx.save();ctx.translate(ob.x,ob.y);if(ob.direction===1){ctx.translate(ob.w,0);ctx.scale(-1,1);}ctx.fillStyle=a;
  if(ob.kind==="jet"){ctx.beginPath();ctx.moveTo(0,10);ctx.lineTo(20,6);ctx.lineTo(32,0);ctx.lineTo(39,0);ctx.lineTo(35,7);ctx.lineTo(ob.w-10,7);ctx.lineTo(ob.w-3,2);ctx.lineTo(ob.w,2);ctx.lineTo(ob.w-3,14);ctx.lineTo(34,14);ctx.lineTo(40,ob.h);ctx.lineTo(30,ob.h);ctx.lineTo(20,14);ctx.closePath();ctx.fill();ctx.fillStyle=t;ctx.fillRect(10,8,8,3);}
+ else if(ob.kind==="drone"){ctx.fillRect(14,8,16,9);ctx.fillRect(3,10,38,3);for(const x of [2,32]){ctx.fillRect(x,2,10,3);ctx.fillRect(x+4,4,2,10);}ctx.fillStyle=t;ctx.fillRect(19,12,5,5);}
+ else if(ob.kind==="helicopter"){ctx.fillRect(14,9,25,14);ctx.fillRect(38,14,20,4);ctx.fillRect(55,9,4,8);ctx.fillRect(25,4,3,6);ctx.fillRect(5,2,44,3);ctx.fillRect(12,27,31,2);ctx.fillRect(19,21,3,7);ctx.fillRect(34,21,3,7);ctx.fillStyle=t;ctx.fillRect(16,11,9,7);}
+ else if(ob.kind==="rocket"){ctx.beginPath();ctx.moveTo(0,7);ctx.lineTo(10,1);ctx.lineTo(36,1);ctx.lineTo(44,0);ctx.lineTo(40,7);ctx.lineTo(44,15);ctx.lineTo(36,13);ctx.lineTo(10,13);ctx.closePath();ctx.fill();ctx.fillStyle=t;ctx.fillRect(13,5,8,4);ctx.fillRect(42,5,5,4);}
+ else if(ob.kind==="car"){ctx.fillRect(1,9,ob.w-2,9);ctx.fillRect(10,2,22,9);ctx.fillStyle=t;ctx.fillRect(13,4,7,5);ctx.fillRect(23,4,6,5);for(const x of [9,ob.w-9]){ctx.beginPath();ctx.arc(x,ob.h-5,5,0,Math.PI*2);ctx.fill();}}
  else{ctx.fillRect(16,0,ob.w-16,ob.h-9);ctx.fillRect(2,8,17,ob.h-17);ctx.fillStyle=t;ctx.fillRect(4,10,10,7);for(const x of [10,ob.w-10]){ctx.beginPath();ctx.arc(x,ob.h-6,6,0,Math.PI*2);ctx.fill();}}
  ctx.restore();
 }
 const shootCanvas=document.getElementById("shooter-canvas"),shootCtx=shootCanvas.getContext("2d"),shootStart=document.getElementById("shooter-start"),shootFire=document.getElementById("shooter-fire"),shootPause=document.getElementById("shooter-pause");
-let shootState="ready",shootScore=0,shootBest=0,shootMisses=0,shootTargets=[],shootSpawn=0,shootLast=0,shootFrame=0,shootAim={x:360,y:150},shootFlash=0;
+let shootState="ready",shootScore=0,shootBest=0,shootMisses=0,shootTargets=[],shootSpawn=0,shootLast=0,shootFrame=0,shootAim={x:360,y:150},shootFlash=0,shootSequence=0;
 try{shootBest=Number(localStorage.getItem("portfolio-shooter-best"))||0}catch{}
 function shootLabels(){
  setGameText("shooter-score","Score "+shootScore+" · Misses "+shootMisses+"/3");
  setGameText("shooter-best","Best "+shootBest);
  shootStart.textContent=shootState==="paused"?"Resume":shootState==="over"?"Play again":"Start game";shootStart.disabled=shootState==="running";shootFire.disabled=shootPause.disabled=shootState!=="running";
- const text=shootState==="over"?"Three slipped through. One more round?":shootState==="paused"?"Paused. Take your time.":shootState==="running"?"Track. Aim. Fire. Keep the radar clear.":"Tap jets and trucks to fire. Three escapes end the round.";
+ const text=shootState==="over"?"Three slipped through. One more round?":shootState==="paused"?"Paused. Take your time.":shootState==="running"?"Track. Aim. Fire. Keep the radar clear.":"Targets arrive from both sides: jets, drones, helicopters, rockets, cars and trucks. Three escapes end the round.";
  const node=document.getElementById("shooter-status");if(node.textContent!==text)node.textContent=text;
 }
 function drawShooter(){
@@ -462,28 +473,28 @@ function fireShot(){
  if(shootState!=="running")return;
  shootFlash=performance.now()+100;
  const i=shootTargets.findIndex(ob=>shootAim.x>=ob.x-8&&shootAim.x<=ob.x+ob.w+8&&shootAim.y>=ob.y-8&&shootAim.y<=ob.y+ob.h+8);
- if(i>=0){shootScore+=shootTargets[i].kind==="jet"?20:10;shootTargets.splice(i,1);}shootLabels();drawShooter();
+ if(i>=0){shootScore+=["truck","car"].includes(shootTargets[i].kind)?10:20;shootTargets.splice(i,1);}shootLabels();drawShooter();
 }
 function shootTick(now){
  if(shootState!=="running")return;
  const dt=Math.min((now-(shootLast||now))/1000,.04);shootLast=now;shootSpawn-=dt;
- if(shootSpawn<=0){const jet=Math.random()<.65;shootTargets.push({kind:jet?"jet":"truck",x:740,y:jet?45+Math.random()*150:251,w:jet?62:48,h:jet?20:34,speed:100+Math.min(180,shootScore*.35)+Math.random()*40});shootSpawn=Math.max(.6,1.5-shootScore*.002);}
- shootTargets.forEach(ob=>ob.x-=ob.speed*dt);shootTargets=shootTargets.filter(ob=>{if(ob.x+ob.w<0){shootMisses++;return false;}return true;});
+ if(shootSpawn<=0){shootTargets.push(makeRadarTarget(shootSequence++,shootScore));shootSpawn=Math.max(.6,1.5-shootScore*.002);}
+ shootTargets.forEach(ob=>ob.x+=ob.direction*ob.speed*dt);shootTargets=shootTargets.filter(ob=>{if(ob.direction<0?ob.x+ob.w<0:ob.x>720){shootMisses++;return false;}return true;});
  if(shootMisses>=3){shootMisses=3;shootState="over";shootBest=Math.max(shootBest,shootScore);try{localStorage.setItem("portfolio-shooter-best",shootBest)}catch{}}
  shootLabels();drawShooter();if(shootState==="running")shootFrame=requestAnimationFrame(shootTick);
 }
 function pauseShooter(){if(shootState==="running"){shootState="paused";cancelAnimationFrame(shootFrame);shootLabels();drawShooter();}}
-shootStart.addEventListener("click",()=>{if(shootState!=="paused"){shootScore=0;shootMisses=0;shootTargets=[];shootSpawn=.4;}cancelAnimationFrame(shootFrame);shootState="running";shootLast=0;shootLabels();shootFrame=requestAnimationFrame(shootTick);});
+shootStart.addEventListener("click",()=>{if(shootState!=="paused"){shootScore=0;shootMisses=0;shootTargets=[];shootSequence=0;shootSpawn=.4;}cancelAnimationFrame(shootFrame);shootState="running";shootLast=0;shootLabels();shootFrame=requestAnimationFrame(shootTick);});
 shootPause.addEventListener("click",pauseShooter);shootFire.addEventListener("click",fireShot);
 shootCanvas.addEventListener("pointerdown",event=>{event.preventDefault();const r=shootCanvas.getBoundingClientRect();shootAim={x:(event.clientX-r.left)*720/r.width,y:(event.clientY-r.top)*320/r.height};fireShot();drawShooter();});
 shootCanvas.addEventListener("keydown",event=>{const d={ArrowLeft:[-18,0],ArrowRight:[18,0],ArrowUp:[0,-18],ArrowDown:[0,18]}[event.code];if(d){event.preventDefault();shootAim.x=Math.max(0,Math.min(720,shootAim.x+d[0]));shootAim.y=Math.max(0,Math.min(285,shootAim.y+d[1]));drawShooter();}if(event.code==="Space"){event.preventDefault();if(!event.repeat)fireShot();}});
 document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseShooter();});
 new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseShooter();},{threshold:.05}).observe(shootCanvas);
 function selectGame(game){
- for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"],["oma","oma-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
- if(game!=="runner")pauseRunner();else drawRunner();if(game!=="shooter")pauseShooter();else drawShooter();if(game!=="oma")window.omaGame?.pause();else window.loadOmaGame?.();
+ for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
+ if(game!=="runner")pauseRunner();else {drawRunner();window.showRunnerGuide?.();}if(game!=="shooter")pauseShooter();else drawShooter();
 }
-for(const game of ["xo","runner","shooter","oma"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
+for(const game of ["xo","runner","shooter"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
 document.addEventListener("portfolio-language-change",()=>{renderXo();runnerLabels();drawRunner();});
 themeChoices.forEach(button=>button.addEventListener("click",()=>{refreshGamePalette();drawRunner();drawShooter();}));
 renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();selectGame("xo");
@@ -496,13 +507,13 @@ function gameResetLabels(){
  document.getElementById("games-reset-status").textContent="";
 }
 function resetGames(){
- window.omaGame?.reset();
+ 
  clearTimeout(xoTimer);cancelAnimationFrame(runnerFrame);cancelAnimationFrame(shootFrame);
  cancelNavigationScroll();
  for(const key of ["portfolio-xo-score","portfolio-xo-name","portfolio-runner-best","portfolio-shooter-best","portfolio-oma-best"]){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
  xoBoard=Array(9).fill("");xoThinking=false;xoOutcome=null;xoPlayer="";xoScores={me:0,you:0};document.getElementById("xo-player-name").value="";
  runnerState="ready";runnerBest=0;runnerY=0;runnerVelocity=0;runnerDistance=0;runnerObstacles=[];runnerDucking=false;runnerDuckUntil=0;runnerSpawn=1.2;runnerLast=0;runnerFrame=0;
- shootState="ready";shootScore=0;shootBest=0;shootMisses=0;shootTargets=[];shootSpawn=0;shootLast=0;shootFrame=0;shootAim={x:360,y:150};shootFlash=0;
+ shootSequence=0;shootState="ready";shootScore=0;shootBest=0;shootMisses=0;shootTargets=[];shootSpawn=0;shootLast=0;shootFrame=0;shootAim={x:360,y:150};shootFlash=0;
  renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();
  document.getElementById("games-reset-status").textContent=document.documentElement.lang==="ta"?"விளையாட்டுத் தரவு அழிக்கப்பட்டது. புதிதாகத் தொடங்கலாம் ✓":"Game data cleared. Fresh start ✓";
 }
@@ -512,3 +523,4 @@ function resetGames(){
 
 
 function nudgeRadar(dx,dy){shootAim.x=Math.max(0,Math.min(720,shootAim.x+dx));shootAim.y=Math.max(0,Math.min(285,shootAim.y+dy));drawShooter();}
+
