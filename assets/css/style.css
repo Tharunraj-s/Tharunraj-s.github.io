@@ -1266,3 +1266,43 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
  #language-toggle{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
 @media(prefers-reduced-motion:reduce){.project-card,.publication-card,.contact-page-card,.theme-option,.social-link,#games-reset{transition:none!important}}
+
+
+/* Arcade mode — theme-aware framing, original blue/amber pixel-art game. */
+.game-choices{flex-wrap:wrap}
+#shooter-panel[hidden],#oma-panel[hidden],.arcade-screen[hidden]{display:none!important}
+#shooter-canvas,#oma-canvas{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--border-glass);margin:18px auto 0;touch-action:none}
+#shooter-canvas{background:rgba(var(--theme-rgb),.035)}
+#oma-canvas{background:#0b192c;image-rendering:pixelated}
+#oma-status,#shooter-status{font-size:.8rem;line-height:1.6;margin:12px 0;color:var(--muted)}
+.oma-movement,.oma-actions,.radar-aim-controls{display:flex;gap:8px}
+.oma-controls .oma-actions{margin-left:auto}
+.oma-movement button,.oma-actions button,.radar-aim-controls button{min-width:48px;min-height:44px;touch-action:none;user-select:none;-webkit-user-select:none}
+.arcade-help{font-size:.7rem;color:var(--muted);line-height:1.6;flex:1 1 100%}
+.arcade-fullscreen-button{border-color:var(--accent-blue)!important}
+.arcade-rotate-dialog{width:min(380px,calc(100vw - 32px));padding:32px 26px;text-align:center;border:1px solid var(--border-glass);border-radius:24px;background:var(--bg);color:var(--text);box-shadow:0 24px 90px rgba(0,0,0,.35)}
+.arcade-rotate-dialog::backdrop{background:rgba(0,0,0,.65)}
+.arcade-prompt-close{position:absolute;right:10px;top:10px;font-size:24px;color:var(--muted);padding:4px 10px}
+.arcade-rotate-dialog h3{font-size:18px;margin:12px 0}
+.arcade-rotate-copy{font-size:13px;line-height:1.7;color:var(--muted);margin-bottom:20px}
+.arcade-tilt{width:90px;height:90px;color:var(--accent-blue);animation:arcade-tilt 1.8s ease-in-out infinite}
+@keyframes arcade-tilt{0%,15%{transform:rotate(0)}55%,80%{transform:rotate(90deg)}100%{transform:rotate(0)}}
+.arcade-enter{padding:13px 20px;border-radius:999px;border:1px solid var(--accent-blue);background:rgba(var(--theme-rgb),.15);color:var(--text);font:inherit;font-size:13px}
+.arcade-enter:disabled{opacity:.4}
+.arcade-screen{position:fixed;inset:0;z-index:2147483000;background:var(--bg);color:var(--text);padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));display:flex;flex-direction:column;overflow:auto;overscroll-behavior:none}
+.arcade-screen:fullscreen{width:100%;height:100%}
+.arcade-screen-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:0 0 36px;font-size:11px;letter-spacing:.08em}
+.arcade-exit{border:1px solid var(--border-glass);border-radius:999px;padding:8px 12px;color:var(--text);font:inherit;font-size:12px;background:var(--bg-glass)}
+.arcade-screen-slot{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.arcade-screen .runner-game{width:100%;border:0;border-radius:0;padding:0;box-shadow:none;backdrop-filter:none;background:transparent}
+.arcade-screen .runner-top{font-size:11px;min-height:24px;max-width:1100px;margin:auto}.arcade-screen .runner-top h3{font-size:12px}
+.arcade-screen canvas{width:min(100%,calc((100dvh - 160px)*var(--game-ratio)));height:auto;max-height:calc(100dvh - 160px);min-height:0!important;margin:6px auto;border-radius:8px}
+.arcade-screen .runner-controls{max-width:1100px;margin:0 auto;justify-content:center;gap:8px}.arcade-screen .runner-controls button{padding:8px 14px;min-height:42px}
+.arcade-screen #runner-status,.arcade-screen #shooter-status,.arcade-screen #oma-status{margin:4px 0;text-align:center;font-size:11px;min-height:0}
+.arcade-screen .arcade-help,.arcade-screen #runner-help,.arcade-screen .runner-controls>p,.arcade-screen .arcade-fullscreen-button{display:none}
+.arcade-screen .oma-movement{margin-right:auto}.arcade-screen .oma-actions{margin-left:auto}
+.arcade-orientation-note{font-size:11px;text-align:center;color:var(--accent-blue);margin:4px}
+.arcade-orientation-note[hidden]{display:none}
+.arcade-fullscreen-button:focus-visible,.arcade-enter:focus-visible,.arcade-exit:focus-visible,#oma-canvas:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+@media(max-width:520px){.oma-controls{gap:8px}.oma-controls button{padding:10px 12px}.arcade-screen-top span{font-size:9px}.arcade-screen .runner-scores{font-size:11px}.arcade-screen .runner-controls{gap:6px}.arcade-screen .runner-controls button{padding:8px 11px}.arcade-screen .radar-aim-controls{gap:4px}}
+@media(prefers-reduced-motion:reduce){.arcade-tilt{animation:none;transform:rotate(90deg)}}

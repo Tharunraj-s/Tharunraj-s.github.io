@@ -480,10 +480,10 @@ shootCanvas.addEventListener("keydown",event=>{const d={ArrowLeft:[-18,0],ArrowR
 document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseShooter();});
 new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseShooter();},{threshold:.05}).observe(shootCanvas);
 function selectGame(game){
- for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
- if(game!=="runner")pauseRunner();else drawRunner();if(game!=="shooter")pauseShooter();else drawShooter();
+ for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"],["oma","oma-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
+ if(game!=="runner")pauseRunner();else drawRunner();if(game!=="shooter")pauseShooter();else drawShooter();if(game!=="oma")window.omaGame?.pause();else window.loadOmaGame?.();
 }
-for(const game of ["xo","runner","shooter"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
+for(const game of ["xo","runner","shooter","oma"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
 document.addEventListener("portfolio-language-change",()=>{renderXo();runnerLabels();drawRunner();});
 themeChoices.forEach(button=>button.addEventListener("click",()=>{refreshGamePalette();drawRunner();drawShooter();}));
 renderXo();runnerLabels();drawRunner();shootLabels();drawShooter();selectGame("xo");
@@ -496,9 +496,10 @@ function gameResetLabels(){
  document.getElementById("games-reset-status").textContent="";
 }
 function resetGames(){
+ window.omaGame?.reset();
  clearTimeout(xoTimer);cancelAnimationFrame(runnerFrame);cancelAnimationFrame(shootFrame);
  cancelNavigationScroll();
- for(const key of ["portfolio-xo-score","portfolio-xo-name","portfolio-runner-best","portfolio-shooter-best"]){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
+ for(const key of ["portfolio-xo-score","portfolio-xo-name","portfolio-runner-best","portfolio-shooter-best","portfolio-oma-best"]){try{localStorage.removeItem(key);sessionStorage.removeItem(key)}catch{}}
  xoBoard=Array(9).fill("");xoThinking=false;xoOutcome=null;xoPlayer="";xoScores={me:0,you:0};document.getElementById("xo-player-name").value="";
  runnerState="ready";runnerBest=0;runnerY=0;runnerVelocity=0;runnerDistance=0;runnerObstacles=[];runnerDucking=false;runnerDuckUntil=0;runnerSpawn=1.2;runnerLast=0;runnerFrame=0;
  shootState="ready";shootScore=0;shootBest=0;shootMisses=0;shootTargets=[];shootSpawn=0;shootLast=0;shootFrame=0;shootAim={x:360,y:150};shootFlash=0;
@@ -508,3 +509,6 @@ function resetGames(){
  document.getElementById("games-reset").addEventListener("click",resetGames);
  document.addEventListener("portfolio-language-change",gameResetLabels);
  gameResetLabels();
+
+
+function nudgeRadar(dx,dy){shootAim.x=Math.max(0,Math.min(720,shootAim.x+dx));shootAim.y=Math.max(0,Math.min(285,shootAim.y+dy));drawShooter();}
