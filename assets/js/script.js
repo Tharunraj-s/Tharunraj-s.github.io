@@ -596,12 +596,13 @@ const mobileGames=document.createElement("section");mobileGames.className="mobil
 mobileGames.setAttribute("aria-label","Games");
 document.querySelector('article[data-page="publications"]').after(mobileGames);
 function fitProjectSidebar(){
- if(window.innerWidth<=992){document.querySelector('article[data-page="projects"]').after(labLink);sidebar.classList.remove("sidebar-flow");labLink.classList.remove("hub-compact","hub-small");return;}
+ if(window.innerWidth<=992){document.querySelector('article[data-page="projects"]').after(labLink);sidebar.classList.remove("sidebar-flow");labLink.classList.remove("hub-medium","hub-compact","hub-small");return;}
  if(labLink.parentElement!==sidebar)sidebar.append(labLink);
- labLink.classList.remove("hub-compact","hub-small");
+ labLink.classList.remove("hub-medium","hub-compact","hub-small");
  const available=window.innerHeight-32;
  const fullHeight=sidebar.scrollHeight;
- if(fullHeight>available)labLink.classList.add("hub-compact");
+ if(fullHeight>available)labLink.classList.add("hub-medium");
+ if(sidebar.scrollHeight>available){labLink.classList.remove("hub-medium");labLink.classList.add("hub-compact");}
  if(sidebar.scrollHeight>available)labLink.classList.add("hub-small");
  sidebar.classList.toggle("sidebar-flow",sidebar.scrollHeight>available);
 }
