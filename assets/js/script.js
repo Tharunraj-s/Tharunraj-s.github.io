@@ -378,7 +378,7 @@ function renderXo(){
  document.getElementById("xo-my-score").textContent=(ta?"தருண்ராஜ்":"Tharunraj")+" · "+xoScores.me;
  document.getElementById("xo-your-score").textContent=(xoPlayer||(ta?"நீங்கள்":"You"))+" · "+xoScores.you;
  document.querySelector(".xo-eyebrow").textContent=ta?"நீங்கள் vs தருண்ராஜ்":"YOU vs THARUNRAJ";
- document.querySelector(".xo-game h3").textContent=xoOutcome?(xoOutcome.winner==="draw"?(ta?"சமநிலை!":"IT’S A DRAW!"):(ta?"ஆட்டம் முடிந்தது.":"ROUND COMPLETE.")):(ta?"உங்கள் முறை.":"YOUR MOVE.");
+ document.querySelector(".xo-game h3").textContent=xoOutcome?(xoOutcome.winner==="draw"?(ta?"சமநிலை!":"IT’S A DRAW!"):(ta?"ஆட்டம் முடிந்தது.":"ROUND COMPLETE.")):(ta?"XO விளையாடலாமா?":"Beat me at XO");
  document.getElementById("xo-hint").textContent=ta?"நீங்கள் X. நான் O. புள்ளிகள் இந்தச் சாதனத்தில் மட்டுமே.":"You’re X. I’m O. Scores stay on this device.";
  document.getElementById("xo-restart").textContent=ta?"மீண்டும் விளையாடு ↻":"Play again ↻";
  const form=document.getElementById("xo-name-form");form.hidden=!((xoOutcome?.winner==="X"||xoOutcome?.winner==="draw")&&!xoPlayer);
@@ -504,7 +504,7 @@ shootCanvas.addEventListener("keydown",event=>{const d={ArrowLeft:[-18,0],ArrowR
 document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseShooter();});
 new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)pauseShooter();},{threshold:.05}).observe(shootCanvas);
 function selectGame(game){
- for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"]]){document.getElementById(panel).hidden=game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
+ for(const [key,panel] of [["xo","xo-panel"],["runner","runner-panel"],["shooter","shooter-panel"]]){document.getElementById(panel).hidden=key==="xo"?false:game!==key;document.getElementById("choose-"+key).setAttribute("aria-pressed",String(game===key));}
  if(game!=="runner")pauseRunner();else {drawRunner();window.showRunnerGuide?.();}if(game!=="shooter")pauseShooter();else drawShooter();
 }
 for(const game of ["xo","runner","shooter"])document.getElementById("choose-"+game).addEventListener("click",()=>selectGame(game));
@@ -537,3 +537,45 @@ function resetGames(){
 
 function nudgeRadar(dx,dy){shootAim.x=Math.max(0,Math.min(720,shootAim.x+dx));shootAim.y=Math.max(0,Math.min(285,shootAim.y+dy));drawShooter();}
 
+
+
+/* Move one live board between the sidebar, mobile footer and expanded dialog. */
+const xoPanel=document.getElementById("xo-panel");
+const xoDock=document.createElement("div");
+xoDock.className="xo-dock";
+const xoMobileHome=document.createElement("div");
+xoMobileHome.className="xo-mobile-home";
+document.querySelector(".main-content").append(xoMobileHome);
+const xoDialog=document.createElement("dialog");
+xoDialog.className="xo-dialog";
+xoDialog.setAttribute("aria-label","XO against Tharunraj");
+document.body.append(xoDialog);
+const xoExpand=document.createElement("button");
+xoExpand.type="button";xoExpand.className="xo-expand";
+xoExpand.textContent="⤢";xoExpand.setAttribute("aria-label","Expand XO game");
+xoPanel.querySelector(".xo-game-top").append(xoExpand);
+const xoReset=document.createElement("button");
+xoReset.type="button";xoReset.className="xo-restart";
+xoReset.textContent="Reset scores ↻";
+xoReset.addEventListener("click",resetGames);
+xoPanel.querySelector(".xo-game-bottom").append(xoReset);
+function dockXo(){
+  if(xoDialog.open)return;
+  const desktop=matchMedia("(min-width:993px)").matches;
+  (desktop?sidebar:xoMobileHome).append(xoDock);
+  xoDock.append(xoPanel);
+  xoExpand.textContent="⤢";
+  xoExpand.setAttribute("aria-label","Expand XO game");
+}
+xoExpand.addEventListener("click",()=>{
+  if(xoDialog.open){xoDialog.close();return;}
+  xoDialog.append(xoPanel);
+  xoExpand.textContent="×";
+  xoExpand.setAttribute("aria-label","Close expanded XO game");
+  xoDialog.showModal();
+});
+xoDialog.addEventListener("close",()=>{dockXo();xoExpand.focus({preventScroll:true});});
+xoDialog.addEventListener("click",event=>{if(event.target===xoDialog){const r=xoDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)xoDialog.close();}});
+window.addEventListener("resize",dockXo);
+document.getElementById("choose-xo").hidden=true;
+dockXo();

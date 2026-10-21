@@ -1362,3 +1362,30 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
     min-height: 0;
   }
 }
+
+
+/* Playable sidebar card; the same board moves below content on mobile. */
+.xo-dock{margin-top:12px;flex-shrink:0;min-width:0}
+.xo-dock .xo-game{width:100%;padding:14px;border-radius:18px}
+.xo-dock .xo-game h3{font-size:1rem;margin:5px 0}
+.xo-dock .xo-eyebrow{font-size:.55rem;letter-spacing:.06em}
+.xo-dock .xo-symbols{display:none}
+.xo-expand{margin-left:auto;flex-shrink:0;width:32px;height:32px;border-radius:9px;border:1px solid var(--border-glass);font-size:23px;cursor:pointer;color:var(--text)}
+.xo-expand:focus-visible{outline:2px solid var(--accent-blue);outline-offset:3px}
+.xo-dock .xo-score-strip{font-size:.68rem;margin-top:8px;padding:8px 0;flex-wrap:wrap}
+.xo-dock .xo-status{font-size:.7rem;min-height:2.6em;margin:8px 0}
+.xo-dock .xo-board{max-width:174px;margin:auto;gap:6px}
+.xo-dock .xo-cell{font-size:1.7rem;border-radius:10px}
+.xo-dock .xo-game-bottom{gap:8px;margin-top:10px}
+.xo-dock #xo-hint{font-size:.6rem;max-width:100%;margin:0;flex-basis:100%}
+.xo-dock .xo-restart{padding:7px 9px;font-size:.65rem}
+.xo-dock #xo-name-form{font-size:.7rem;margin-top:10px}
+.xo-mobile-home:empty{display:none}
+.xo-mobile-home{margin-top:16px}
+.xo-mobile-home .xo-dock{max-width:480px;margin-inline:auto}
+.xo-mobile-home .xo-board{max-width:260px}
+.xo-dialog{width:min(480px,calc(100vw - 28px));max-height:calc(100dvh - 32px);padding:0;border:1px solid var(--border-glass);border-radius:24px;background:var(--bg);color:var(--text);overflow:auto}
+.xo-dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(7px)}
+.xo-dialog .xo-game{border:0;margin:0;max-width:none}
+.xo-dialog .xo-game-bottom{gap:10px}
+@media(min-width:993px){.sidebar .sidebar-info,.sidebar .sidebar-info_more{flex-shrink:0}}
