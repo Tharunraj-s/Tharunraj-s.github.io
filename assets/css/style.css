@@ -1426,3 +1426,23 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 .break-game-button[hidden]{display:none}
 #break-game-picker{position:fixed;right:22px;bottom:132px;z-index:2051;width:270px;max-width:calc(100vw - 32px);margin:0;background:var(--bg);box-shadow:0 16px 50px rgba(0,0,0,.25)}
 @media(max-width:992px){.project-lab-link{margin-top:14px}#break-game-picker,.break-game-button{display:none!important}}
+
+/* Content fits naturally; compact the hub before giving up sticky placement. */
+@media(min-width:993px){
+ .sidebar{height:auto!important;max-height:none!important;overflow:visible!important;justify-content:flex-start}
+ .sidebar.sidebar-flow{position:relative;top:0!important}
+ .project-lab-link.hub-compact{padding:13px 16px;gap:0}
+ .project-lab-link.hub-compact>.lab-link-icon,.project-lab-link.hub-compact>strong,.project-lab-link.hub-compact>span{display:none}
+ .project-lab-link.hub-compact>b{font-size:.8rem;line-height:1.5}
+ .project-lab-link.hub-small{padding:8px 12px;margin-top:8px}
+}
+.mobile-games-menu[hidden]{display:none!important}
+article.desktop-games-docked{display:none!important}
+.xo-mobile-home[hidden]{display:none!important}
+@media(max-width:992px){
+ .mobile-games-menu{margin-top:16px;padding:16px;border:1px solid var(--border-glass);border-radius:18px;background:var(--bg-glass)}
+ .mobile-games-menu .break-game-button{display:block!important;position:static;width:100%;padding:13px 16px;border-radius:12px;text-align:left}
+ .mobile-games-menu #break-game-picker:not([hidden]){display:grid!important;position:static;width:100%;max-width:none;margin-top:12px;box-shadow:none}
+ .mobile-games-menu #break-game-picker[hidden]{display:none!important}
+ .desktop-game-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:12px}
+}

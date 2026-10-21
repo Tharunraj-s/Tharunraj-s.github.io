@@ -353,17 +353,6 @@ copyEmailButton?.addEventListener("click",async()=>{
   }
 });
 
-function fitDesktopSidebar(){
-  if(!sidebar)return;
-  if(window.innerWidth<=992){sidebar.style.removeProperty("top");sidebar.style.removeProperty("--sidebar-offset");return;}
-  sidebar.style.setProperty("--sidebar-offset",Math.max(16,(window.innerHeight-sidebar.offsetHeight)/2)+"px");
-}
-if("ResizeObserver" in window)new ResizeObserver(fitDesktopSidebar).observe(sidebar);
-window.addEventListener("resize",fitDesktopSidebar);
-fitDesktopSidebar();
-
-
-
 const xoLines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 function xoResult(b){for(const line of xoLines)if(b[line[0]]&&line.every(i=>b[i]===b[line[0]]))return{winner:b[line[0]],line};return b.every(Boolean)?{winner:"draw",line:[]}:null;}
 function xoChoose(b){const free=b.map((m,i)=>m?null:i).filter(i=>i!==null);for(const mark of ["O","X"])for(const i of free){const test=[...b];test[i]=mark;if(xoResult(test)?.winner===mark)return i;}if(!b[4])return 4;return free[Math.floor(Math.random()*free.length)];}
@@ -602,15 +591,39 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!gameLaunch
 const labLink=document.createElement("a");labLink.className="project-lab-link glass-layer";labLink.href="projects.html";
 labLink.innerHTML='<span class="lab-link-icon" aria-hidden="true">↗</span><strong>See how I built it</strong><span>Visual walkthroughs, interactive demos & the thinking behind the projects.</span><b>Explore the project lab →</b>';
 sidebar.append(labLink);
+labLink.querySelector("b").textContent="Explore project hub →";
+const mobileGames=document.createElement("section");mobileGames.className="mobile-games-menu";
+mobileGames.setAttribute("aria-label","Games");
+document.querySelector('article[data-page="publications"]').after(mobileGames);
+function fitProjectSidebar(){
+ if(window.innerWidth<=992){sidebar.classList.remove("sidebar-flow");labLink.classList.remove("hub-compact","hub-small");return;}
+ labLink.classList.remove("hub-compact","hub-small");
+ const available=window.innerHeight-32;
+ const fullHeight=sidebar.scrollHeight;
+ if(fullHeight>available)labLink.classList.add("hub-compact");
+ if(sidebar.scrollHeight>available)labLink.classList.add("hub-small");
+ sidebar.classList.toggle("sidebar-flow",sidebar.scrollHeight>available);
+}
+window.addEventListener("resize",fitProjectSidebar);
+document.fonts?.ready.then(fitProjectSidebar);
+if("ResizeObserver" in window){
+ const hubObserver=new ResizeObserver(()=>requestAnimationFrame(fitProjectSidebar));
+ hubObserver.observe(sidebar.querySelector(".sidebar-info"));
+ hubObserver.observe(sidebar.querySelector(".sidebar-info_more"));
+}
+document.addEventListener("portfolio-language-change",()=>requestAnimationFrame(fitProjectSidebar));
+requestAnimationFrame(fitProjectSidebar);
 xoExpand.addEventListener("click",()=>openDockedGame("xo",xoExpand));
 function placeDesktopGames(){
  const desktop=matchMedia("(min-width:993px)").matches;
  if(gameDialog.open)gameDialog.close();
- breakButton.hidden=!desktop;
+ breakButton.hidden=false;
+ (desktop?document.body:mobileGames).append(breakButton,gameLauncher);
+ mobileGames.hidden=desktop;
  closeBreakPicker();
- xoMobileHome.hidden=desktop;
- document.querySelector('article[data-page="play"]').classList.toggle("desktop-games-docked",desktop);
+ xoMobileHome.hidden=true;
+ document.querySelector('article[data-page="play"]').classList.add("desktop-games-docked");
 }
-window.addEventListener("resize",()=>{const desktop=matchMedia("(min-width:993px)").matches;if(desktop!==!breakButton.hidden)placeDesktopGames();});
+window.addEventListener("resize",()=>{const desktop=matchMedia("(min-width:993px)").matches;if(desktop!==mobileGames.hidden)placeDesktopGames();});
 document.getElementById("choose-xo").hidden=true;
 placeDesktopGames();
