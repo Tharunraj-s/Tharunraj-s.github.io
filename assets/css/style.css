@@ -1410,3 +1410,6 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 .desktop-game-dialog .xo-game-bottom{gap:10px}
 .desktop-game-dialog .xo-symbols{display:none}
 @media(min-width:993px){article.desktop-games-docked{display:none!important}}
+
+/* A small invitation above the desktop arcade icons. */
+.desktop-game-invite{grid-column:1/-1;margin:2px 0 4px;text-align:center;font-size:.76rem;font-weight:500;color:var(--muted);letter-spacing:.02em}

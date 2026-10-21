@@ -552,6 +552,7 @@ xoPanel.querySelector(".xo-game-top").append(xoExpand);
 const xoReset=document.createElement("button");xoReset.type="button";xoReset.className="xo-restart";xoReset.textContent="Reset scores ↻";xoReset.addEventListener("click",resetGames);xoPanel.querySelector(".xo-game-bottom").append(xoReset);
 const gameLauncher=document.createElement("div");
 gameLauncher.className="desktop-game-launcher glass-layer";
+const gameInvite=document.createElement("p");gameInvite.className="desktop-game-invite";gameInvite.textContent="Fancy a game?";gameLauncher.append(gameInvite);
 gameLauncher.setAttribute("role","group");gameLauncher.setAttribute("aria-label","Play a game");
 const gameIcons={
  xo:'<path d="M5 5l6 6m0-6l-6 6M5 17l6 6m0-6l-6 6"/><circle cx="21" cy="8" r="4"/><circle cx="21" cy="20" r="4"/>',
