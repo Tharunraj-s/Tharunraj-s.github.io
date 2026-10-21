@@ -539,43 +539,66 @@ function nudgeRadar(dx,dy){shootAim.x=Math.max(0,Math.min(720,shootAim.x+dx));sh
 
 
 
-/* Move one live board between the sidebar, mobile footer and expanded dialog. */
+/* Compact desktop arcade launcher; preserve the mobile game layout. */
 const xoPanel=document.getElementById("xo-panel");
-const xoDock=document.createElement("div");
-xoDock.className="xo-dock";
 const xoMobileHome=document.createElement("div");
 xoMobileHome.className="xo-mobile-home";
 document.querySelector(".main-content").append(xoMobileHome);
-const xoDialog=document.createElement("dialog");
-xoDialog.className="xo-dialog";
-xoDialog.setAttribute("aria-label","XO against Tharunraj");
-document.body.append(xoDialog);
+const xoDock=document.createElement("div");xoDock.className="xo-dock";
+xoMobileHome.append(xoDock);xoDock.append(xoPanel);
 const xoExpand=document.createElement("button");
-xoExpand.type="button";xoExpand.className="xo-expand";
-xoExpand.textContent="⤢";xoExpand.setAttribute("aria-label","Expand XO game");
+xoExpand.type="button";xoExpand.className="xo-expand";xoExpand.textContent="⤢";xoExpand.setAttribute("aria-label","Expand XO game");
 xoPanel.querySelector(".xo-game-top").append(xoExpand);
-const xoReset=document.createElement("button");
-xoReset.type="button";xoReset.className="xo-restart";
-xoReset.textContent="Reset scores ↻";
-xoReset.addEventListener("click",resetGames);
-xoPanel.querySelector(".xo-game-bottom").append(xoReset);
-function dockXo(){
-  if(xoDialog.open)return;
-  const desktop=matchMedia("(min-width:993px)").matches;
-  (desktop?sidebar:xoMobileHome).append(xoDock);
-  xoDock.append(xoPanel);
-  xoExpand.textContent="⤢";
-  xoExpand.setAttribute("aria-label","Expand XO game");
+const xoReset=document.createElement("button");xoReset.type="button";xoReset.className="xo-restart";xoReset.textContent="Reset scores ↻";xoReset.addEventListener("click",resetGames);xoPanel.querySelector(".xo-game-bottom").append(xoReset);
+const gameLauncher=document.createElement("div");
+gameLauncher.className="desktop-game-launcher glass-layer";
+gameLauncher.setAttribute("role","group");gameLauncher.setAttribute("aria-label","Play a game");
+const gameIcons={
+ xo:'<path d="M5 5l6 6m0-6l-6 6M5 17l6 6m0-6l-6 6"/><circle cx="21" cy="8" r="4"/><circle cx="21" cy="20" r="4"/>',
+ runner:'<path d="M4 16h24v7H4zM9 12h13v4M17 5v7M12 5h10M4 28h24"/><circle cx="9" cy="24" r="3"/><circle cx="23" cy="24" r="3"/>',
+ shooter:'<circle cx="16" cy="16" r="12"/><circle cx="16" cy="16" r="6"/><path d="M16 16l9-9M16 2v4M2 16h4M16 26v4M26 16h4"/>'
+};
+const gameDialog=document.createElement("dialog");gameDialog.className="desktop-game-dialog";
+gameDialog.innerHTML='<div class="desktop-game-header"><strong></strong><button type="button" aria-label="Close game">×</button></div><div class="desktop-game-slot"></div>';
+document.body.append(gameDialog);
+let dockedGame=null,gameMarker=null,gameOpener=null,gameReturnY=0,gameWasHidden=false,gameOldOverflow="";
+function openDockedGame(game,opener){
+ if(gameDialog.open)return;
+ pauseRunner();pauseShooter();cancelNavigationScroll();
+ const panel=document.getElementById(game+"-panel");
+ gameReturnY=window.scrollY;gameOldOverflow=document.body.style.overflow;document.body.style.overflow="hidden";gameOpener=opener;gameWasHidden=panel.hidden;dockedGame=panel;
+ gameMarker=document.createComment("game home");panel.before(gameMarker);panel.hidden=false;
+ gameDialog.querySelector(".desktop-game-slot").append(panel);
+ gameDialog.querySelector("strong").textContent={xo:"Beat me at XO",runner:"Rover Run",shooter:"Radar Defence"}[game];
+ gameDialog.classList.toggle("is-xo",game==="xo");gameDialog.setAttribute("aria-label",gameDialog.querySelector("strong").textContent);
+ gameDialog.showModal();
+ if(game==="runner"){drawRunner();window.showRunnerGuide?.();}
+ if(game==="shooter")drawShooter();
 }
-xoExpand.addEventListener("click",()=>{
-  if(xoDialog.open){xoDialog.close();return;}
-  xoDialog.append(xoPanel);
-  xoExpand.textContent="×";
-  xoExpand.setAttribute("aria-label","Close expanded XO game");
-  xoDialog.showModal();
+gameDialog.querySelector("button").addEventListener("click",()=>gameDialog.close());
+gameDialog.addEventListener("close",()=>{
+ pauseRunner();pauseShooter();cancelNavigationScroll();
+ if(dockedGame){gameMarker.replaceWith(dockedGame);dockedGame.hidden=gameWasHidden;}
+ dockedGame=null;gameMarker=null;
+ document.body.style.overflow=gameOldOverflow;
+ window.scrollTo({top:gameReturnY,behavior:"instant"});
+ gameOpener?.focus({preventScroll:true});
 });
-xoDialog.addEventListener("close",()=>{dockXo();xoExpand.focus({preventScroll:true});});
-xoDialog.addEventListener("click",event=>{if(event.target===xoDialog){const r=xoDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)xoDialog.close();}});
-window.addEventListener("resize",dockXo);
+gameDialog.addEventListener("click",event=>{if(event.target===gameDialog){const r=gameDialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)gameDialog.close();}});
+for(const [game,label] of [["xo","XO"],["runner","Rover"],["shooter","Radar"]]){
+ const button=document.createElement("button");button.type="button";button.setAttribute("aria-label","Play "+label);button.setAttribute("aria-haspopup","dialog");
+ button.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+gameIcons[game]+'</svg><span>'+label+'</span>';
+ button.addEventListener("click",()=>openDockedGame(game,button));gameLauncher.append(button);
+}
+sidebar.append(gameLauncher);
+xoExpand.addEventListener("click",()=>openDockedGame("xo",xoExpand));
+function placeDesktopGames(){
+ const desktop=matchMedia("(min-width:993px)").matches;
+ if(gameDialog.open)gameDialog.close();
+ gameLauncher.hidden=!desktop;
+ xoMobileHome.hidden=desktop;
+ document.querySelector('article[data-page="play"]').classList.toggle("desktop-games-docked",desktop);
+}
+window.addEventListener("resize",()=>{const desktop=matchMedia("(min-width:993px)").matches;if(desktop!==!gameLauncher.hidden)placeDesktopGames();});
 document.getElementById("choose-xo").hidden=true;
-dockXo();
+placeDesktopGames();

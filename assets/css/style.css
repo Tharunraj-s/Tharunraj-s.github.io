@@ -1389,3 +1389,24 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 .xo-dialog .xo-game{border:0;margin:0;max-width:none}
 .xo-dialog .xo-game-bottom{gap:10px}
 @media(min-width:993px){.sidebar .sidebar-info,.sidebar .sidebar-info_more{flex-shrink:0}}
+
+/* Three quiet desktop launchers replace the full sidebar board. */
+.desktop-game-launcher{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px;padding:10px;flex-shrink:0;border-radius:18px}
+.desktop-game-launcher[hidden],.xo-mobile-home[hidden]{display:none!important}
+.desktop-game-launcher button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:10px 4px;border-radius:12px;color:var(--muted);cursor:pointer;transition:color 180ms ease,background-color 180ms ease,transform 180ms ease}
+.desktop-game-launcher svg{width:28px;height:28px;color:var(--accent-blue)}
+.desktop-game-launcher span{font-size:.68rem}
+.desktop-game-launcher button:hover{background:rgba(var(--theme-rgb),.1);color:var(--text);transform:translateY(-2px);box-shadow:0 0 14px rgba(var(--theme-rgb),.12)}
+.desktop-game-launcher button:focus-visible{outline:2px solid var(--accent-blue);outline-offset:2px}
+.desktop-game-dialog{width:min(900px,calc(100vw - 40px));max-height:calc(100dvh - 40px);padding:20px;border:1px solid var(--border-glass);border-radius:24px;background:var(--bg);color:var(--text);overflow:auto}
+.desktop-game-dialog.is-xo{width:min(500px,calc(100vw - 28px))}
+.desktop-game-dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(7px)}
+.desktop-game-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:12px}
+.desktop-game-header strong{font-size:1rem}
+.desktop-game-header button{width:36px;height:36px;border-radius:10px;border:1px solid var(--border-glass);font-size:24px;cursor:pointer}
+.desktop-game-dialog .xo-game{max-width:none;margin:0}
+.desktop-game-dialog .xo-expand,.desktop-game-dialog .arcade-fullscreen-button,.desktop-game-dialog .runner-guide-full{display:none}
+.desktop-game-dialog .runner-game{padding:16px}
+.desktop-game-dialog .xo-game-bottom{gap:10px}
+.desktop-game-dialog .xo-symbols{display:none}
+@media(min-width:993px){article.desktop-games-docked{display:none!important}}
