@@ -1339,3 +1339,26 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
   .navbar-link { padding-inline: clamp(9px, 1vw, 18px); }
 }
 #language-wave { will-change: clip-path; }
+
+
+/* Compact desktop frame: align the profile and navigation at the top. */
+@media (min-width: 993px) {
+  main {
+    padding-block: 16px 20px;
+    padding-inline: clamp(24px, 2vw, 32px);
+    align-items: start;
+  }
+  .sidebar {
+    top: 16px !important;
+    margin-top: 0;
+    height: auto;
+    max-height: calc(100dvh - 32px);
+    justify-content: flex-start;
+    align-self: start;
+  }
+  .navbar { top: 16px; }
+  article[data-page] {
+    margin-top: 16px;
+    min-height: 0;
+  }
+}
