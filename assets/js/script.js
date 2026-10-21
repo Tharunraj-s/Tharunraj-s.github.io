@@ -279,7 +279,7 @@ languageButton.addEventListener("click",async()=>{
   languageButton.disabled=true;
   const next=siteLanguage==="en"?"ta":"en";
   const main=document.querySelector("main");
-  let fade;
+  let wave;
   try {
     if(next==="ta")await tamilFontReady;
     cancelNavigationScroll();
@@ -287,15 +287,28 @@ languageButton.addEventListener("click",async()=>{
     const anchor=[...pages].reverse().find(page=>page.getBoundingClientRect().top<=threshold)||pages[0];
     const anchorTop=anchor.getBoundingClientRect().top;
     const animate=!reduceMotion()&&typeof main.animate==="function";
-    if(animate){fade=main.animate([{opacity:1},{opacity:0}],{duration:130,easing:"ease-out",fill:"forwards"});await fade.finished;}
+    const bounds=languageButton.getBoundingClientRect();
+    const x=bounds.left+bounds.width/2;
+    const y=bounds.top+bounds.height/2;
+    const radius=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+    const closed=`circle(0px at ${x}px ${y}px)`;
+    const open=`circle(${Math.ceil(radius)}px at ${x}px ${y}px)`;
+    if(animate){
+      languageWave.hidden=false;
+      wave=languageWave.animate([{clipPath:closed},{clipPath:open}],{duration:300,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"});
+      await wave.finished;
+    }
     setSiteLanguage(next);
     await new Promise(resolve=>requestAnimationFrame(resolve));
     window.scrollTo({top:window.scrollY+anchor.getBoundingClientRect().top-anchorTop,behavior:"instant"});
     positionNavPill();
-    fade?.cancel();
-    if(animate){fade=main.animate([{opacity:0},{opacity:1}],{duration:220,easing:"cubic-bezier(.22,1,.36,1)",fill:"forwards"});await fade.finished;}
+    if(animate){
+      wave.cancel();
+      wave=languageWave.animate([{clipPath:open},{clipPath:closed}],{duration:340,easing:"cubic-bezier(.65,0,.35,1)",fill:"forwards"});
+      await wave.finished;
+    }
   } finally {
-    fade?.cancel();
+    wave?.cancel();
     languageWave.hidden=true;
     languageButton.disabled=false;
     languageBusy=false;

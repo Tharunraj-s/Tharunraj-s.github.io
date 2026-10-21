@@ -1323,3 +1323,19 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
 #runner-panel #runner-action{order:3;margin-left:auto}
 #runner-panel .arcade-help-button{order:4}
 #runner-panel .arcade-fullscreen-button,#runner-panel #runner-help{order:5}
+
+/* Give desktop and ultrawide displays room without stretching body copy. */
+@media (min-width: 1201px) {
+  main {
+    width: 100%;
+    max-width: 1760px;
+    padding: clamp(26px, 2.5vw, 48px);
+    grid-template-columns: clamp(290px, 22vw, 360px) minmax(0, 1fr);
+    gap: clamp(24px, 2vw, 40px);
+  }
+  article { padding: clamp(26px, 2.4vw, 44px); }
+  .intro-summary { max-width: 78ch; }
+  .sidebar .contact-link { overflow-wrap: anywhere; }
+  .navbar-link { padding-inline: clamp(9px, 1vw, 18px); }
+}
+#language-wave { will-change: clip-path; }
