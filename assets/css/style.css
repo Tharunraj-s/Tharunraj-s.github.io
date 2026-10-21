@@ -1446,3 +1446,9 @@ article.desktop-games-docked{display:none!important}
  .mobile-games-menu #break-game-picker[hidden]{display:none!important}
  .desktop-game-dialog{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:12px}
 }
+
+/* Keep the arrow and project-hub heading on one row. */
+.project-lab-link{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:10px;align-items:center}
+.project-lab-link>.lab-link-icon{grid-column:1;grid-row:1;line-height:1}
+.project-lab-link>strong{grid-column:2;grid-row:1;min-width:0}
+.project-lab-link>span:not(.lab-link-icon),.project-lab-link>b{grid-column:1/-1}
