@@ -591,15 +591,26 @@ for(const [game,label] of [["xo","XO"],["runner","Rover"],["shooter","Radar"]]){
  button.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+gameIcons[game]+'</svg><span>'+label+'</span>';
  button.addEventListener("click",()=>openDockedGame(game,button));gameLauncher.append(button);
 }
-sidebar.append(gameLauncher);
+document.body.append(gameLauncher);
+gameLauncher.id="break-game-picker";gameLauncher.hidden=true;
+const breakButton=document.createElement("button");breakButton.type="button";breakButton.className="break-game-button";breakButton.textContent="Take a break 🎮";breakButton.setAttribute("aria-controls","break-game-picker");breakButton.setAttribute("aria-expanded","false");document.body.append(breakButton);
+function closeBreakPicker(){gameLauncher.hidden=true;breakButton.setAttribute("aria-expanded","false");}
+breakButton.addEventListener("click",()=>{gameLauncher.hidden=!gameLauncher.hidden;breakButton.setAttribute("aria-expanded",String(!gameLauncher.hidden));});
+gameLauncher.addEventListener("click",event=>{if(event.target.closest("button"))closeBreakPicker();});
+document.addEventListener("click",event=>{if(!gameLauncher.contains(event.target)&&!breakButton.contains(event.target))closeBreakPicker();});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!gameLauncher.hidden){closeBreakPicker();breakButton.focus({preventScroll:true});}});
+const labLink=document.createElement("a");labLink.className="project-lab-link glass-layer";labLink.href="projects.html";
+labLink.innerHTML='<span class="lab-link-icon" aria-hidden="true">↗</span><strong>See how I built it</strong><span>Visual walkthroughs, interactive demos & the thinking behind the projects.</span><b>Explore the project lab →</b>';
+sidebar.append(labLink);
 xoExpand.addEventListener("click",()=>openDockedGame("xo",xoExpand));
 function placeDesktopGames(){
  const desktop=matchMedia("(min-width:993px)").matches;
  if(gameDialog.open)gameDialog.close();
- gameLauncher.hidden=!desktop;
+ breakButton.hidden=!desktop;
+ closeBreakPicker();
  xoMobileHome.hidden=desktop;
  document.querySelector('article[data-page="play"]').classList.toggle("desktop-games-docked",desktop);
 }
-window.addEventListener("resize",()=>{const desktop=matchMedia("(min-width:993px)").matches;if(desktop!==!gameLauncher.hidden)placeDesktopGames();});
+window.addEventListener("resize",()=>{const desktop=matchMedia("(min-width:993px)").matches;if(desktop!==!breakButton.hidden)placeDesktopGames();});
 document.getElementById("choose-xo").hidden=true;
 placeDesktopGames();
