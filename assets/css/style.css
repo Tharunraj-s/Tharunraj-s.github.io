@@ -1461,3 +1461,8 @@ article.desktop-games-docked{display:none!important}
  .project-lab-link.hub-medium>strong{font-size:.88rem}
  .project-lab-link.hub-medium>b{font-size:.75rem}
 }
+
+/* Let the About introduction fill its card at every desktop breakpoint. */
+@media(min-width:993px){
+ .about .about-text.intro-summary,.about .about-text.intro-summary>p{width:100%;max-width:none}
+}
