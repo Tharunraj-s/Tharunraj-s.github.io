@@ -1334,7 +1334,7 @@ body[data-theme="obsidian"] .glass-layer,body[data-theme="amethyst"] .glass-laye
     gap: clamp(24px, 2vw, 40px);
   }
   article { padding: clamp(26px, 2.4vw, 44px); }
-  .intro-summary { max-width: 78ch; }
+  .intro-summary { max-width: none; width: 100%; }
   .sidebar .contact-link { overflow-wrap: anywhere; }
   .navbar-link { padding-inline: clamp(9px, 1vw, 18px); }
 }
