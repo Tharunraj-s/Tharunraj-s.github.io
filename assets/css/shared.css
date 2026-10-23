@@ -3,24 +3,19 @@
 .atlas-opening{overflow:clip}html[lang=ta] .chapter h2{font-size:clamp(25px,5vw,52px);line-height:1.65;letter-spacing:0;overflow-wrap:anywhere}html[lang=ta] .hello-email{font-size:clamp(27px,5vw,58px);gap:16px;max-width:100%}.shared-links button{border:1px solid currentColor;background:none;color:inherit;border-radius:20px;padding:5px 14px;font:inherit;cursor:pointer}.shared-project-grid button:hover .shared-art{opacity:1}
 @media(max-width:600px){body[data-portfolio-style=studio] header nav{display:grid;grid-template-columns:1fr auto;gap:14px;padding:14px 6%}body[data-portfolio-style=studio] .navlinks{grid-row:2;grid-column:1/-1;justify-content:space-between;gap:7px;font-size:11px;min-width:0}body[data-portfolio-style=studio] .navlinks a{display:inline!important;min-width:0}body[data-portfolio-style=studio] .navright{grid-row:1;grid-column:2}html[lang=ta] body[data-portfolio-style=studio] .lab h2{font-size:29px;line-height:1.65;letter-spacing:0;overflow-wrap:anywhere}html[lang=ta] body[data-portfolio-style=studio] .hero h1{letter-spacing:-2px}}
 
-/* Language and Appearance occupy distinct layout regions. */
-:root{--language-strip:52px}
-body{padding-top:var(--language-strip);padding-bottom:0}
-.shared-language-top{position:fixed;inset:0 0 auto;z-index:2300;height:var(--language-strip);padding:6px max(18px,env(safe-area-inset-right));display:flex;align-items:center;justify-content:flex-end;background:var(--bg,#f3f1e9);color:var(--text,var(--ink,#202524));border-bottom:1px solid color-mix(in srgb,currentColor 12%,transparent)}
-.shared-language-top #language-toggle,.shared-language-top .lang,.shared-language-top #shared-language{position:static!important;inset:auto!important;display:inline-flex;align-items:center;gap:5px;min-height:38px;padding:7px 12px;margin:0;background:transparent;color:inherit;border:1px solid color-mix(in srgb,currentColor 22%,transparent);border-radius:22px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font:12px/1.5 system-ui;cursor:pointer}
+/* Navigation language control, separate corner Appearance control. */
+:root{--language-strip:0px}body{padding-top:0;padding-bottom:76px}
+.shared-language-nav{display:flex;align-items:center;justify-content:flex-end;flex:0 0 auto;margin-left:14px;color:var(--text,var(--ink,#202524))}
+.shared-language-nav #language-toggle,.shared-language-nav .lang,.shared-language-nav #shared-language{position:static!important;inset:auto!important;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;min-height:38px;padding:7px 12px;margin:0;background:var(--bg-glass,transparent);color:inherit;border:1px solid color-mix(in srgb,currentColor 20%,transparent);border-radius:22px;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;font:12px/1.5 system-ui;cursor:pointer}
 .shared-source-control{display:none!important}
-.shared-appearance{display:inline-grid!important;place-items:center;flex:0 0 40px;width:40px;height:40px;padding:0;background:transparent;color:var(--text,var(--ink,#202524));border:1px solid color-mix(in srgb,currentColor 22%,transparent);border-radius:50%;cursor:pointer;margin-left:12px}
-.navbar:has(>.shared-appearance){display:flex;align-items:center;gap:8px}.navbar:has(>.shared-appearance) .navbar-list{flex:1;min-width:0}.navbar>.shared-appearance{margin-left:auto}
-.shared-appearance-row{padding:14px 24px;display:flex;justify-content:flex-start}
+.shared-appearance{position:fixed!important;right:max(18px,env(safe-area-inset-right));bottom:calc(18px + env(safe-area-inset-bottom));z-index:2300;display:grid!important;place-items:center;width:46px;height:46px;padding:0;margin:0;background:color-mix(in srgb,var(--bg,#f3f1e9) 88%,transparent);color:var(--text,var(--ink,#202524));border:1px solid color-mix(in srgb,currentColor 22%,transparent);border-radius:50%;box-shadow:0 5px 22px #0002;backdrop-filter:blur(16px);cursor:pointer}
+.navbar:has(.shared-language-nav){display:flex;align-items:center;gap:8px}.navbar:has(.shared-language-nav) .navbar-list{flex:1;min-width:0}
 .shared-theme-section{border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);margin-top:26px;padding-top:18px}.shared-theme-section h3{font:500 17px/1.5 system-ui;margin:0 0 14px}.shared-theme-options{display:flex;flex-wrap:wrap;gap:9px}.shared-theme-options button{padding:10px 14px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:22px;color:inherit;background:none;font:12px/1.5 system-ui;cursor:pointer}.shared-theme-options button[aria-pressed=true]{background:var(--text,var(--ink,#202524));color:var(--bg,#f3f1e9)}
 .shared-hub-link{display:inline-block;margin:15px 0;color:var(--accent-blue,var(--ink,#527076));font:13px/1.7 system-ui;text-decoration:underline;text-underline-offset:4px}
-body[data-portfolio-style=motion]>nav{top:var(--language-strip)}
-body[data-portfolio-style=studio]>header{top:var(--language-strip)}
-body .navbar{top:calc(var(--language-strip) + 8px)!important}
-.experience-top{top:var(--language-strip)!important}
-html{scroll-padding-top:calc(var(--language-strip) + 110px)}
-body[data-portfolio-style=motion] .chapter-dock{bottom:24px}
-.language-toolbar:empty,.experience-language:empty{display:none!important}
-.shared-language-top :focus-visible,.shared-appearance:focus-visible,.shared-theme-options button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
-@media(max-width:850px){.experience-top>.shared-appearance{margin-left:auto}.experience-top .chapter-nav{order:3}.shared-appearance{margin-left:8px}}
-@media(max-width:600px){.shared-language-top{padding-right:max(12px,env(safe-area-inset-right))}.shared-style-picker{width:100vw;max-width:none;max-height:85dvh;border-radius:20px 20px 0 0;inset:auto 0 0;margin:0;padding:24px}.style-options{grid-template-columns:1fr 1fr}.shared-theme-options button{font-size:11px}.navbar>.shared-appearance{flex-basis:36px;width:36px;height:36px}}
+
+body[data-portfolio-style=motion]>nav,body[data-portfolio-style=studio]>header{top:0}
+body .navbar{top:8px!important}.experience-top{top:0!important}
+html{scroll-padding-top:110px}body[data-portfolio-style=motion] .chapter-dock{bottom:80px}
+.language-toolbar:empty,.experience-language:empty,.controls:empty{display:none!important}
+.shared-language-nav :focus-visible,.shared-appearance:focus-visible,.shared-theme-options button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+@media(max-width:600px){.navbar:has(.shared-language-nav){flex-wrap:wrap}.navbar:has(.shared-language-nav) .navbar-list{order:2;flex-basis:100%;width:100%}.navbar>.shared-language-nav{margin-left:auto}.shared-language-nav{margin-left:8px}.shared-language-nav #language-toggle,.shared-language-nav .lang,.shared-language-nav #shared-language{padding:7px 10px;font-size:11px}.shared-appearance{right:14px;bottom:calc(14px + env(safe-area-inset-bottom))}.shared-style-picker{width:100vw;max-width:none;max-height:85dvh;border-radius:20px 20px 0 0;inset:auto 0 0;margin:0;padding:24px}.style-options{grid-template-columns:1fr 1fr}.shared-theme-options button{font-size:11px}}

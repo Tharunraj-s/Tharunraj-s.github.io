@@ -3,7 +3,7 @@
 const data=window.PORTFOLIO_PROJECTS,byId=Object.fromEntries(data.map(p=>[p.id,p]));
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const safeGet=k=>{try{return localStorage.getItem(k)}catch{return null}},save=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
-const layouts=[['glass','Classic Glass','Original layout · glass surfaces'],['atlas','Research Atlas','Open composition · project stories'],['motion','Form & Motion','Scroll chapters · layered visuals'],['studio','Research Studio','Editorial layout · interactive lab']];
+const layouts=[['glass','Classic','Sidebar layout · soft surfaces'],['atlas','Research Atlas','Open composition · project stories'],['motion','Form & Motion','Scroll chapters · layered visuals'],['studio','Research Studio','Editorial layout · interactive lab']];
 const filename=location.pathname.split('/').pop().replace('.html','')||'glass';const page=filename==='index'?(document.body.dataset.homeStyle||'glass'):filename,isHub=page==='projects';
 const requestedStyle=new URLSearchParams(location.search).get('style');const active=layouts.some(s=>s[0]===page)?page:layouts.some(s=>s[0]===requestedStyle)?requestedStyle:safeGet('portfolio-style')||'glass';
 document.body.dataset.portfolioStyle=active;
@@ -53,15 +53,15 @@ detail.querySelector('.shared-close').onclick=closeProject;detail.addEventListen
 document.addEventListener('click',e=>{const card=e.target.closest('[data-shared-project]');if(!card)return;e.preventDefault();e.stopImmediatePropagation();openProject(card.dataset.sharedProject)},true);
 addEventListener('popstate',()=>{const id=new URLSearchParams(location.search).get('project');if(id&&byId[id])openProject(id,false);else{detail.close();originFocus?.focus()}});
 // Compact layout selection with small compositional previews.
-// Language has its own reserved top strip; Appearance belongs to the section navigation.
-const topbar=document.createElement('div');topbar.className='shared-language-top';topbar.setAttribute('aria-label','Language');
+// Language belongs to navigation; Appearance has one independent corner button.
+const topbar=document.createElement('div');topbar.className='shared-language-nav';topbar.setAttribute('aria-label','Language');
 const nativeLanguage=$('#language-toggle')||$('.lang');
 if(nativeLanguage)topbar.append(nativeLanguage);else topbar.innerHTML='<button type="button" id="shared-language" aria-label="Switch language">EN / தமிழ்</button>';
-document.body.prepend(topbar);
+const languageHome=$('.experience-language')||$('.navbar')||$('.navright')||$('.controls')||$('.lab-nav');
+if(languageHome)languageHome.append(topbar);else document.body.prepend(topbar);
 const appearance=document.createElement('button');appearance.type='button';appearance.id='shared-style-open';appearance.className='shared-appearance';appearance.setAttribute('aria-label','Appearance: style and theme');appearance.setAttribute('aria-haspopup','dialog');appearance.title='Appearance';
 appearance.innerHTML='<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18h1.4a2.1 2.1 0 0 0 1.2-3.8c-.8-.5-.4-1.7.5-1.7h1.4A4.5 4.5 0 0 0 21 11c0-4.4-4-8-9-8Z"/><circle cx="7.5" cy="10" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="15.5" cy="8.5" r="1"/></svg>';
-const appearanceHome=$('.experience-top')||$('.navbar')||$('.navright')||$('.controls')||$('.lab-nav');
-if(appearanceHome)appearanceHome.append(appearance);else{const row=document.createElement('div');row.className='shared-appearance-row';row.append(appearance);topbar.after(row);}
+document.body.append(appearance);
 // Keep native handlers available while replacing their separate visible theme controls.
 const nativeTheme=$('#theme-toggle'),nativeThemePicker=$('#theme-picker'),motionThemes=$('.themes'),studioTheme=$('.theme');
 if(nativeTheme)nativeTheme.classList.add('shared-source-control');
@@ -74,11 +74,12 @@ if(projectsHeading)projectsHeading.append(hub);else{const projectSection=$('#all
 const picker=document.createElement('dialog');picker.className='shared-dialog shared-style-picker';picker.innerHTML='<button type="button" class="shared-close" aria-label="Close style selector">×</button><p class="shared-kicker">PORTFOLIO / PRESENTATION</p><h2 data-copy="choose"></h2><p data-copy="same"></p><div class="style-options">'+layouts.map(([id,name,desc],i)=>`<button type="button" data-style="${id}" ${id===active?'aria-current="true"':''}><span class="style-mini mini-${id}" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong>${name}</strong><small>${desc}</small></button>`).join('')+'</div>';document.body.append(picker);
 const themeSection=document.createElement('section');themeSection.className='shared-theme-section';themeSection.innerHTML='<h3 data-copy="themes">Theme</h3><div class="shared-theme-options"></div>';picker.append(themeSection);
 const themeOptions=themeSection.querySelector('.shared-theme-options');
+const themeNames={arctic:'Arctic Mist',velvet:'Velvet Crimson',obsidian:'Obsidian Gold',champagne:'Champagne',amethyst:'Amethyst',cobalt:'Cobalt',emerald:'Emerald',graphite:'Graphite',silver:'Porcelain',midnight:'Midnight',linen:'Sandstone'};
 const nativeChoices=all('#theme-picker [data-theme-choice],.themes .swatch');
-const makeTheme=(id,label,action,isSelected)=>{const button=document.createElement('button');button.type='button';button.dataset.sharedTheme=id;button.textContent=label;button.setAttribute('aria-pressed',String(isSelected()));button.onclick=()=>{action();syncThemes()};themeOptions.append(button);button._selected=isSelected;};
+const makeTheme=(id,label,action,isSelected)=>{const button=document.createElement('button');button.type='button';button.dataset.sharedTheme=id;button.textContent=themeNames[id]||label;button.setAttribute('aria-pressed',String(isSelected()));button.onclick=()=>{action();syncThemes()};themeOptions.append(button);button._selected=isSelected;};
 function syncThemes(){themeOptions.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b._selected())))}
 if(nativeChoices.length){nativeChoices.forEach(button=>{const id=button.dataset.themeChoice||button.dataset.theme;const label=button.querySelector('strong')?.textContent||button.getAttribute('aria-label')||button.textContent.trim();makeTheme(id,label,()=>button.click(),()=>document.body.dataset.theme===id)})}
-else if(studioTheme){makeTheme('light','Light',()=>{if(document.body.classList.contains('dark'))studioTheme.click()},()=>!document.body.classList.contains('dark'));makeTheme('dark','Dark',()=>{if(!document.body.classList.contains('dark'))studioTheme.click()},()=>document.body.classList.contains('dark'))}
+else if(studioTheme){makeTheme('light','Parchment',()=>{if(document.body.classList.contains('dark'))studioTheme.click()},()=>!document.body.classList.contains('dark'));makeTheme('dark','Forest Night',()=>{if(!document.body.classList.contains('dark'))studioTheme.click()},()=>document.body.classList.contains('dark'))}
 else{[['arctic','Arctic'],['obsidian','Obsidian Gold'],['velvet','Velvet'],['amethyst','Amethyst']].forEach(([id,label])=>makeTheme(id,label,()=>{document.body.dataset.theme=id;save('portfolio-theme',id)},()=>document.body.dataset.theme===id))}
 $('#shared-style-open').onclick=()=>{syncThemes();picker.showModal()};picker.querySelector('.shared-close').onclick=()=>picker.close();
 function sectionKey(){if(isHub)return location.hash.slice(1)||'work';const markers=all('[data-page],[data-view],section[id]');let current='about';for(const el of markers){const r=el.getBoundingClientRect();if(r.top<innerHeight*.55&&r.bottom>80)current=el.dataset.page||el.dataset.view||el.id}return({work:'projects',mind:'about',proof:'publications',hello:'contact',research:'publications',vision:'projects',speech:'projects',glass:'projects','all-projects':'projects'})[current]||current}
@@ -86,7 +87,7 @@ picker.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{const id=b.dat
 const copies={themes:['Theme','வண்ணத் தோற்றம்'],all:['All projects','அனைத்துத் திட்டங்கள்'],details:['Read project details ↗','திட்ட விவரங்கள் ↗'],styles:['Styles','வடிவங்கள்'],hub:['Project hub ↗','திட்ட மையம் ↗'],choose:['Choose a style','வடிவத்தைத் தேர்ந்தெடுங்கள்'],same:['The same projects and evidence, presented in four layouts.','ஒரே திட்டங்களும் சான்றுகளும், நான்கு வடிவங்களில்.']};
 const translationMap=new Map(window.PORTFOLIO_TRANSLATIONS||[]),studioTexts=[];
 if(page==='studio'||isHub){const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const n=walker.currentNode;if(n.parentElement.closest('script,style,[data-copy],[data-title],.education,.skills'))continue;const key=n.nodeValue.trim();if(translationMap.has(key))studioTexts.push({node:n,en:n.nodeValue,ta:n.nodeValue.replace(key,translationMap.get(key))});}}
-function updateSharedLanguage(){studioTexts.forEach(x=>x.node.nodeValue=language==='ta'?x.ta:x.en);all('[data-copy]').forEach(el=>{const a=copies[el.dataset.copy];if(a)el.textContent=a[language==='ta'?1:0]});all('[data-title]').forEach(el=>el.textContent=title(byId[el.dataset.title]));$('#shared-hub').href=`projects.html?lang=${language}&style=${active}`;if(detail.open)openProject(new URLSearchParams(location.search).get('project'),false)}
+function updateSharedLanguage(){const languageControl=$('#language-toggle')||$('.lang')||$('#shared-language');if(languageControl)languageControl.textContent='EN / தமிழ்';studioTexts.forEach(x=>x.node.nodeValue=language==='ta'?x.ta:x.en);all('[data-copy]').forEach(el=>{const a=copies[el.dataset.copy];if(a)el.textContent=a[language==='ta'?1:0]});all('[data-title]').forEach(el=>el.textContent=title(byId[el.dataset.title]));$('#shared-hub').href=`projects.html?lang=${language}&style=${active}`;if(detail.open)openProject(new URLSearchParams(location.search).get('project'),false)}
 function applyLanguage(next){language=next;save('portfolio-language',language);document.documentElement.lang=language;
  if(typeof setSiteLanguage==='function')setSiteLanguage(language);
  else if(typeof setLang==='function'){lang=language;setLang()}
