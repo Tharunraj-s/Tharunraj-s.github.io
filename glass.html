@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+
+<head><script>try{const s=localStorage.getItem("portfolio-style");if(["classic","atlas","motion","studio"].includes(s)&&!location.search)location.replace(s+".html"+location.hash)}catch{}</script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tharunraj Singaravelu | Machine Learning &amp; Data Science</title>
+  <meta name="description" content="Tharunraj Singaravelu — MSc in Data Science and Statistical Learning. Machine learning, computer vision, edge AI and large-scale analytics projects. ICBSII 2023 Best Paper recipient.">
+
+  <!-- 🔹 Favicon -->
+  <link rel="shortcut icon" href="./assets/imgs/my-avatar.svg" type="image/x-icon">
+
+  <!-- 🔹 Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css?v=20261022-about-width-v2">
+
+  <!-- 🔹 Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;family=Noto+Sans+Tamil:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  <!-- 🔹 Ionicons (v7) -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<style>
+.profile-section {margin-top:32px}
+.profile-section p {margin-bottom:20px}
+.project-description {color:var(--muted);font-size:13px;line-height:1.8;margin:12px 0}
+.project-detail-link {display:inline-block;font-size:13px;color:var(--text);text-decoration:underline;margin-bottom:12px}
+.project-card {height:100%}
+.publication-preview p {line-height:1.7}
+@media(max-width:480px){.navbar-list{gap:12px}.navbar-link{font-size:12px}}
+.contact-intro{color:var(--muted);line-height:1.8;margin-bottom:24px;max-width:650px}
+.contact-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.contact-page-card{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:28px;border:1px solid var(--glass-border);border-radius:22px;color:var(--text);transition:transform .2s}
+.contact-page-card:hover{transform:translateY(-3px)}
+.contact-page-card:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.contact-page-card>ion-icon{font-size:30px;color:var(--accent)}
+.contact-page-card h3{font-size:18px}.contact-page-card p{color:var(--muted);overflow-wrap:anywhere;font-size:14px}.contact-page-card .card-read{margin-top:auto}
+.contact-location{display:flex;gap:8px;align-items:center;color:var(--muted);margin-top:24px;font-size:14px}
+@media(max-width:580px){.contact-grid{grid-template-columns:1fr}.navbar-list{gap:6px;flex-wrap:wrap}.navbar-link{padding:10px 8px;font-size:11px}}
+/* A closer mobile profile frame, with room between both layers. */
+@media(max-width:992px){.sidebar{padding:10px}}
+
+</style>
+<link rel="stylesheet" href="assets/css/shared.css?v=1"></head>
+
+<body>
+
+  <!-- 🌗 Theme Toggle (persists via localStorage) -->
+  <button id="theme-toggle" class="theme-toggle theme-picker-toggle" aria-label="Choose a theme" aria-expanded="false" aria-controls="theme-picker"><ion-icon name="color-palette-outline"></ion-icon><span>Themes</span></button>
+<section id="theme-picker" class="theme-picker glass-layer" aria-label="Theme picker" hidden><div class="theme-picker-header"><div><p class="theme-eyebrow">MAKE IT YOURS</p><h2>Choose your atmosphere</h2></div><button id="theme-picker-close" aria-label="Close theme picker">×</button></div><div class="theme-options"><button class="theme-option" type="button" data-theme-choice="arctic" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#edf5fa;--swatch-accent:#229fba"><i></i><i></i><i></i></span><span><strong>Arctic Glass</strong><small>Frosted blue · airy</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="velvet" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#200d14;--swatch-accent:#e47787"><i></i><i></i><i></i></span><span><strong>Velvet Crimson</strong><small>Burgundy glass · scarlet glow</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="obsidian" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#0b0c0e;--swatch-accent:#c5a66a"><i></i><i></i><i></i></span><span><strong>Obsidian Gold</strong><small>Ink black · brushed gold</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="champagne" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#f5f0e7;--swatch-accent:#9b793f"><i></i><i></i><i></i></span><span><strong>Champagne Glass</strong><small>Warm ivory · soft gold</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="amethyst" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#130f1b;--swatch-accent:#b39bd4"><i></i><i></i><i></i></span><span><strong>Amethyst Glass</strong><small>Deep plum · lilac light</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="cobalt" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#0a1429;--swatch-accent:#86aafa"><i></i><i></i><i></i></span><span><strong>Cobalt Studio</strong><small>Navy glass · electric blue</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="emerald" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#081610;--swatch-accent:#73bd99"><i></i><i></i><i></i></span><span><strong>Emerald Glass</strong><small>Forest glass · quiet emerald</small></span><span class="theme-check" aria-hidden="true">✓</span></button><button class="theme-option" type="button" data-theme-choice="graphite" aria-pressed="false"><span class="theme-swatch" style="--swatch-bg:#181b1e;--swatch-accent:#bacbd5"><i></i><i></i><i></i></span><span><strong>Graphite Glass</strong><small>Smoked charcoal · silver</small></span><span class="theme-check" aria-hidden="true">✓</span></button></div><p class="theme-picker-note">Preview instantly. Your choice stays saved on this device.</p></section>
+
+  <div id="language-wave" aria-hidden="true" hidden></div>
+  <main>
+
+    <!-- 🧊 SIDEBAR -->
+    <aside class="sidebar glass-effect" data-sidebar>
+
+      <!-- 📇 Profile block -->
+      <div class="sidebar-info glass-layer">
+
+        <figure class="avatar-box">
+          <img src="./assets/imgs/profile-photo.jpg" alt="Tharunraj Singaravelu" width="152" height="176">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="Tharunraj Singaravelu">Tharunraj</h1>
+          <p class="title"><span class="role-tag">Machine Learning Engineer</span></p>
+        </div>
+
+        <!-- Toggle contacts visibility (mobile) -->
+        <button class="info_more-btn" data-sidebar-btn aria-expanded="false" aria-controls="profile-contacts">
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+      </div>
+
+      <!-- 📬 Contacts -->
+      <div id="profile-contacts" class="sidebar-info_more glass-layer">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <!-- ✉️ Email -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/gmail.svg" alt="Email" width="30">
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:stharunraj2002@gmail.com" class="contact-link">
+                stharunraj2002@gmail.com
+              </a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box neon-glow"><ion-icon name="call-outline" aria-hidden="true"></ion-icon></div>
+            <div class="contact-info"><p class="contact-title">Mobile</p><a href="tel:+353892032647" class="contact-link">+353 89 203 2647</a></div>
+          </li>
+
+          <!-- 📍 Location -->
+          <li class="contact-item">
+            <div class="icon-box neon-glow">
+              <img src="./assets/imgs/location.svg" alt="Location" width="30">
+            </div>
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Ireland</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <!-- 🌐 Social Links -->
+        <ul class="social-list">
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/tharunraj-s/" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/Tharunraj-s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://instagram.com/tharunraj._.s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.credly.com/users/tharunraj-s" target="_blank" class="social-link neon-glow" rel="noopener">
+              <img src="./assets/imgs/credly.png" alt="Credly" width="23">
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </aside>
+
+    <!-- 🌐 MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- 🧭 NAVBAR (SPA section switcher) -->
+      <nav class="navbar glass-effect neon-border" aria-label="Primary">
+        <div class="language-toolbar"><button id="language-toggle" type="button" aria-label="Switch to Tamil" aria-pressed="false"><span lang="en">EN</span><span aria-hidden="true"> / </span><span lang="ta">தமிழ்</span></button></div>
+        <ul class="navbar-list">
+          <li class="navbar-item"><button class="navbar-link active" data-nav-link data-nav-target="about">About</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="projects">Projects</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="certificates">Certificates</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="publications">Publications</button></li>
+          <li class="navbar-item"><button class="navbar-link" data-nav-link data-nav-target="contact">Contact</button></li>
+        </ul>
+      </nav>
+
+      <!-- =====================
+           🧑‍💻 ABOUT
+           ===================== -->
+      <article class="about active glass-layer" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title neon-text">About Me</h2>
+        </header>
+
+        <section class="about-text intro-summary"><p>I work on machine learning, computer vision and data analysis. I completed an MSc in Data Science and Statistical Learning at the University of Limerick. My academic projects include speech emotion recognition, kidney CT-image analysis, Spark-based analytics, mathematical modelling and a vision-based active protection prototype. I’m based in Ireland and looking for a role where I can contribute to a team and develop this work further.</p></section><section class="service glass-layer profile-card"><h3 class="h3 service-title"><span class="glow-line"></span>What I'm Doing</h3><ul class="service-list"><li class="service-item"><div class="service-icon-box"><img src="./assets/imgs/ML.svg" alt="" width="44"></div><div class="service-content-box"><h4 class="service-item-title">Machine Learning</h4><p class="service-item-text">Predictive modelling, feature engineering and rigorous evaluation.</p></div></li><li class="service-item"><div class="service-icon-box"><img src="./assets/imgs/ai-brain-management.svg" alt="" width="44"></div><div class="service-content-box"><h4 class="service-item-title">Computer Vision &amp; Edge AI</h4><p class="service-item-text">Visual recognition and hardware-integrated prototypes.</p></div></li><li class="service-item"><div class="service-icon-box"><img src="./assets/imgs/ds2.png" alt="" width="44"></div><div class="service-content-box"><h4 class="service-item-title">Data Engineering &amp; Analytics</h4><p class="service-item-text">Distributed processing and decision-focused insights.</p></div></li><li class="service-item"><div class="service-icon-box"><img src="./assets/imgs/R.png" alt="" width="44"></div><div class="service-content-box"><h4 class="service-item-title">Data Science &amp; Statistics</h4><p class="service-item-text">Experiment design, numerical modelling and reproducible analysis.</p></div></li></ul></section><section class="service glass-layer profile-card"><h3 class="h3 service-title"><span class="glow-line"></span>Research Experience</h3><div class="experience-entry"><div class="entry-top"><h4>Applied Machine Learning Research</h4><span class="entry-date">Nov 2022 – Dec 2024</span></div><p class="entry-meta">Faculty-supervised academic research</p><p>Developed computer-vision, healthcare-imaging and speech-analysis workflows, from data annotation and augmentation to model training and evaluation. Led vision development and hardware integration for an IEEE-published edge-AI prototype recognised with the ICBSII 2023 Best Paper Award.</p></div></section><div class="profile-grid"><section class="service glass-layer profile-card"><h3 class="h3 service-title"><span class="glow-line"></span>Education</h3><div class="education-entry" data-keep-english><h4>MSc Data Science &amp; Statistical Learning</h4><p>University of Limerick · Ireland</p><span class="entry-date">2024 – 2025</span></div><div class="education-entry" data-keep-english><h4>B.Tech Computer Science &amp; Engineering</h4><p>SRM Institute of Science and Technology · India</p><span class="entry-date">2020 – 2024</span></div></section><section class="service glass-layer profile-card" data-keep-english><h3 class="h3 service-title"><span class="glow-line"></span>Technical Skills</h3><dl class="skills-grid" data-keep-english><div class="skill-group"><dt>Languages &amp; Databases</dt><dd>Python · SQL · R · C++ · Relational Database Design</dd></div><div class="skill-group"><dt>ML &amp; Statistical Methods</dt><dd>scikit-learn · Statistical Inference · Cross-Validation · Hyperparameter Optimisation · A/B Testing</dd></div><div class="skill-group"><dt>Deep Learning &amp; Vision</dt><dd>PyTorch · TensorFlow/Keras · CNN-LSTM · YOLOv5/v8 · OpenCV</dd></div><div class="skill-group"><dt>Data Processing &amp; Visualisation</dt><dd>Pandas · NumPy · PySpark / Spark MLlib · Databricks · R Shiny</dd></div><div class="skill-group"><dt>Development &amp; Cloud</dt><dd>Git / GitHub · Linux · Microsoft Azure · Flask · CI/CD · MLOps</dd></div><div class="skill-group"><dt>Hardware &amp; Simulation</dt><dd>Raspberry Pi · Arduino · MATLAB</dd></div></dl></section></div>
+      </article>
+
+      <!-- =====================
+           🧱 PROJECTS
+           ===================== -->
+      <article class="portfolio glass-layer" data-page="projects">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Projects</h2>
+        </header>
+
+        <section class="projects">
+
+          <!-- 🧭 Filter bar -->
+          <ul class="filter-list" aria-label="Project filters">
+            <li class="filter-item"><button class="active neon-btn" data-filter-btn data-filter-category="all">All</button></li>
+            <li class="filter-item"><button class="neon-btn" data-filter-btn data-filter-category="ai/ml">AI/ML</button></li>
+            <li class="filter-item"><button class="neon-btn" data-filter-btn data-filter-category="data analytics">Data Analytics</button></li>
+            
+          </ul>
+
+          <!-- 🔽 Mobile dropdown -->
+          <div class="filter-select-box">
+            <button class="filter-select" data-select>
+              <div class="select-value" data-selecct-value>Select category</div>
+              <div class="select-icon"><ion-icon name="chevron-down"></ion-icon></div>
+            </button>
+
+            <ul class="select-list">
+              <li class="select-item"><button data-select-item>All</button></li>
+              <li class="select-item"><button data-select-item>AI/ML</button></li>
+              <li class="select-item"><button data-select-item>Data Analytics</button></li>
+              
+            </ul>
+          </div>
+
+          <!-- 🎨 Project grid -->
+          <ul class="project-list" aria-label="Project list">
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Real-Time Edge AI Active Protection System"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/VisionBasedAPS.jpg" alt="Real-Time Edge AI Active Protection System" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Real-Time Edge AI Active Protection System</h3><p class="project-category">YOLOv5, OpenCV, Raspberry Pi, Arduino</p><p class="project-description">Real-time detection with hardware integration…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Led computer-vision development in a five-member team, from annotation and model experimentation to servo-controlled target alignment. IEEE publication and ICBSII 2023 Best Paper Award.</p><span class="project-detail-link" rel="noopener">View project ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Renal Failure Prediction System"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/RFD.png" alt="Renal Failure Prediction System" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Renal Failure Prediction System</h3><p class="project-category">Random Forest, YOLOv8, Flask</p><p class="project-description">Biomarker prediction and renal CT-image analysis…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Academic workflow integrating 24 biomarker features and kidney CT-image analysis in a Flask interface. Compared classical classifiers and a PyTorch biomarker CNN, alongside YOLO image analysis. The interface presents both outputs; it is not a calibrated joint prediction model or a clinically validated system.</p><span class="project-detail-link" rel="noopener">Code, report &amp; recorded results ↗</span><span class="project-detail-link">Explore the visual walkthrough ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Speech Emotion Recognition"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/HSER.png" alt="Speech Emotion Recognition" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Speech Emotion Recognition</h3><p class="project-category">CNN-LSTM, MFCC, DWT</p><p class="project-description">Speech-emotion modelling across four datasets…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Explored MFCC and DWT features with LSTM, CNN-LSTM and related architectures across TESS, CREMA-D, SAVEE and RAVDESS. Recorded CNN-LSTM validation accuracy ranged from 48.96% on CREMA-D to 99.64% on TESS. The maintained desktop prototype uses a separate MFCC-only LSTM checkpoint.</p><span class="project-detail-link" rel="noopener">Code, report &amp; experiment figures ↗</span><span class="project-detail-link">Explore the visual walkthrough ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Large-Scale Chicago Crime Analytics"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/chicago-crime-cover-v2.jpg" alt="Large-Scale Chicago Crime Analytics" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Large-Scale Chicago Crime Analytics</h3><p class="project-category">PySpark, Spark MLlib, Databricks</p><p class="project-description">Distributed analytics across 7 million crime records…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Group coursework using PySpark and Databricks for cleaning, exploratory analysis and Random Forest classification of recorded incident categories. Compared numeric, text and combined features. The repository contains the report, notebooks and Databricks export; historical scores are separate from the subsequently corrected pipeline.</p><span class="project-detail-link" rel="noopener">Code, group report &amp; notebooks ↗</span><span class="project-detail-link">Explore the visual walkthrough ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Customer Segmentation &amp; Analytics"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/customer-segmentation-cover-v2.jpg" alt="Customer Segmentation &amp; Analytics" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Customer Segmentation &amp; Analytics</h3><p class="project-category">R, R Shiny, K-Means, PAM, Hierarchical Clustering</p><p class="project-description">Customer segments and interactive business insights…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Compared clustering methods, analysed customer lifetime value and experimental outcomes, and presented results through an interactive R Shiny application.</p><span class="project-detail-link" rel="noopener">View project ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Mathematical Modelling of Glass Etching"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/glass-etching-cover-v2.jpg" alt="Mathematical Modelling of Glass Etching" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Mathematical Modelling of Glass Etching</h3><p class="project-category">Python, MATLAB, Numerical Modelling</p><p class="project-description">Multi-species glass etching through numerical models…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>MSc thesis exploring multi-species glass etching through MATLAB differential-equation models and an exploratory Python lattice simulation. The public release includes run instructions and model limitations.</p><span class="project-detail-link" rel="noopener">View project ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="data analytics"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about US Road Network Analysis"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/us-road-network-cover-v2.jpg" alt="US Road Network Analysis" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>US Road Network Analysis</h3><p class="project-category">Network Analysis, Graph Analytics</p><p class="project-description">Road-network topology and local connectivity…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Explored US road-network connectivity using degree distributions, complementary cumulative distributions, local clustering coefficients and six-hop neighbourhood visualisations in R.</p><span class="project-detail-link" rel="noopener">View project ↗</span></div></button></li>
+<li class="project-item active" data-filter-item data-category="ai/ml"><button type="button" class="project-card project-modal-card" data-modal-item aria-label="Read about Heart Disease Analysis &amp; Prediction"><figure class="project-img"><img data-modal-avatar src="./assets/imgs/heart-disease-cover-v2.jpg" alt="Heart Disease Analysis &amp; Prediction" loading="lazy" decoding="async"></figure><div class="project-content"><h3 class="project-title" data-modal-title>Heart Disease Analysis &amp; Prediction</h3><p class="project-category">R, caret, XGBoost, Random Forest</p><p class="project-description">Comparing classifiers on heart-disease survey data…</p><span class="card-read">Read more ↗</span></div><div class="project-full-description" data-modal-text><p>Compared XGBoost and Random Forest using stratified train/test splitting, cross-validation, ROC-AUC and feature importance. The curated release documents evaluation conventions and requires the original input dataset.</p><span class="project-detail-link" rel="noopener">View project ↗</span></div></button></li>
+</ul>
+        </section>
+      </article>
+
+      <!-- =====================
+           🏅 CERTIFICATES
+           Includes: Credly badges
+           ===================== -->
+      <article class="certificates glass-layer" data-page="certificates">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Certificates</h2>
+        </header>
+
+        <!-- 🏅 Credly Badges (click to open modal) -->
+        <section class="badges glass-layer">
+          <h3 class="h3 badges-title neon-text"><span class="glow-line"></span>Credly Badges</h3>
+
+          <ul class="badge-list has-scrollbar" aria-label="Credly badges">
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/microsoft-certified-azure-ai-fundamentals.png" alt="Azure AI Fundamentals" width="64" data-modal-avatar>
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Microsoft Certified Azure AI Fundamentals</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/aws-cloud-quest-cloud-practitioner%20(1).png" alt="AWS Cloud Quest" width="64" data-modal-avatar>
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>AWS Cloud Quest Practitioner</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/python-project-for-ai-and-application-development.png" alt="IBM Python Project" width="64" data-modal-avatar>
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Python Project for AI &amp; Application Development</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/python-for-data-science-and-ai.png" alt="Python for Data Science and AI" width="64" data-modal-avatar>
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Python for Data Science and AI</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+            <li class="badge-item">
+              <button class="badge-card" type="button" data-modal-item>
+                <figure class="badge-logo neon-glow">
+                  <img src="./assets/imgs/chatbot-building-essentials.png" alt="Chatbot Building Essentials" width="64" data-modal-avatar>
+                </figure>
+                <h4 class="h4 badge-title" data-modal-title>Chatbot Building Essentials</h4>
+                <div class="badge-desc" data-modal-text>
+                  <p style="text-align:justify;">Credential earned via Credly.</p>
+                </div>
+              </button>
+            </li>
+
+          </ul>
+        </section>
+
+        <!-- 🎓 Certificates list -->
+        <section class="certificates-posts">
+          <ul class="certificates-posts-list" aria-label="Certificates list">
+
+            <li class="certificates-post-item">
+              <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/CCCBE6TTVYGC" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/IBMAAI.png" alt="IBM Applied AI" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Coursera</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-06">Jun 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">IBM Applied AI Specialization</h3>
+                  <p class="certificates-text">Learned and built AI-powered applications using Python, IBM Watson APIs and OpenCV.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/ICBSII.pdf" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/apsconf.png" alt="ICBSII Best Paper Award" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">ICBSII</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-03">Mar 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Best Paper Award – ICBSII 2023</h3>
+                  <p class="certificates-text">Presented “Vision-Based Realtime Active Protection System Using Deep CNN” and won Best Paper Award.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://www.coursera.org/account/accomplishments/certificate/C3RPCAPY8P2W" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/coursera1.jpg" alt="Supervised Machine Learning" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">AI</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-02">Feb 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Supervised Machine Learning</h3>
+                  <p class="certificates-text">Built and trained ML models using NumPy and Scikit-learn for regression and classification tasks.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="https://learn.microsoft.com/en-us/users/tharunrajs-2195/transcript/dzq5bk8woy1pg9d" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/ai900.png" alt="Azure AI Fundamentals" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Microsoft Certified</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-10">Oct 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Azure AI Fundamentals (AI-900)</h3>
+                  <p class="certificates-text">Earned Microsoft AI-900 certification, demonstrating foundational knowledge of AI services on Azure.</p>
+                </div>
+              </a>
+            </li>
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/coin-2.png" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/coin-2.png" alt="AI with Python" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">AI</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-12">Dec 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">AI with Python</h3>
+                  <p class="certificates-text">Built a CNN model using the Fashion MNIST dataset for image classification.</p>
+                </div>
+              </a>
+            </li>
+
+            
+
+            <li class="certificates-post-item">
+              <a href="https://www.udemy.com/certificate/UC-902e4b06-ed73-4cd3-8984-f4b68eeea8be/" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/Udemy.png" alt="Udemy Python" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Udemy</p>
+                    <span class="dot"></span>
+                    <time datetime="2023-01">Jan 2023</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">Core Python for Everyone</h3>
+                  <p class="certificates-text">Completed Udemy course covering Python fundamentals and OOP.</p>
+                </div>
+              </a>
+            </li>
+
+            
+
+            <li class="certificates-post-item">
+              <a href="./assets/imgs/AWS.jpg" target="_blank" class="certificate-link" rel="noopener">
+                <figure class="certificates-banner-box neon-glow">
+                  <img src="./assets/imgs/AWS.jpg" alt="AWS ML Essentials" loading="lazy" decoding="async">
+                </figure>
+                <div class="certificates-content">
+                  <div class="certificates-meta">
+                    <p class="certificates-category">Amazon Skill Builder</p>
+                    <span class="dot"></span>
+                    <time datetime="2022-02">Feb 2022</time>
+                  </div>
+                  <h3 class="h3 certificates-item-title">ML Essentials for Business and Technical Leaders</h3>
+                  <p class="certificates-text">Completed AWS Machine Learning Essentials training for technical decision-makers.</p>
+                </div>
+              </a>
+            </li>
+
+            
+
+          </ul>
+        </section>
+      </article>
+
+      <!-- =====================
+           📚 PUBLICATIONS
+           ===================== -->
+      <article class="publications glass-layer" data-page="publications">
+
+        <header>
+          <h2 class="h2 article-title neon-text"><span class="glow-line"></span>Publications</h2>
+        </header>
+
+        <section class="publications-list-wrap">
+          <ul class="publication-list" aria-label="Publications list">
+<li class="publication-item">
+<button class="publication-card" type="button" data-modal-item>
+<figure class="publication-logo neon-glow"><img src="./assets/imgs/RFD.png" alt="Renal CT imaging research" width="88" height="88" data-modal-avatar></figure>
+<div class="publication-content">
+<h4 class="h4 publication-title" data-modal-title>Enhanced Deep Learning Models for Early Detection of Renal Failure from CT Imaging</h4>
+<div class="publication-preview"><p>FMDB Transactions on Sustainable Health Science Letters · 2024</p><span class="card-read">Read paper details ↗</span></div>
+<div class="publication-desc" data-modal-text>
+<p><strong>Enhanced Deep Learning Models for Early Detection of Renal Failure from CT Imaging</strong></p>
+<p>S. Rubin Bose, J. Angelin Jeba, R. Regin, S. Tarunraj, Edwin Shalom Soji and S. Suman Rajest.</p>
+<p>FMDB Transactions on Sustainable Health Science Letters, 2(3), 152–163. Published 1 September 2024.</p>
+<p>Research on deep learning for renal CT-image analysis, including YOLOv8-based detection and segmentation of kidney abnormalities.</p>
+<p>DOI: <a href="https://doi.org/10.69888/FTSHSL.2024.000251" target="_blank" class="neon-link" rel="noopener">10.69888/FTSHSL.2024.000251</a></p>
+<p><a href="https://www.fmdbpub.com/uploads/articles/173865882591014.%20FTSHSL-251-2024.pdf" target="_blank" class="neon-link" rel="noopener">Read publisher PDF ↗</a></p>
+</div></div></button></li>
+
+            <li class="publication-item">
+              <button class="publication-card" type="button" data-modal-item>
+                <figure class="publication-logo neon-glow">
+                  <img src="./assets/imgs/RVAPS.jpg" alt="Vision Based APS" width="88" height="88" data-modal-avatar>
+                </figure>
+
+                <div class="publication-content">
+                  <h4 class="h4 publication-title" data-modal-title>
+                    Vision-Based Realtime Active Protection System Using Deep CNN
+                  </h4>
+
+                  <!-- ✅ Visible small summary box -->
+                  <div class="publication-preview"><p>ICBSII · IEEE Xplore · 2023</p><span class="card-read">Read paper details ↗</span></div>
+
+                  <!-- ✅ Hidden: used ONLY for modal content -->
+                  <div class="publication-desc" data-modal-text><p><strong>Vision-Based Realtime Active Protection System Using Deep CNN</strong></p><p>Published in the 2023 International Conference on Biosignals, Images and Instrumentation (ICBSII), IEEE Xplore.</p><p>Research on deep-learning-based real-time visual detection with hardware integration. The project combined YOLOv5 and OpenCV with Raspberry Pi and Arduino for detection and servo-controlled target alignment.</p><p>Recognised with the ICBSII 2023 Best Paper Award.</p><p><a href="https://ieeexplore.ieee.org/document/10181062" target="_blank" class="neon-link" rel="noopener">Read IEEE publication ↗</a></p></div>
+                </div>
+              </button>
+            </li>
+
+          </ul>
+        </section>
+      </article>
+
+      <article class="play glass-layer" data-page="play"><header><h2 class="h2 article-title">Feeling bored? Let’s play a game.</h2></header><p class="play-intro">Challenge me at XO, take the rover for a run, or keep the radar clear.</p><div class="game-reset-bar" data-keep-english><button id="games-reset" type="button">Reset games ↻</button><p id="games-reset-note">Clears saved scores, best runs and your name on this device.</p><p id="games-reset-status" role="status" aria-live="polite"></p></div><div class="game-choices" data-keep-english role="group" aria-label="Choose a game"><button id="choose-xo" type="button" aria-pressed="true" aria-controls="xo-panel">XO</button><button id="choose-runner" type="button" aria-pressed="false" aria-controls="runner-panel">Rover Run ↗</button><button id="choose-shooter" type="button" aria-pressed="false" aria-controls="shooter-panel">Radar Defence ↗</button></div><section id="xo-panel" class="xo-game glass-layer" data-keep-english aria-label="XO against Tharunraj"><div class="xo-game-top"><div><span class="xo-eyebrow">YOU vs THARUNRAJ</span><h3>YOUR MOVE.</h3></div><span class="xo-symbols" aria-hidden="true">X <span>O</span></span></div><div class="xo-score-strip"><span id="xo-my-score"></span><span id="xo-your-score"></span></div><p id="xo-status" class="xo-status" role="status" aria-live="polite"></p><div class="xo-board" role="group" aria-label="XO board"><button class="xo-cell" type="button" data-xo-cell="0" aria-label="Row 1, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="1" aria-label="Row 1, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="2" aria-label="Row 1, column 3: empty"></button><button class="xo-cell" type="button" data-xo-cell="3" aria-label="Row 2, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="4" aria-label="Row 2, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="5" aria-label="Row 2, column 3: empty"></button><button class="xo-cell" type="button" data-xo-cell="6" aria-label="Row 3, column 1: empty"></button><button class="xo-cell" type="button" data-xo-cell="7" aria-label="Row 3, column 2: empty"></button><button class="xo-cell" type="button" data-xo-cell="8" aria-label="Row 3, column 3: empty"></button></div><form id="xo-name-form" hidden><label for="xo-player-name">Hi, by the way—what’s your name?</label><div><input id="xo-player-name" maxlength="24" autocomplete="given-name" placeholder="Your name (optional)"><button type="submit">Nice to meet you ↗</button></div></form><div class="xo-game-bottom"><p id="xo-hint">You’re X. I’m O. Best of… however many you like.</p><button id="xo-restart" class="xo-restart" type="button">Play again ↻</button></div></section><section id="runner-panel" hidden class="runner-game glass-layer" data-keep-english aria-label="Robot runner game"><div class="runner-top"><h3>ROBOT RUN</h3><div class="runner-scores"><span id="runner-score">Score 0</span><span id="runner-best">Best 0</span></div></div><canvas id="runner-canvas" width="720" height="260" tabindex="0" aria-label="Rover Run: Right / Space to jump; Left to duck. Tap the right or left side."></canvas><p id="runner-status" role="status" aria-live="polite"></p><div class="runner-controls"><button id="runner-action" type="button">Start running</button><button id="runner-duck" type="button" disabled>Duck ↓</button><button id="runner-pause" type="button" disabled>Pause</button><p id="runner-help">Space / ↑ or tap to jump. Best score stays on this device.</p></div></section><section id="shooter-panel" hidden class="runner-game glass-layer" data-keep-english aria-label="Radar Defence arcade game"><div class="runner-top"><h3>RADAR DEFENCE</h3><div class="runner-scores"><span id="shooter-score">Score 0</span><span id="shooter-best">Best 0</span></div></div><canvas id="shooter-canvas" width="720" height="320" tabindex="0" aria-label="Radar Defence: tap targets to fire, or use arrow keys to aim and Space to fire"></canvas><p id="shooter-status" role="status" aria-live="polite">Track vehicles and aircraft from both sides. Three escapes end the round.</p><div class="runner-controls"><button id="shooter-start" type="button">Start game</button><button id="shooter-fire" type="button" disabled>Fire ↗</button><button id="shooter-pause" type="button" disabled>Pause</button><p>Tap / click to aim and fire. Keyboard: arrows to aim, Space to fire. Best score stays here.</p></div></section></article>
+
+      <article class="contact glass-layer" data-page="contact">
+        <header><h2 class="h2 article-title neon-text"><span class="glow-line"></span>Contact</h2></header>
+        <p class="contact-intro">Let’s connect about opportunities, projects and collaborations in machine learning, computer vision and data science.</p>
+        <section class="contact-grid" aria-label="Contact options">
+          <a class="contact-page-card glass-layer" href="mailto:stharunraj2002@gmail.com"><ion-icon name="mail-outline" aria-hidden="true"></ion-icon><h3>Email</h3><p>stharunraj2002@gmail.com</p><span class="card-read">Send an email ↗</span></a>
+          <a class="contact-page-card glass-layer" href="https://www.linkedin.com/in/tharunraj-s/" target="_blank" rel="noopener"><ion-icon name="logo-linkedin" aria-hidden="true"></ion-icon><h3>LinkedIn</h3><p>Tharunraj Singaravelu</p><span class="card-read">Connect on LinkedIn ↗</span></a>
+          <a class="contact-page-card glass-layer" href="tel:+353892032647"><ion-icon name="call-outline" aria-hidden="true"></ion-icon><h3>Mobile</h3><p>+353 89 203 2647</p><span class="card-read">Call me ↗</span></a>
+          <a class="contact-page-card glass-layer" href="https://github.com/Tharunraj-s" target="_blank" rel="noopener"><ion-icon name="logo-github" aria-hidden="true"></ion-icon><h3>GitHub</h3><p>Tharunraj-s</p><span class="card-read">Explore my code ↗</span></a>
+        </section>
+        <button class="copy-contact-btn" id="copy-email" type="button"><ion-icon name="copy-outline" aria-hidden="true"></ion-icon><span>Copy email</span></button><p id="contact-feedback" role="status" aria-live="polite"></p>
+        <p class="contact-location"><ion-icon name="location-outline" aria-hidden="true"></ion-icon> Based in Ireland</p>
+      </article>
+
+      <!-- 🔍 Shared Modal (Badges + Publications) -->
+      <div class="modal-container" data-modal-container>
+        <div class="overlay" data-overlay></div>
+
+        <section class="projects-modal glass-layer" role="dialog" aria-modal="true" aria-label="Details modal">
+          <button class="modal-close-btn" data-modal-close-btn aria-label="Close">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+          <div class="modal-img-wrapper">
+            <figure class="modal-avatar-box">
+              <img src="" alt="" width="84" height="84" data-modal-img>
+            </figure>
+          </div>
+
+          <div class="modal-content">
+            <h4 class="h3 modal-title" data-modal-title></h4>
+            <div data-modal-text></div>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ⚙️ Custom JavaScript -->
+  <script src="./assets/js/script.js?v=20261022-about-width-v2"></script>
+  <script src="./assets/js/arcade-ui.js?v=20261022-about-width-v2"></script>
+<script src="assets/js/projects-data.js?v=1"></script><script src="assets/js/shared.js?v=1"></script></body>
+
+</html>
