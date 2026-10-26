@@ -30,3 +30,6 @@ html{scroll-padding-top:110px}body[data-portfolio-style=motion] .chapter-dock{bo
 @media(max-width:850px){#experience .experience-top{grid-template-columns:minmax(0,1fr) auto;gap:12px 16px;padding-block:14px}#experience .experience-brand{grid-column:1;grid-row:1}#experience .experience-language{grid-column:2;grid-row:1}#experience .chapter-nav{grid-column:1/-1;grid-row:2;width:100%;justify-content:space-between;gap:10px}#experience .chapter-nav button{white-space:nowrap}}
 #experience .experience-language{position:static!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;display:block!important}
 #experience .experience-brand{width:auto;justify-self:start}
+
+/* Keep personal photographs in their original colour across presentations. */
+.portrait img,.mind-opening img,.sidebar-info img,img[src*="profile-photo"]{filter:none!important}
